@@ -6,7 +6,7 @@ microframework.
 ## Team
 
 - Dishant Kaushik
-- 
+- Sayantika Bhattacharya
 - 
 - 
 
