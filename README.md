@@ -11,14 +11,14 @@ microframework.
 - Licelot Marmolejos
 
 
-##Prerequisites
+## Prerequisites
 
 - Java 8
 
 - Maven
 
 
-##How to run it
+## How to run it
 
 1. Clone the repository and go to the root directory.
 
@@ -29,7 +29,7 @@ microframework.
 4. Start a game and begin playing.
 
 
-##License
+## License
 MIT License
 
 See LICENSE for details.
