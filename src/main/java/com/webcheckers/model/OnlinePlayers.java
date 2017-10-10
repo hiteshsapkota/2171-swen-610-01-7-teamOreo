@@ -8,6 +8,10 @@ public class OnlinePlayers {
     private String name;
     private boolean isFree;
 
+    public OnlinePlayers(String name) {
+        this.name = name;
+        this.isFree = true;
+    }
 
     public String getName()
     {

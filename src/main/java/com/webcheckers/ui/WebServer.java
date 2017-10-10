@@ -124,7 +124,7 @@ public class WebServer {
     get(SIGNIN_URL,new GetSignInController(),templateEngine);
     post(SIGNIN_URL, new PostSignInController(),templateEngine);
     get(SIGNOUT_URL,new GetSignOutController(),templateEngine);
-
+    get("/play", new GetPlayController(), templateEngine);
   }
 
 }
