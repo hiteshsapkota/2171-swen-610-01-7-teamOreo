@@ -21,7 +21,7 @@
         </#if>
         <form action = "/signin" method = "post">
             <input type ="text" placeholder="Enter your name" name ="username">
-            <button type="submit> Enter the game!</button>
+            <button type="submit"> Enter the game!</button>
         </form>
     </div>
 

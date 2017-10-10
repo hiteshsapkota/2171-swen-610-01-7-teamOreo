@@ -26,7 +26,7 @@
       </#if>
       <#if currentPlayer==true>
         <h2>Here is a list of online players!</h2>
-        <formaction="/play">
+        <form action="/play">
             <ul>
                 <#list onlinePlayers?eval as row>
                     <#if row.name != playerName && row.isFree == true>
@@ -36,7 +36,7 @@
                     </#if>
                 </#list>
             </ul>
-            <button>Lets Play!</button>
+            <button type="submit">Lets Play!</button>
            </form>
 
       <#else>

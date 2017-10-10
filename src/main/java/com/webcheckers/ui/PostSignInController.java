@@ -21,6 +21,12 @@ public class PostSignInController implements TemplateViewRoute {
             vm.put("messageType", "error");
             return new ModelAndView(vm, "signin.ftl");
         }
+        else if (OnlinePlayers.onlineList.contains(name)){
+            vm.put("title", "Welcome!");
+            vm.put("message", "The name already exists!");
+            vm.put("messageType", "error");
+            return new ModelAndView(vm, "signin.ftl");
+        }
         else {
             request.session().attribute("username", name.getName());
             OnlinePlayers.onlineList.add(name);
