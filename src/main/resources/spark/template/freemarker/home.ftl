@@ -11,11 +11,37 @@
     <h1>Web Checkers</h1>
     
     <div class="navigation">
-      <a href="/">my home</a>
+
+        <#if currentPlayer == true>
+            <a href="/">my home</a>
+            <a href="/signout">Sign Out [${playerName}]</a>
+        <#else>
+            <a href="/signin">Sign In</a>
+        </#if>
     </div>
     
     <div class="body">
-      <p>Welcome to the world of online Checkers.</p>
+      <#if message??>
+            <div id="message" class="${messageType}">${message}</div>
+      </#if>
+      <#if currentPlayer==true>
+        <h2>Here is a list of online players!</h2>
+        <formaction="/play">
+            <ul>
+                <#list onlinePlayers?eval as row>
+                    <#if row.name != playerName && row.isFree == true>
+                        <input type="radio" value="${row.name}"name="opponent">
+                        <label for="opponent">${row.name}</label>
+                        <br>
+                    </#if>
+                </#list>
+            </ul>
+            <button>Lets Play!</button>
+           </form>
+
+      <#else>
+            <p>Welcome to the world of online Checkers.</p>
+      </#if>
     </div>
     
   </div>
