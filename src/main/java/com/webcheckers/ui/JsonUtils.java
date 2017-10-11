@@ -1,8 +1,7 @@
 package com.webcheckers.ui;
 
-import spark.ResponseTransformer;
-
 import com.google.gson.Gson;
+import spark.ResponseTransformer;
 
 /**
  * A Utility class for parsing and formatting JSON data.
