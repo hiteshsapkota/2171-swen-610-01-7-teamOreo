@@ -59,9 +59,15 @@ public class OnlinePlayers {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+
     OnlinePlayers that = (OnlinePlayers) o;
 
     return name != null ? name.equals(that.name) : that.name == null;
+  }
+
+  @Override
+  public int hashCode() {
+    return name != null ? name.hashCode() : 0;
   }
 
   @Override
