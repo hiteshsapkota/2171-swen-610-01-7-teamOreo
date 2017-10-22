@@ -33,7 +33,7 @@ public class PostSignInController implements TemplateViewRoute {
   @Override
   public ModelAndView handle(Request request, Response response) {
     Map<String, Object> vm = new HashMap<>();
-    OnlinePlayers name = new OnlinePlayers(request.queryParams(USERNAME_ATTR).toLowerCase(), true);
+    OnlinePlayers name = new OnlinePlayers(request.queryParams(USERNAME_ATTR).toLowerCase());
     // if the name entered is empty
     if (name.getName().equals("")) {
       // show error and redirect to sign in page.
