@@ -9,7 +9,6 @@ public class GameCenter {
         /**
          * This function will get the game for the current user
          */
-
     }
 
     public void createGame(String player1, String player2) {
@@ -23,7 +22,6 @@ public class GameCenter {
         /**
          * This function will end the game
          */
-
 
     }
 }
