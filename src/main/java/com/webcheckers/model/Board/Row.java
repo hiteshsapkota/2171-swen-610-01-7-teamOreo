@@ -1,5 +1,8 @@
 package com.webcheckers.model.Board;
 
+import com.webcheckers.model.Board.Piece.colorEnum;
+import com.webcheckers.model.Board.Piece.typeEnum;
+import com.webcheckers.model.Board.Space.SPACECOLOR;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -11,7 +14,7 @@ public class Row implements Iterable<Space> {
   /**
    * list
    */
-  public ArrayList<Space> spaces = new ArrayList<>();
+  private ArrayList<Space> spaces;
 
   /**
    * attributes
@@ -24,6 +27,37 @@ public class Row implements Iterable<Space> {
    */
   public Row(int index) {
     this.index = index;
+    spaces = new ArrayList<>();
+    for (int i = 0; i < 8; i++) {
+      // Adding spaces
+      if (index % 2 == 0) {
+        if (i % 2 == 0) {
+          spaces.add(new Space(i, SPACECOLOR.WHITE, null));
+        } else {
+          spaces.add(new Space(i, SPACECOLOR.BLACK, null));
+        }
+      } else {
+        if (i % 2 == 0) {
+          spaces.add(new Space(i, SPACECOLOR.BLACK, null));
+        } else {
+          spaces.add(new Space(i, SPACECOLOR.WHITE, null));
+        }
+      }
+
+      // Adding pieces for the spaces
+      for (int j = 0; j < 8; j++) {
+        if(index == 0 || index == 1 || index == 2){
+          if(spaces.get(i).getSpaceColor() == SPACECOLOR.BLACK){
+            spaces.get(i).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
+          }
+        }
+        else if(index == 5 || index == 6 || index == 7){
+          if(spaces.get(i).getSpaceColor() == SPACECOLOR.BLACK){
+            spaces.get(i).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
+          }
+        }
+      }
+    }
   }
 
   /**
