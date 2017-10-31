@@ -9,8 +9,6 @@ import java.util.ArrayList;
  */
 public class OnlinePlayers {
 
-  // List of all online players.
-  public static ArrayList<OnlinePlayers> onlineList = new ArrayList<>();
 
   private String name;
   private boolean isFree;
@@ -19,13 +17,6 @@ public class OnlinePlayers {
     this.name = name;
     this.isFree = true;
   }
-
-  public OnlinePlayers(String name, boolean isFree) {
-    this.name = name;
-    this.isFree = isFree;
-
-  }
-
   /**
    * Accessor for name of the player
    * @return name of the player
@@ -33,21 +24,20 @@ public class OnlinePlayers {
   public String getName() {
     return name;
   }
-
-
   /**
    *
    * @return true if the player is free to play a game
    */
-  public boolean isFree() {
+  public boolean isFree()
+  {
     return isFree;
   }
-
   /**
    *
    * @param free change the player from engaged to free.
    */
-  public void setFree(boolean free) {
+  public void setFree(boolean free)
+  {
     isFree = free;
   }
 
@@ -66,7 +56,8 @@ public class OnlinePlayers {
   }
 
   @Override
-  public int hashCode() {
+  public int hashCode()
+  {
     return name != null ? name.hashCode() : 0;
   }
 

@@ -10,7 +10,9 @@ import static com.webcheckers.model.Strings.SIGN_IN_TITLE;
 import static com.webcheckers.model.Strings.TITLE_ATTR;
 import static com.webcheckers.model.Strings.USERNAME_ATTR;
 import static com.webcheckers.model.Strings.WELCOME_TITLE;
+import static spark.Spark.halt;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.OnlinePlayers;
 import com.webcheckers.ui.JsonUtils;
 import java.util.HashMap;
@@ -24,12 +26,17 @@ import spark.TemplateViewRoute;
  * Get controller for the sign in page.
  */
 public class GetSignInController implements TemplateViewRoute {
+  private final GameCenter gameCenter;
+
+  public GetSignInController(final GameCenter gameCenter){
+    this.gameCenter = gameCenter;
+  }
 
 
   @Override
   public ModelAndView handle(Request request, Response response) {
     Map<String, Object> vm = new HashMap<>();
-    String username = request.session().attribute(USERNAME_ATTR);
+    OnlinePlayers username = request.session().attribute("user");
     // if there is no session
     if (username == null) {
       //Show login information
@@ -38,12 +45,9 @@ public class GetSignInController implements TemplateViewRoute {
 
     } else {
       //Redirect to home
-      vm.put(TITLE_ATTR, WELCOME_TITLE);
-      vm.put(CURRENT_PLAYER_ATTR, true);
-      vm.put(PLAYER_NAME_ATTR, username);
-      vm.put(ONLINE_PLAYERS_ATTR, JsonUtils.toJson(OnlinePlayers.onlineList));
-      return new ModelAndView(vm, HOME_VIEW);
-
+      response.redirect("/");
+      halt();
+      return null;
     }
 
   }
