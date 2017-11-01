@@ -7,8 +7,11 @@ import static com.webcheckers.model.Strings.SIGN_OUT_URL;
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
+import static spark.SparkBase.threadPool;
 
-import com.webcheckers.ui.Game.GetPlayController;
+import com.webcheckers.appl.GameCenter;
+import com.webcheckers.ui.Game.GetGameController;
+import com.webcheckers.ui.Game.StartPlayController;
 import com.webcheckers.ui.Login.GetSignInController;
 import com.webcheckers.ui.Login.GetSignOutController;
 import com.webcheckers.ui.Login.PostSignInController;
@@ -52,6 +55,7 @@ public class WebServer {
   //
 
   private final TemplateEngine templateEngine;
+  private final GameCenter gameCenter;
 
   //
   // Constructor
@@ -62,9 +66,10 @@ public class WebServer {
    *
    * @param templateEngine The default {@link TemplateEngine} to render views.
    */
-  public WebServer(
-      final TemplateEngine templateEngine) {
+  public WebServer(final GameCenter gameCenter,
+                   final TemplateEngine templateEngine) {
     this.templateEngine = templateEngine;
+    this.gameCenter = gameCenter;
   }
 
   //
@@ -116,15 +121,17 @@ public class WebServer {
     //// code clean; using small classes.
 
     // Shows the Checkers game Home page.
-    get(HOME_URL, new HomeController(), templateEngine);
+    get(HOME_URL, new HomeController(gameCenter), templateEngine);
     // Shows the Sign In Page.
-    get(SIGN_IN_URL, new GetSignInController(), templateEngine);
+    get(SIGN_IN_URL, new GetSignInController(gameCenter), templateEngine);
     // POST controller for signing in
-    post(SIGN_IN_URL, new PostSignInController(), templateEngine);
+    post(SIGN_IN_URL, new PostSignInController(gameCenter), templateEngine);
     // Get controller for Signing out
-    get(SIGN_OUT_URL, new GetSignOutController(), templateEngine);
+    get(SIGN_OUT_URL, new GetSignOutController(gameCenter), templateEngine);
     // Shows the Game form.
-    get(PLAY_URL, new GetPlayController(), templateEngine);
+    post(PLAY_URL, new StartPlayController(gameCenter), templateEngine);
+
+    get("/game", new GetGameController(gameCenter), templateEngine);
   }
 
 }
