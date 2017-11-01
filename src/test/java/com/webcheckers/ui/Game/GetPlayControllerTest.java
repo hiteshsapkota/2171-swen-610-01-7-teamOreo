@@ -37,7 +37,7 @@
 //    @Test
 //    public void checkIfOpponentIsFree()
 //    {
-//        GetPlayController getPlayController=new GetPlayController();
+//        GetGameController getPlayController=new GetGameController();
 //        String opponent = "player1";
 //        String current = "player2";
 //        OnlinePlayers.onlineList.add(new OnlinePlayers(opponent));

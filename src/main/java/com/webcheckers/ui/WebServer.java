@@ -7,7 +7,6 @@ import static com.webcheckers.model.Strings.SIGN_OUT_URL;
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
-import static spark.SparkBase.threadPool;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.ui.Game.GetGameController;
@@ -67,7 +66,7 @@ public class WebServer {
    * @param templateEngine The default {@link TemplateEngine} to render views.
    */
   public WebServer(final GameCenter gameCenter,
-                   final TemplateEngine templateEngine) {
+      final TemplateEngine templateEngine) {
     this.templateEngine = templateEngine;
     this.gameCenter = gameCenter;
   }

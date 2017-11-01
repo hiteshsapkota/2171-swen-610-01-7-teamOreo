@@ -20,6 +20,9 @@ public class Board implements Iterable<Row> {
     }
   }
 
+  public Row getRow(int index){
+    return rows.get(index);
+  }
 
   /**
    * Iterator

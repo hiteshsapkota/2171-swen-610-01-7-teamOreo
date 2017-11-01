@@ -42,7 +42,7 @@ public PostSignInController(final GameCenter gameCenter)
     String username=request.queryParams(USERNAME_ATTR).toLowerCase();
 
     // if the name entered is empty
-    if (username==" ") {
+    if (username == "") {
       // show error and redirect to sign in page.
       vm.put(TITLE_ATTR, WELCOME_TITLE);
       vm.put(MESSAGE_ATTR, MESSAGE_EMPTY_NAME);
