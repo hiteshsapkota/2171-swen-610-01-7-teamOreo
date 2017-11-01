@@ -6,6 +6,7 @@ import static com.webcheckers.model.Strings.TITLE_ATTR;
 import static com.webcheckers.model.Strings.USERNAME_ATTR;
 import static com.webcheckers.model.Strings.WELCOME_TITLE;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.OnlinePlayers;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,11 @@ import spark.TemplateViewRoute;
  * GET controller for Signing out.
  */
 public class GetSignOutController implements TemplateViewRoute {
+  private final GameCenter gameCenter;
+  public GetSignOutController(final GameCenter gameCenter)
+  {
+    this.gameCenter=gameCenter
+  }
 
   @Override
   public ModelAndView handle(Request request, Response response) {
