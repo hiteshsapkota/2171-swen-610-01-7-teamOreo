@@ -11,7 +11,15 @@ public class Board implements Iterable<Row> {
   /**
    * Lists
    */
-  public ArrayList<Row> rows = new ArrayList<>();
+  private ArrayList<Row> rows;
+
+  public Board(){
+    rows = new ArrayList<>();
+    for (int i = 0; i < 8; i++) {
+      rows.add(new Row(i));
+    }
+  }
+
 
   /**
    * Iterator
