@@ -57,14 +57,3 @@ public class HomeController implements TemplateViewRoute {
     return new ModelAndView(vm, HOME_VIEW);
   }
 }
-
-
-// Show homepage with list of online players.
-      vm.put(CURRENT_PLAYER_ATTR, true);
-      vm.put(PLAYER_NAME_ATTR, currentUsername);
-      vm.put(ONLINE_PLAYERS_ATTR, JsonUtils.toJson(OnlinePlayers.onlineList));
-    }
-    return new ModelAndView(vm, HOME_VIEW);
-  }
-
-}
