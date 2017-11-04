@@ -11,22 +11,31 @@ public class Space {
   private int cellIdx;
   private boolean isValid;
   private Piece piece;
+  public enum SPACECOLOR{
+    BLACK,
+    WHITE
+  }
+  private SPACECOLOR spaceColor;
 
   /**
    * Constructor
    * @param cellIdx positon of the space
-   * @param isValid if the position is valid for the piece
    * @param piece can be null
    */
-  public Space(int cellIdx, boolean isValid, Piece piece) {
+  public Space(int cellIdx, SPACECOLOR spaceColor, Piece piece) {
     this.cellIdx = cellIdx;
-    this.isValid = isValid;
     this.piece = piece;
+    this.spaceColor = spaceColor;
+  }
+
+  public SPACECOLOR getSpaceColor() {
+    return spaceColor;
   }
 
   /**
    * Public methods
    */
+
 
   public int getCellIdx() {
     return cellIdx;
@@ -37,11 +46,7 @@ public class Space {
   }
 
   public boolean isValid() {
-    return isValid;
-  }
-
-  public void setValid(boolean valid) {
-    isValid = valid;
+    return this.spaceColor == SPACECOLOR.BLACK && this.piece == null;
   }
 
   public Piece getPiece() {
