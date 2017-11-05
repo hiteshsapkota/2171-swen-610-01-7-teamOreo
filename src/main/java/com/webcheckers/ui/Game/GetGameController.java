@@ -50,7 +50,7 @@ public class GetGameController implements TemplateViewRoute {
         vm.put(PLAYER_COLOR_ATTR, game.getPlayerColor(user));
         vm.put(OPPONENT_COLOR_ATTR, game.getOpponentColor(user));
         vm.put(IS_MY_TURN_ATTR, game.isMyTurn(user));
-
+        vm.put("currentPlayer", true);
         vm.put(BOARD_ATTR, game.getBoard());
 
         return new ModelAndView(vm, GAME_VIEW);

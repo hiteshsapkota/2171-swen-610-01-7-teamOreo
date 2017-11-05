@@ -10,6 +10,10 @@ import static spark.Spark.staticFileLocation;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.ui.Game.GetGameController;
+import com.webcheckers.ui.Game.PostBackUpMoveController;
+import com.webcheckers.ui.Game.PostCheckTurnController;
+import com.webcheckers.ui.Game.PostSubmitTurnController;
+import com.webcheckers.ui.Game.PostValidateMoveController;
 import com.webcheckers.ui.Game.StartPlayController;
 import com.webcheckers.ui.Login.GetSignInController;
 import com.webcheckers.ui.Login.GetSignOutController;
@@ -66,7 +70,7 @@ public class WebServer {
    * @param templateEngine The default {@link TemplateEngine} to render views.
    */
   public WebServer(final GameCenter gameCenter,
-      final TemplateEngine templateEngine) {
+                   final TemplateEngine templateEngine) {
     this.templateEngine = templateEngine;
     this.gameCenter = gameCenter;
   }
@@ -131,6 +135,14 @@ public class WebServer {
     post(PLAY_URL, new StartPlayController(gameCenter), templateEngine);
 
     get("/game", new GetGameController(gameCenter), templateEngine);
+
+    post("/checkTurn", new PostCheckTurnController(gameCenter), JsonUtils.json());
+
+    post("/validateMove", new PostValidateMoveController(gameCenter), JsonUtils.json());
+
+    post("/backupMove", new PostBackUpMoveController(gameCenter), JsonUtils.json());
+
+    post("/submitTurn", new PostSubmitTurnController(gameCenter), JsonUtils.json());
   }
 
 }
