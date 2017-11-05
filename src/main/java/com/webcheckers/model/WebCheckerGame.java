@@ -98,18 +98,26 @@ public class WebCheckerGame
         return (Objects.equals(player1, username) || Objects.equals(player2, username));
     }
 
-  public Message isValidTurn(int startRow, int startCell, int endRow, int endCell, String user) {
+    public Message isValidTurn(int startRow, int startCell, int endRow, int endCell, String user) {
+        Message message;
         if(Objects.equals(user, this.player1)){
-            return isValidTurnRed(startRow, startCell, startRow, endRow);
+            message = isValidTurnRed(startRow, startCell, endRow, endCell);
         }
         else{
-            return isValidTurnWhite(startRow, startCell, endRow, endCell);
+            message = isValidTurnWhite(startRow, startCell, endRow, endCell);
         }
-  }
+        if(moveState == moveStatCode.MOVEMENT_MADE || moveState == moveStatCode.CAPTURE_MODE){
+            movements = new Movement(startRow, startCell, endRow, endCell);
+            Piece piece = this.getBoard().getRow(startRow).getSpace(startCell).getPiece();
+            this.getBoard().getRow(startRow).getSpace(startCell).setPiece(null);
+            this.getBoard().getRow(endRow).getSpace(endCell).setPiece(piece);
+        }
+        return message;
+    }
 
-    private Message isValidTurnRed(int startRow, int startCell, int startRow1, int endRow) {
+    private Message isValidTurnRed(int startRow, int startCell, int endRow, int endCell) {
         Message message = new Message();
-        if(moveState == moveStatCode.MOVEMENT_MADE){
+        if(moveState == moveStatCode.MOVEMENT_MADE || moveState == moveStatCode.CAPTURE_MODE){
             message.text = "You have already made a move!";
             message.type = "error";
         }
@@ -127,7 +135,12 @@ public class WebCheckerGame
         }
         else if(endRow == startRow + 2){
             if(endCell == startCell + 2 || endCell == startCell - 2){
-                if((endCell == startCell + 2 && this.getBoard().getRow(endRow - 1).getSpace(endCell - 1).getPiece() != null) || (endCell == startCell - 2 && this.getBoard().getRow(endRow - 1).getSpace(endCell + 1).getPiece() != null)){
+                if((endCell == startCell + 2
+                    && this.getBoard().getRow(endRow - 1).getSpace(endCell - 1).getPiece() != null
+                    && this.getBoard().getRow(endRow - 1).getSpace(endCell - 1).getPiece().getColor() == this.player2Color)
+                    || (endCell == startCell - 2
+                    && this.getBoard().getRow(endRow - 1).getSpace(endCell + 1).getPiece() != null
+                    && this.getBoard().getRow(endRow - 1).getSpace(endCell + 1).getPiece().getColor() == this.player2Color)){
                     message.text = "Valid move! Get that piece!";
                     message.type = "info";
                     moveState = moveStatCode.CAPTURE_MODE;
@@ -148,12 +161,6 @@ public class WebCheckerGame
             message.type = "error";
             message.text = "Invalid move!";
             moveState = moveStatCode.NO_MOVEMENT;
-        }
-        if(moveState == moveStatCode.MOVEMENT_MADE){
-            movements = new Movement(startRow, startCell, endRow, endCell);
-            Piece piece = this.getBoard().getRow(startRow).getSpace(startCell).getPiece();
-            this.getBoard().getRow(startRow).getSpace(startCell).setPiece(null);
-            this.getBoard().getRow(endRow).getSpace(endCell).setPiece(piece);
         }
         return message;
     }
@@ -178,7 +185,12 @@ public class WebCheckerGame
         }
         else if(endRow == startRow - 2){
             if(endCell == startCell + 2 || endCell == startCell - 2){
-                if((endCell == startCell + 2 && this.getBoard().getRow(endRow + 1).getSpace(endCell - 1).getPiece() != null) || (endCell == startCell + 2 && this.getBoard().getRow(endRow + 1).getSpace(endCell + 1).getPiece() != null)){
+                if((endCell == startCell + 2
+                    && this.getBoard().getRow(startRow - 1).getSpace(startCell + 1).getPiece() != null
+                    && this.getBoard().getRow(startRow - 1).getSpace(startCell + 1).getPiece().getColor() == player1Color)
+                    || (endCell == startCell - 2
+                    && this.getBoard().getRow(startRow - 1).getSpace(startCell - 1).getPiece() != null
+                    && this.getBoard().getRow(startRow - 1).getSpace(startCell - 1).getPiece().getColor() == player1Color)){
                     message.text = "Valid move! Get that piece!";
                     message.type = "info";
                     moveState = moveStatCode.CAPTURE_MODE;
@@ -200,12 +212,6 @@ public class WebCheckerGame
             message.text = "Invalid move!";
             moveState = moveStatCode.NO_MOVEMENT;
         }
-        if(moveState == moveStatCode.MOVEMENT_MADE){
-            movements = (new Movement(startRow, startCell, endRow, endCell));
-            Piece piece = this.getBoard().getRow(startRow).getSpace(startCell).getPiece();
-            this.getBoard().getRow(startRow).getSpace(startCell).setPiece(null);
-            this.getBoard().getRow(endRow).getSpace(endCell).setPiece(piece);
-        }
         return message;
     }
 
@@ -222,48 +228,23 @@ public class WebCheckerGame
         if (moveState == moveStatCode.CAPTURE_MODE){
             //FIXME remove the piece.
             if(isPlayer1Turn){
-                if(this.getBoard()
-                    .getRow(movements.getEndRow() - 1)
-                    .getSpace( movements.getEndCell() - 1)
-                    .getPiece() != null){
-                    this.getBoard()
-                        .getRow(movements.getEndRow() - 1)
-                        .getSpace( movements.getEndCell() - 1)
-                        .setPiece(null);
-                    System.out.println("Piece is on the back left");
+                System.out.println("Startcell " + movements.getStartCell());
+                System.out.println("Endcell " + movements.getEndCell());
+                if(movements.getEndCell() > movements.getStartCell()){
+                    this.getBoard().getRow(movements.getStartRow() + 1).getSpace(movements.getStartCell() + 1).setPiece(null);
                 }
-                else if(this.getBoard()
-                    .getRow(movements.getEndRow() - 1)
-                    .getSpace(movements.getEndCell() +  1)
-                    .getPiece() != null) {
-                    this.getBoard()
-                        .getRow(movements.getEndRow() - 1)
-                        .getSpace(movements.getEndCell() + 1)
-                        .setPiece(null);
-                    System.out.println("Piece is on the back right");
+                else{
+                    this.getBoard().getRow(movements.getStartRow() + 1).getSpace(movements.getStartCell() - 1).setPiece(null);
                 }
                 isPlayer2Turn = true;
                 isPlayer1Turn = false;
             }
-            else if(isPlayer2Turn){
-                if(this.getBoard()
-                    .getRow(movements.getEndRow() + 1)
-                    .getSpace( movements.getEndCell() - 1)
-                    .getPiece() != null){
-                    this.getBoard()
-                        .getRow(movements.getEndRow() + 1)
-                        .getSpace( movements.getEndCell() - 1)
-                        .setPiece(null);
-                    System.out.println("Piece is on the back left");
+            else{
+                if (movements.getStartCell() > movements.getEndCell()){
+                    this.getBoard().getRow(movements.getStartRow() - 1).getSpace(movements.getStartCell() - 1).setPiece(null);
                 }
-                else if(this.getBoard()
-                    .getRow(movements.getEndRow() + 1)
-                    .getSpace(movements.getEndCell() +  1)
-                    .getPiece() != null) {
-                    this.getBoard()
-                        .getRow(movements.getEndRow() + 1)
-                        .getSpace(movements.getEndCell() + 1).setPiece(null);
-                    System.out.println("Piece is on the back right");
+                else{
+                    this.getBoard().getRow(movements.getStartRow() - 1).getSpace(movements.getStartCell() + 1).setPiece(null);
                 }
                 isPlayer2Turn = false;
                 isPlayer1Turn = true;
@@ -279,7 +260,8 @@ public class WebCheckerGame
                 isPlayer1Turn = true;
             }
         }
+        movements = null;
         moveState = moveStatCode.NO_MOVEMENT;
     }
-
 }
+
