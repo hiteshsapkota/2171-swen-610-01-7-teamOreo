@@ -21,7 +21,13 @@ public class PostBackUpMoveController implements Route {
     public Object handle(Request request, Response response) throws Exception {
         System.out.println(request.body());
         String user = ((OnlinePlayers)request.session().attribute("user")).getName();
-        gameCenter.getGame(user).popMove();
-        return new Message("Backed Up the Move.", "info");
+        Message message;
+        if(gameCenter.getGame(user).popMove()){
+            message = new Message("Backed Up the Move", "info");
+        }
+        else {
+            message = new Message("This is a forced move because of the disk capture", "error");
+        }
+        return message;
     }
 }
