@@ -108,7 +108,7 @@ public class WebCheckerGame
         }
         if(moveState == moveStatCode.MOVEMENT_MADE || moveState == moveStatCode.CAPTURE_MODE){
             movements = new Movement(startRow, startCell, endRow, endCell);
-            Piece piece = this.getBoard().getRow(startRow).getSpace(startCell).getPiece();
+            Piece piece = getPiece(startRow, startCell);
             this.getBoard().getRow(startRow).getSpace(startCell).setPiece(null);
             this.getBoard().getRow(endRow).getSpace(endCell).setPiece(piece);
         }
@@ -136,11 +136,11 @@ public class WebCheckerGame
         else if(endRow == startRow + 2){
             if(endCell == startCell + 2 || endCell == startCell - 2){
                 if((endCell == startCell + 2
-                    && this.getBoard().getRow(endRow - 1).getSpace(endCell - 1).getPiece() != null
-                    && this.getBoard().getRow(endRow - 1).getSpace(endCell - 1).getPiece().getColor() == this.player2Color)
+                    && getPiece(endRow - 1, endCell - 1) != null
+                    && getPiece(endRow - 1, endCell - 1).getColor() == this.player2Color)
                     || (endCell == startCell - 2
-                    && this.getBoard().getRow(endRow - 1).getSpace(endCell + 1).getPiece() != null
-                    && this.getBoard().getRow(endRow - 1).getSpace(endCell + 1).getPiece().getColor() == this.player2Color)){
+                    && getPiece(endRow - 1, endCell + 1) != null
+                    && getPiece(endRow - 1, endCell + 1).getColor() == this.player2Color)){
                     message.text = "Valid move! Get that piece!";
                     message.type = "info";
                     moveState = moveStatCode.CAPTURE_MODE;
@@ -186,11 +186,11 @@ public class WebCheckerGame
         else if(endRow == startRow - 2){
             if(endCell == startCell + 2 || endCell == startCell - 2){
                 if((endCell == startCell + 2
-                    && this.getBoard().getRow(startRow - 1).getSpace(startCell + 1).getPiece() != null
-                    && this.getBoard().getRow(startRow - 1).getSpace(startCell + 1).getPiece().getColor() == player1Color)
+                    && getPiece(startRow - 1, startCell + 1) != null
+                    && getPiece(startRow - 1, startCell + 1).getColor() == player1Color)
                     || (endCell == startCell - 2
-                    && this.getBoard().getRow(startRow - 1).getSpace(startCell - 1).getPiece() != null
-                    && this.getBoard().getRow(startRow - 1).getSpace(startCell - 1).getPiece().getColor() == player1Color)){
+                    && getPiece(startRow - 1, startCell - 1) != null
+                    && getPiece(startRow - 1, startCell - 1).getColor() == player1Color)){
                     message.text = "Valid move! Get that piece!";
                     message.type = "info";
                     moveState = moveStatCode.CAPTURE_MODE;
@@ -215,13 +215,18 @@ public class WebCheckerGame
         return message;
     }
 
-    public void popMove(){
-        Movement latestMovement = movements;
-        Piece piece = this.getBoard().getRow(latestMovement.getEndRow()).getSpace(latestMovement.getEndCell()).getPiece();
-        this.getBoard().getRow(latestMovement.getEndRow()).getSpace(latestMovement.getEndCell()).setPiece(null);
-        this.getBoard().getRow(latestMovement.getStartRow()).getSpace(latestMovement.getStartCell()).setPiece(piece);
-        movements = null;
-        moveState = moveStatCode.NO_MOVEMENT;
+    public boolean popMove(){
+        boolean undoSuccessful = false;
+        if(moveState != moveStatCode.CAPTURE_MODE){
+            Movement latestMovement = movements;
+            Piece piece = getPiece(latestMovement.getEndRow(), latestMovement.getEndCell());
+            setPiece(latestMovement.getEndRow(), movements.getEndCell(), null);
+            setPiece(latestMovement.getStartRow(), latestMovement.getStartCell(), piece);
+            movements = null;
+            moveState = moveStatCode.NO_MOVEMENT;
+            undoSuccessful = true;
+        }
+        return  undoSuccessful;
     }
 
     public void makeMove() {
@@ -231,20 +236,20 @@ public class WebCheckerGame
                 System.out.println("Startcell " + movements.getStartCell());
                 System.out.println("Endcell " + movements.getEndCell());
                 if(movements.getEndCell() > movements.getStartCell()){
-                    this.getBoard().getRow(movements.getStartRow() + 1).getSpace(movements.getStartCell() + 1).setPiece(null);
+                    setPiece(movements.getStartRow() + 1, movements.getStartCell() + 1, null);
                 }
                 else{
-                    this.getBoard().getRow(movements.getStartRow() + 1).getSpace(movements.getStartCell() - 1).setPiece(null);
+                    setPiece(movements.getStartRow() + 1, movements.getStartCell() - 1, null);
                 }
                 isPlayer2Turn = true;
                 isPlayer1Turn = false;
             }
             else{
                 if (movements.getStartCell() > movements.getEndCell()){
-                    this.getBoard().getRow(movements.getStartRow() - 1).getSpace(movements.getStartCell() - 1).setPiece(null);
+                    setPiece(movements.getStartRow() - 1, movements.getStartCell() - 1, null);
                 }
                 else{
-                    this.getBoard().getRow(movements.getStartRow() - 1).getSpace(movements.getStartCell() + 1).setPiece(null);
+                    setPiece(movements.getStartRow() - 1, movements.getStartCell() + 1, null);
                 }
                 isPlayer2Turn = false;
                 isPlayer1Turn = true;
@@ -262,6 +267,14 @@ public class WebCheckerGame
         }
         movements = null;
         moveState = moveStatCode.NO_MOVEMENT;
+    }
+
+    private Piece getPiece(int x, int y){
+        return this.getBoard().getRow(x).getSpace(y).getPiece();
+    }
+
+    private void setPiece(int x, int y, Piece piece){
+        this.getBoard().getRow(x).getSpace(y).setPiece(piece);
     }
 }
 
