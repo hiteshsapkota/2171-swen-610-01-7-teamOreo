@@ -10,7 +10,7 @@ public class WebCheckerGame
     private Board board;
     private String player1;
     private colorEnum player1Color;
-    private boolean isPlayer1Turn;
+    private boolean     isPlayer1Turn;
     private String player2;
     private colorEnum player2Color;
     private boolean isPlayer2Turn;
