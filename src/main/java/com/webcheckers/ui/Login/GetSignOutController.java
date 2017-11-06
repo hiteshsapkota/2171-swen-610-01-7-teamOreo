@@ -1,16 +1,9 @@
 package com.webcheckers.ui.Login;
 
-import static com.webcheckers.model.Strings.CURRENT_PLAYER_ATTR;
-import static com.webcheckers.model.Strings.HOME_VIEW;
-import static com.webcheckers.model.Strings.TITLE_ATTR;
-import static com.webcheckers.model.Strings.USERNAME_ATTR;
-import static com.webcheckers.model.Strings.WELCOME_TITLE;
+import static com.webcheckers.model.Strings.*;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.OnlinePlayers;
-import java.util.HashMap;
-import java.util.Map;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -29,7 +22,6 @@ public class GetSignOutController implements TemplateViewRoute {
 
   @Override
   public ModelAndView handle(Request request, Response response) {
-    Map<String, Object> vm = new HashMap<>();
     // Remove the player from the online list.
     // Remove the player from the session variable
 
@@ -37,11 +29,8 @@ public class GetSignOutController implements TemplateViewRoute {
 
     gameCenter.logout(request.session());
     // Show the home view.
-    response.redirect("/");
+    response.redirect(HOME_URL);
     halt();
     return null;
-//    vm.put(TITLE_ATTR, WELCOME_TITLE);
-//    vm.put(CURRENT_PLAYER_ATTR, false);
-//    return new ModelAndView(vm, HOME_VIEW);
   }
 }

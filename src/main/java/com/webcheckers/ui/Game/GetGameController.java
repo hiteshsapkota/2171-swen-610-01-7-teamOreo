@@ -1,14 +1,6 @@
 package com.webcheckers.ui.Game;
 
-import static com.webcheckers.model.Strings.BOARD_ATTR;
-import static com.webcheckers.model.Strings.GAME_TITLE;
-import static com.webcheckers.model.Strings.GAME_VIEW;
-import static com.webcheckers.model.Strings.IS_MY_TURN_ATTR;
-import static com.webcheckers.model.Strings.OPPONENT_COLOR_ATTR;
-import static com.webcheckers.model.Strings.OPPONENT_NAME_ATTR;
-import static com.webcheckers.model.Strings.PLAYER_COLOR_ATTR;
-import static com.webcheckers.model.Strings.PLAYER_NAME_ATTR;
-import static com.webcheckers.model.Strings.TITLE_ATTR;
+import static com.webcheckers.model.Strings.*;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
@@ -38,7 +30,7 @@ public class GetGameController implements TemplateViewRoute {
       String user = ((OnlinePlayers) session.attribute("user")).getName();
       WebCheckerGame game = gameCenter.getGame(user);
       if(game == null){
-        response.redirect("/");
+        response.redirect(HOME_URL);
         halt();
         return null;
       }
@@ -50,14 +42,14 @@ public class GetGameController implements TemplateViewRoute {
         vm.put(PLAYER_COLOR_ATTR, game.getPlayerColor(user));
         vm.put(OPPONENT_COLOR_ATTR, game.getOpponentColor(user));
         vm.put(IS_MY_TURN_ATTR, game.isMyTurn(user));
-        vm.put("currentPlayer", true);
+        vm.put(CURRENT_PLAYER_ATTR, true);
         vm.put(BOARD_ATTR, game.getBoard());
 
         return new ModelAndView(vm, GAME_VIEW);
       }
     }
     catch (Exception e){
-      response.redirect("/");
+      response.redirect(HOME_URL);
       halt();
       return null;
     }

@@ -8,7 +8,9 @@
         import spark.Route;
         import spark.TemplateViewRoute;
 
-public class PostCheckTurnController implements Route {
+        import static com.webcheckers.model.Strings.USER_SESSION_ATTRIBUTE;
+
+        public class PostCheckTurnController implements Route {
     private final GameCenter gameCenter;
 
     public PostCheckTurnController(final GameCenter gameCenter) {
@@ -17,7 +19,7 @@ public class PostCheckTurnController implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        String user = ((OnlinePlayers)request.session().attribute("user")).getName();
+        String user = ((OnlinePlayers)request.session().attribute(USER_SESSION_ATTRIBUTE)).getName();
         return gameCenter.getGame(user).isMyTurn(user);
     }
 }

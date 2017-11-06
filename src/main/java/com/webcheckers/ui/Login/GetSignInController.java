@@ -1,15 +1,7 @@
 package com.webcheckers.ui.Login;
 
 
-import static com.webcheckers.model.Strings.CURRENT_PLAYER_ATTR;
-import static com.webcheckers.model.Strings.HOME_VIEW;
-import static com.webcheckers.model.Strings.ONLINE_PLAYERS_ATTR;
-import static com.webcheckers.model.Strings.PLAYER_NAME_ATTR;
-import static com.webcheckers.model.Strings.SIGNIN_VIEW;
-import static com.webcheckers.model.Strings.SIGN_IN_TITLE;
-import static com.webcheckers.model.Strings.TITLE_ATTR;
-import static com.webcheckers.model.Strings.USERNAME_ATTR;
-import static com.webcheckers.model.Strings.WELCOME_TITLE;
+import static com.webcheckers.model.Strings.*;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
@@ -36,7 +28,7 @@ public class GetSignInController implements TemplateViewRoute {
   @Override
   public ModelAndView handle(Request request, Response response) {
     Map<String, Object> vm = new HashMap<>();
-    OnlinePlayers username = request.session().attribute("user");
+    OnlinePlayers username = request.session().attribute(USER_SESSION_ATTRIBUTE);
     // if there is no session
     if (username == null) {
       //Show login information
@@ -45,7 +37,7 @@ public class GetSignInController implements TemplateViewRoute {
 
     } else {
       //Redirect to home
-      response.redirect("/");
+      response.redirect(HOME_URL);
       halt();
       return null;
     }

@@ -5,6 +5,8 @@ import com.webcheckers.model.Board.Piece;
 import com.webcheckers.model.Board.Piece.colorEnum;
 import java.util.Objects;
 
+import static com.webcheckers.model.Strings.*;
+
 public class WebCheckerGame
 {
     private Board board;
@@ -99,7 +101,13 @@ public class WebCheckerGame
     }
 
     public Message isValidTurn(int startRow, int startCell, int endRow, int endCell, String user) {
-        Message message;
+        Message message = new Message();
+        if(moveState == moveStatCode.MOVEMENT_MADE || moveState == moveStatCode.CAPTURE_MODE){
+            message.text = INVALID_ALREADY_MADE;
+            message.type = MESSAGE_ERROR;
+            return message;
+        }
+
         if(Objects.equals(user, this.player1)){
             message = isValidTurnRed(startRow, startCell, endRow, endCell);
         }
@@ -109,27 +117,23 @@ public class WebCheckerGame
         if(moveState == moveStatCode.MOVEMENT_MADE || moveState == moveStatCode.CAPTURE_MODE){
             movements = new Movement(startRow, startCell, endRow, endCell);
             Piece piece = getPiece(startRow, startCell);
-            this.getBoard().getRow(startRow).getSpace(startCell).setPiece(null);
-            this.getBoard().getRow(endRow).getSpace(endCell).setPiece(piece);
+            setPiece(startRow, startCell, null);
+            setPiece(endRow, endCell, piece);
         }
         return message;
     }
 
     private Message isValidTurnRed(int startRow, int startCell, int endRow, int endCell) {
         Message message = new Message();
-        if(moveState == moveStatCode.MOVEMENT_MADE || moveState == moveStatCode.CAPTURE_MODE){
-            message.text = "You have already made a move!";
-            message.type = "error";
-        }
-        else if(endRow == startRow + 1){
+        if(endRow == startRow + 1){
             if(endCell == startCell + 1 || endCell == startCell - 1){
-                message.text = "Valid move";
-                message.type = "info";
+                message.text = VALID_MOVE;
+                message.type = MESSAGE_INFO;
                 moveState = moveStatCode.MOVEMENT_MADE;
             }
             else {
-                message.text = "Invalid move, only diagonals forwards are allowed";
-                message.type = "error";
+                message.text = INVALID_ONLY_DIAGONALS;
+                message.type = MESSAGE_ERROR;
                 moveState = moveStatCode.NO_MOVEMENT;
             }
         }
@@ -141,25 +145,25 @@ public class WebCheckerGame
                     || (endCell == startCell - 2
                     && getPiece(endRow - 1, endCell + 1) != null
                     && getPiece(endRow - 1, endCell + 1).getColor() == this.player2Color)){
-                    message.text = "Valid move! Get that piece!";
-                    message.type = "info";
+                    message.text = VALID_GET_PIECE;
+                    message.type = MESSAGE_INFO;
                     moveState = moveStatCode.CAPTURE_MODE;
                 }
                 else {
-                    message.text = "Invalid move";
-                    message.type = "error";
+                    message.text = INVALID_MOVE;
+                    message.type = MESSAGE_ERROR;
                     moveState = moveStatCode.NO_MOVEMENT;
                 }
             }
             else {
-                message.text = "Invalid move, only diagonal forwards are allowed";
-                message.type = "error";
+                message.text = INVALID_ONLY_DIAGONALS;
+                message.type = MESSAGE_ERROR;
                 moveState = moveStatCode.NO_MOVEMENT;
             }
         }
         else{
-            message.type = "error";
-            message.text = "Invalid move!";
+            message.type = MESSAGE_ERROR;
+            message.text = INVALID_MOVE;
             moveState = moveStatCode.NO_MOVEMENT;
         }
         return message;
@@ -167,19 +171,15 @@ public class WebCheckerGame
 
     private Message isValidTurnWhite(int startRow, int startCell, int endRow, int endCell){
         Message message = new Message();
-        if(moveState == moveStatCode.MOVEMENT_MADE){
-            message.text = "You have already made a move!";
-            message.type = "error";
-        }
-        else if(endRow == startRow - 1){
+        if(endRow == startRow - 1){
             if(endCell == startCell + 1 || endCell == startCell - 1){
-                message.text = "Valid move";
-                message.type = "info";
+                message.text = VALID_MOVE;
+                message.type = MESSAGE_INFO;
                 moveState = moveStatCode.MOVEMENT_MADE;
             }
             else {
-                message.text = "Invalid move, only diagonals forwards are allowed";
-                message.type = "error";
+                message.text = INVALID_ONLY_DIAGONALS;
+                message.type = MESSAGE_ERROR;
                 moveState = moveStatCode.NO_MOVEMENT;
             }
         }
@@ -191,25 +191,25 @@ public class WebCheckerGame
                     || (endCell == startCell - 2
                     && getPiece(startRow - 1, startCell - 1) != null
                     && getPiece(startRow - 1, startCell - 1).getColor() == player1Color)){
-                    message.text = "Valid move! Get that piece!";
-                    message.type = "info";
+                    message.text = VALID_GET_PIECE;
+                    message.type = MESSAGE_INFO;
                     moveState = moveStatCode.CAPTURE_MODE;
                 }
                 else {
-                    message.text = "Invalid move";
-                    message.type = "error";
+                    message.text = INVALID_MOVE;
+                    message.type = MESSAGE_ERROR;
                     moveState = moveStatCode.NO_MOVEMENT;
                 }
             }
             else {
-                message.text = "Invalid move, only diagonal forwards are allowed";
-                message.type = "error";
+                message.text = INVALID_ONLY_DIAGONALS;
+                message.type = MESSAGE_ERROR;
                 moveState = moveStatCode.NO_MOVEMENT;
             }
         }
         else{
-            message.type = "error";
-            message.text = "Invalid move!";
+            message.type = MESSAGE_ERROR;
+            message.text = INVALID_MOVE;
             moveState = moveStatCode.NO_MOVEMENT;
         }
         return message;
@@ -231,10 +231,7 @@ public class WebCheckerGame
 
     public void makeMove() {
         if (moveState == moveStatCode.CAPTURE_MODE){
-            //FIXME remove the piece.
             if(isPlayer1Turn){
-                System.out.println("Startcell " + movements.getStartCell());
-                System.out.println("Endcell " + movements.getEndCell());
                 if(movements.getEndCell() > movements.getStartCell()){
                     setPiece(movements.getStartRow() + 1, movements.getStartCell() + 1, null);
                 }

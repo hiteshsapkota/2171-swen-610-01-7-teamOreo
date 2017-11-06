@@ -1,9 +1,6 @@
 package com.webcheckers.ui;
 
-import static com.webcheckers.model.Strings.HOME_URL;
-import static com.webcheckers.model.Strings.PLAY_URL;
-import static com.webcheckers.model.Strings.SIGN_IN_URL;
-import static com.webcheckers.model.Strings.SIGN_OUT_URL;
+import static com.webcheckers.model.Strings.*;
 import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
@@ -43,16 +40,6 @@ import spark.TemplateEngine;
  */
 public class WebServer {
 
-  //
-  // Constants
-  //
-
-  /**
-   * The URL pattern to request the Home page.
-   */
-//  public static final String HOME_URL = "/";
-//  public static final String SIGNIN_URL="/signin";
-//  public static final String SIGNOUT_URL="/signout";
   //
   // Attributes
   //
@@ -134,15 +121,15 @@ public class WebServer {
     // Shows the Game form.
     post(PLAY_URL, new StartPlayController(gameCenter), templateEngine);
 
-    get("/game", new GetGameController(gameCenter), templateEngine);
+    get(GAME_URL, new GetGameController(gameCenter), templateEngine);
 
-    post("/checkTurn", new PostCheckTurnController(gameCenter), JsonUtils.json());
+    post(CHECK_TURN, new PostCheckTurnController(gameCenter), JsonUtils.json());
 
-    post("/validateMove", new PostValidateMoveController(gameCenter), JsonUtils.json());
+    post(VALIDATE_MOVE, new PostValidateMoveController(gameCenter), JsonUtils.json());
 
-    post("/backupMove", new PostBackUpMoveController(gameCenter), JsonUtils.json());
+    post(BACKUP_MOVE, new PostBackUpMoveController(gameCenter), JsonUtils.json());
 
-    post("/submitTurn", new PostSubmitTurnController(gameCenter), JsonUtils.json());
+    post(SUBMIT_TURN, new PostSubmitTurnController(gameCenter), JsonUtils.json());
   }
 
 }

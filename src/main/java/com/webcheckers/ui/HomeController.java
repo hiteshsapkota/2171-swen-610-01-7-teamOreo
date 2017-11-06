@@ -1,11 +1,6 @@
 package com.webcheckers.ui;
 
-import static com.webcheckers.model.Strings.CURRENT_PLAYER_ATTR;
-import static com.webcheckers.model.Strings.HOME_VIEW;
-import static com.webcheckers.model.Strings.ONLINE_PLAYERS_ATTR;
-import static com.webcheckers.model.Strings.PLAYER_NAME_ATTR;
-import static com.webcheckers.model.Strings.TITLE_ATTR;
-import static com.webcheckers.model.Strings.WELCOME_TITLE;
+import static com.webcheckers.model.Strings.*;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
@@ -34,7 +29,7 @@ public class HomeController implements TemplateViewRoute {
   public ModelAndView handle(Request request, Response response) {
     Map<String, Object> vm = new HashMap<>();
     vm.put(TITLE_ATTR, WELCOME_TITLE);
-    OnlinePlayers currentPlayer = request.session().attribute("user");
+    OnlinePlayers currentPlayer = request.session().attribute(USER_SESSION_ATTRIBUTE);
 
     // If there is no username in session
     if (currentPlayer == null) {

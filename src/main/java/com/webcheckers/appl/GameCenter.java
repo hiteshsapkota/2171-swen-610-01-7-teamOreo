@@ -7,14 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 import spark.Session;
 
+import static com.webcheckers.model.Strings.USER_SESSION_ATTRIBUTE;
+
 public class GameCenter {
 
     private Map<String, OnlinePlayers> allPlayers = new HashMap<>();
     private ArrayList<WebCheckerGame> allGames = new ArrayList();
 
-    /**
-     * User functions
-     */
 
     /**
      *  To add player in the all players list
@@ -32,8 +31,8 @@ public class GameCenter {
      * @param session
      */
     public void logout(Session session){
-        String username = ((OnlinePlayers) session.attribute("user")).getName();
-        session.removeAttribute("user");
+        String username = ((OnlinePlayers) session.attribute(USER_SESSION_ATTRIBUTE)).getName();
+        session.removeAttribute(USER_SESSION_ATTRIBUTE);
         this.allPlayers.remove(username);
     }
 

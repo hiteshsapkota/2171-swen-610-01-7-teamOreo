@@ -1,24 +1,6 @@
 package com.webcheckers.ui.Game;
 
-import static com.webcheckers.model.Strings.BOARD_ATTR;
-import static com.webcheckers.model.Strings.CURRENT_PLAYER_ATTR;
-import static com.webcheckers.model.Strings.GAME_TITLE;
-import static com.webcheckers.model.Strings.GAME_VIEW;
-import static com.webcheckers.model.Strings.HOME_VIEW;
-import static com.webcheckers.model.Strings.IS_MY_TURN_ATTR;
-import static com.webcheckers.model.Strings.MESSAGE_ATTR;
-import static com.webcheckers.model.Strings.MESSAGE_PLAYER_PLAYING;
-import static com.webcheckers.model.Strings.MESSAGE_TYPE_ATTR;
-import static com.webcheckers.model.Strings.MESSAGE_TYPE_ERROR;
-import static com.webcheckers.model.Strings.ONLINE_PLAYERS_ATTR;
-import static com.webcheckers.model.Strings.OPPONENT_ATTR;
-import static com.webcheckers.model.Strings.OPPONENT_COLOR_ATTR;
-import static com.webcheckers.model.Strings.OPPONENT_NAME_ATTR;
-import static com.webcheckers.model.Strings.PLAYER_COLOR_ATTR;
-import static com.webcheckers.model.Strings.PLAYER_NAME_ATTR;
-import static com.webcheckers.model.Strings.TITLE_ATTR;
-import static com.webcheckers.model.Strings.USERNAME_ATTR;
-import static com.webcheckers.model.Strings.WELCOME_TITLE;
+import static com.webcheckers.model.Strings.*;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
@@ -53,7 +35,7 @@ public class StartPlayController implements TemplateViewRoute {
   public ModelAndView handle(Request request, Response response) {
     // get the name of the opponent and the player.
     String opponent = request.queryParams(OPPONENT_ATTR);
-    String player = ((OnlinePlayers)request.session().attribute("user")).getName();
+    String player = ((OnlinePlayers)request.session().attribute(USER_SESSION_ATTRIBUTE)).getName();
     Map<String, Object> vm = new HashMap<>();
 
     // get indexes of player and opponent from the list.
@@ -62,11 +44,11 @@ public class StartPlayController implements TemplateViewRoute {
     if (gameCenter.userIsFree(opponent)) {
       gameCenter.addGame(player, opponent);
       // Redirect to getGameController
-      response.redirect("/game");
+      response.redirect(GAME_URL);
       halt();
       return null;
     } else { // if the opponent got busy
-      response.redirect("/");
+      response.redirect(HOME_URL);
       halt();
       return null;
     }
