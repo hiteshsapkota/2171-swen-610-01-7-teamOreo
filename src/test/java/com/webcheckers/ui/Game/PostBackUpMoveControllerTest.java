@@ -1,5 +1,6 @@
 package com.webcheckers.ui.Game;
 
+import static com.webcheckers.model.Strings.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -41,8 +42,8 @@ public class PostBackUpMoveControllerTest {
     when(game.popMove()).thenReturn(true);
 
     Message trueMessage = (Message) postBackUpMoveController.handle(request, response);
-    assertEquals("Backed Up the Move", trueMessage.text);
-    assertEquals("info", trueMessage.type);
+    assertEquals(BACKUP_SUCCESSFUL, trueMessage.text);
+    assertEquals(MESSAGE_INFO, trueMessage.type);
   }
 
   @Test
@@ -62,8 +63,8 @@ public class PostBackUpMoveControllerTest {
     when(game.popMove()).thenReturn(false);
 
     Message trueMessage = (Message) postBackUpMoveController.handle(request, response);
-    assertEquals("This is a forced move because of the disk capture", trueMessage.text);
-    assertEquals("error", trueMessage.type);
+    assertEquals(BACKUP_UNSUCCESSFUL, trueMessage.text);
+    assertEquals(MESSAGE_ERROR, trueMessage.type);
   }
 
 }

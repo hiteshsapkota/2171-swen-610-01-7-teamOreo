@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 
+import static com.webcheckers.model.Strings.*;
 import static org.junit.Assert.*;
 
 import com.webcheckers.model.Board.Board;
@@ -59,31 +60,31 @@ public class WebCheckerGameTest {
   @Test
   public void isValidTurn() throws Exception {
     Message message = game.isValidTurn(1,1,1,1, p1);
-    assertEquals("error", message.type);
-    assertEquals("Invalid move!", message.text);
+    assertEquals(MESSAGE_ERROR, message.type);
+    assertEquals(INVALID_MOVE, message.text);
     message = game.isValidTurn(1,1,2,2, p1);
-    assertEquals("info", message.type);
-    assertEquals("Valid move", message.text);
+    assertEquals(MESSAGE_INFO, message.type);
+    assertEquals(VALID_MOVE, message.text);
     assertTrue(game.popMove());
     game.getBoard().getRow(3).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
     message = game.isValidTurn(2, 1, 4, 3, p1);
-    assertEquals("info", message.type);
-    assertEquals("Valid move! Get that piece!", message.text);
+    assertEquals(MESSAGE_INFO, message.type);
+    assertEquals(VALID_GET_PIECE, message.text);
     assertFalse(game.popMove());
     game.makeMove();
 
     message = game.isValidTurn(5, 0, 5, 5, p2);
-    assertEquals("error", message.type);
-    assertEquals("Invalid move!", message.text);
+    assertEquals(MESSAGE_ERROR, message.type);
+    assertEquals(INVALID_MOVE, message.text);
     message = game.isValidTurn(5, 0, 4, 1, p2);
-    assertEquals("info", message.type);
-    assertEquals("Valid move", message.text);
+    assertEquals(MESSAGE_INFO, message.type);
+    assertEquals(VALID_MOVE, message.text);
     assertTrue(game.popMove());
     game.getBoard().getRow(4).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
     message = game.isValidTurn(5, 0, 3, 2, p2);
     System.out.println(message.type + message.text);
-    assertEquals("info", message.type);
-    assertEquals("Valid move! Get that piece!", message.text);
+    assertEquals(MESSAGE_INFO, message.type);
+    assertEquals(VALID_GET_PIECE, message.text);
     assertFalse(game.popMove());
     game.makeMove();
 
