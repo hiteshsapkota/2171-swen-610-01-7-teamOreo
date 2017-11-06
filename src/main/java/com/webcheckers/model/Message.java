@@ -1,7 +1,6 @@
 package com.webcheckers.model;
 
     public class Message {
-
         public String text;
         public String type;
 

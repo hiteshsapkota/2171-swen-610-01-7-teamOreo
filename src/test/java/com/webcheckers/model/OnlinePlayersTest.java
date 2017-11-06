@@ -1,49 +1,42 @@
-//package com.webcheckers.model;
-//
-//import org.junit.Before;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//
-//
-///**
-// * Testing The OnlinePlayersClass
-// */
-//public class OnlinePlayersTest {
-//  OnlinePlayers mockOnlinePlayers;
-//  String testName;
-//
-//  @Before
-//  public void initialize(){
-//    testName = "Dishant";
-//  }
-//
-//  @Test
-//  public void testConstructor(){
-//    mockOnlinePlayers = new OnlinePlayers(testName);
-//    assertEquals(testName, mockOnlinePlayers.getName());
-//    assertTrue(mockOnlinePlayers.isFree());
-//  }
-//
-//  @Test
-//  public void testConstructorWithParameters(){
-//    mockOnlinePlayers = new OnlinePlayers(testName, true);
-//    assertEquals(testName, mockOnlinePlayers.getName());
-//    assertTrue(mockOnlinePlayers.isFree());
-//  }
-//
-//  @Test
-//  public void testClassNameToString(){
-//    mockOnlinePlayers = new OnlinePlayers(testName);
-//    assertEquals(testName, mockOnlinePlayers.toString());
-//  }
-//
-//  @Test
-//  public void testEqualsAndHashCode(){
-//    mockOnlinePlayers = new OnlinePlayers(testName);
-//    OnlinePlayers mock2 = new OnlinePlayers(testName);
-//    assertEquals(mockOnlinePlayers, mock2);
-//    assertTrue("Worked?", (mockOnlinePlayers.hashCode() == mock2.hashCode()));
-//  }
-//
-//
-//}
+package com.webcheckers.model;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class OnlinePlayersTest {
+  private OnlinePlayers onlinePlayers;
+  private String test = "test";
+
+  @Before
+  public void start(){
+    onlinePlayers = new OnlinePlayers(test);
+  }
+
+  @Test
+  public void getName() throws Exception {
+    assertEquals(test, onlinePlayers.getName());
+  }
+
+  @Test
+  public void isFree() throws Exception {
+    assertTrue(onlinePlayers.isFree());
+  }
+
+  @Test
+  public void setFree() throws Exception {
+    onlinePlayers.setFree(false);
+    assertFalse(onlinePlayers.isFree());
+  }
+
+  @Test
+  public void equals() throws Exception {
+    OnlinePlayers p2 = new OnlinePlayers(test);
+    assertTrue(onlinePlayers.equals(p2));
+    assertFalse(onlinePlayers.equals(null));
+    assertFalse(onlinePlayers.equals(test));
+
+  }
+
+}

@@ -1,50 +1,50 @@
-//package com.webcheckers.model.Board;
-//
-//import com.sun.org.apache.regexp.internal.RE;
-//import com.webcheckers.model.OnlinePlayers;
-//import org.junit.Test;
-//
-//import static com.webcheckers.model.Board.Piece.colorEnum.RED;
-//import static com.webcheckers.model.Board.Piece.typeEnum.SINGLE;
-//import static org.junit.Assert.*;
-//
-//public class SpaceTest {
-//
-//@Test
-//    public void checkSpace()
-//    { Piece piece = new Piece(SINGLE,RED);
-//        Space space=new Space(5,true, piece);
-//        assertEquals(5,space.getCellIdx() );
-//        assertEquals(true, space.isValid());
-//        assertEquals(RED,piece.getColor());
-//        assertEquals(SINGLE, piece.getType());
-//
-//    }
-//
-//    @Test
-//    public void checkSetIdx(){
-//        int targetId = 5;
-//        Space space = new Space(7, true, null);
-//        space.setCellIdx(targetId);
-//        assertEquals(targetId, space.getCellIdx());
-//    }
-//
-//    @Test
-//    public void checkSetValid(){
-//        boolean targetValid = false;
-//        Space space = new Space(5, true, null);
-//        space.setValid(targetValid);
-//
-//        assertFalse(space.isValid());
-//    }
-//
-//    @Test
-//    public void checkGetAndSetPiece(){
-//        Piece targetPiece = new Piece(SINGLE, RED);
-//        Space space = new Space(5, true, null);
-//
-//        space.setPiece(targetPiece);
-//        assertEquals(targetPiece, space.getPiece());
-//    }
-//
-//}
+package com.webcheckers.model.Board;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+import com.webcheckers.model.Board.Space.SPACECOLOR;
+import org.junit.Before;
+import org.junit.Test;
+
+public class SpaceTest {
+  private Space space;
+
+  @Before
+  public void start(){
+    space = new Space(1, SPACECOLOR.BLACK, null);
+  }
+
+  @Test
+  public void getSpaceColor() throws Exception {
+    assertEquals(SPACECOLOR.BLACK, space.getSpaceColor());
+  }
+
+  @Test
+  public void getCellIdx() throws Exception {
+    assertEquals(1, space.getCellIdx());
+  }
+
+  @Test
+  public void setCellIdx() throws Exception {
+    space.setCellIdx(2);
+    assertEquals(2, space.getCellIdx());
+  }
+
+  @Test
+  public void isValid() throws Exception {
+    assertTrue(space.isValid());
+    space.setPiece(mock(Piece.class));
+    assertFalse(space.isValid());
+  }
+
+  @Test
+  public void getPiece() throws Exception {
+    Piece piece = mock(Piece.class);
+    assertNull(space.getPiece());
+    space.setPiece(piece);
+    assertNotNull(space.getPiece());
+    assertEquals(piece, space.getPiece());
+  }
+
+}
