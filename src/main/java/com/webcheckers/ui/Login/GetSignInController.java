@@ -20,11 +20,20 @@ import spark.TemplateViewRoute;
 public class GetSignInController implements TemplateViewRoute {
   private final GameCenter gameCenter;
 
+  /**
+   * This is a constructor initializes the gameCenter attribute.
+   * @param gameCenter
+   */
   public GetSignInController(final GameCenter gameCenter){
     this.gameCenter = gameCenter;
   }
 
-
+  /**
+   * This handle method is overridden  to create a new sign in and show login info.
+   * @param request
+   * @param response
+   * @return home_view
+   */
   @Override
   public ModelAndView handle(Request request, Response response) {
     Map<String, Object> vm = new HashMap<>();
@@ -36,7 +45,7 @@ public class GetSignInController implements TemplateViewRoute {
       return new ModelAndView(vm, SIGNIN_VIEW);
 
     } else {
-      //Redirect to home
+      //Redirects to home
       response.redirect(HOME_URL);
       halt();
       return null;

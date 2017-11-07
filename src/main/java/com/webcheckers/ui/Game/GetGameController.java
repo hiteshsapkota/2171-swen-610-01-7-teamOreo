@@ -14,14 +14,27 @@ import spark.Response;
 import spark.Session;
 import spark.TemplateViewRoute;
 
+/**
+ * The controller for the game
+ */
 public class GetGameController implements TemplateViewRoute {
 
   private final GameCenter gameCenter;
 
+  /**
+   * Initializes the gameCenter attribute.
+   * @param gameCenter
+   */
   public GetGameController(final GameCenter gameCenter){
     this.gameCenter = gameCenter;
   }
 
+  /**
+   * This handle method determines if the name can be created to return the game page otherwise redirects to home_page
+   * @param request
+   * @param response
+   * @return game_view
+   */
   @Override
   public ModelAndView handle(Request request, Response response) {
     final Session session = request.session();

@@ -21,10 +21,22 @@ public class HomeController implements TemplateViewRoute {
 
   private final GameCenter gameCenter;
 
+  /**
+   * This is a constructor initializes the gameCenter attribute.
+   * @param gameCenter new game
+   */
+
   public HomeController(GameCenter gameCenter){
     this.gameCenter = gameCenter;
   }
 
+  /**
+   *
+   *This handle method is overridden to create a new session and get the home page.
+   * @param request
+   * @param response
+   * @return home_view
+   */
   @Override
   public ModelAndView handle(Request request, Response response) {
     Map<String, Object> vm = new HashMap<>();

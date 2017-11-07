@@ -15,11 +15,22 @@ import spark.TemplateViewRoute;
 public class GetSignOutController implements TemplateViewRoute {
   private final GameCenter gameCenter;
 
+  /**
+   * This constructor initializes the gameCenter attribute.
+   *
+   * @param gameCenter
+   */
   public GetSignOutController(final GameCenter gameCenter) {
     this.gameCenter = gameCenter;
 
   }
 
+  /**
+   * This handle method remove the session and username of the player.
+   * @param request
+   * @param response
+   * @return home_view
+   */
   @Override
   public ModelAndView handle(Request request, Response response) {
     // Remove the player from the online list.

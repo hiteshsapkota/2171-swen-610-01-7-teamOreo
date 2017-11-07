@@ -18,10 +18,23 @@ import spark.TemplateViewRoute;
  */
 public class PostSignInController implements TemplateViewRoute {
 private final GameCenter gameCenter;
+
+  /**
+   * Initializes the gameCenter attribute.
+   * @param gameCenter
+   */
+
 public PostSignInController(final GameCenter gameCenter)
 {
   this.gameCenter=gameCenter;
 }
+
+  /**
+   * Verify that the name entered is not empty and if it is empty or existing name it redirects to sign in page otherwise to home page.
+   * @param request
+   * @param response
+   * @return home_view
+   */
   @Override
   public ModelAndView handle(Request request, Response response) {
     Map<String, Object> vm = new HashMap<>();
