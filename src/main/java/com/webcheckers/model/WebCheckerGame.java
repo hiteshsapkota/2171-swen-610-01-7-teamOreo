@@ -7,8 +7,14 @@ import java.util.Objects;
 
 import static com.webcheckers.model.Strings.*;
 
+/**
+ * This is the class of the game and its functions. It holds the boards, the players and some of the validations.
+ */
 public class WebCheckerGame
 {
+    //
+    // Attributes
+    //
     private Board board;
     private String player1;
     private colorEnum player1Color;
@@ -27,13 +33,13 @@ public class WebCheckerGame
     private boolean gameEnded;
     private int turn;
 
+    /**
+     * Constructor to create a new game.
+     * @param player1 players name
+     * @param player2 opponent's name
+     */
     public WebCheckerGame(String player1,String player2)
     {
-        /**
-         * It will create new board with rows,spaces and pieces
-         * @param player1
-         * @param player2
-         */
         this.board = new Board();
         this.player1 = player1;
         this.player1Color = colorEnum.RED;
@@ -46,6 +52,11 @@ public class WebCheckerGame
         this.moveState = moveStatCode.NO_MOVEMENT;
     }
 
+    /**
+     * isMyTurn checks if its the current user's turn.
+     * @param username name of the player asking for the turn.
+     * @return returns true if its his/her turn else returns false.
+     */
     public boolean isMyTurn(String username){
         if(Objects.equals(player1, username)){
             return isPlayer1Turn;
@@ -55,10 +66,19 @@ public class WebCheckerGame
         }
     }
 
+    /**
+     * Returns the board of the game.
+     * @return {@link Board}
+     */
     public Board getBoard() {
         return board;
     }
 
+    /**
+     * Returns the current player
+     * @param username the name of the current player from the session.
+     * @return name of the user.
+     */
     public String getPlayer(String username) {
         if(Objects.equals(player1, username)){
             return player1;
@@ -68,6 +88,11 @@ public class WebCheckerGame
         }
     }
 
+    /**
+     * Returns the opponent of the current player
+     * @param username current player
+     * @return opponent name
+     */
     public String getOpponent(String username){
         if(Objects.equals(this.player1, username)){
             return player2;
@@ -77,6 +102,11 @@ public class WebCheckerGame
         }
     }
 
+    /**
+     * gets the color of the player.
+     * @param username current player
+     * @return @colorEnum of the player's piece
+     */
     public colorEnum getPlayerColor(String username){
         if(Objects.equals(this.player1, username)){
             return player1Color;
@@ -86,7 +116,11 @@ public class WebCheckerGame
         }
     }
 
-
+    /**
+     * gets the color of the opponent.
+     * @param username the name of the current user.
+     * @return @colorEnum of the opponent.
+     */
     public colorEnum getOpponentColor(String username) {
         if(Objects.equals(this.player1, username)){
             return player2Color;
@@ -96,10 +130,24 @@ public class WebCheckerGame
         }
     }
 
+    /**
+     * check if the game has the player.
+     * @param username name of the current user.
+     * @return true if the player is in the game.
+     */
     public boolean hasPlayer(String username) {
         return (Objects.equals(player1, username) || Objects.equals(player2, username));
     }
 
+    /**
+     * Checks if the movement is a valid one or not and returns the appropriate method.
+     * @param startRow row position of the start.
+     * @param startCell cell position of the start.
+     * @param endRow row position of the end.
+     * @param endCell cell position of the end.
+     * @param user current username.
+     * @return the appropriate message.
+     */
     public Message isValidTurn(int startRow, int startCell, int endRow, int endCell, String user) {
         Message message = new Message();
         if(moveState == moveStatCode.MOVEMENT_MADE || moveState == moveStatCode.CAPTURE_MODE){
@@ -123,6 +171,14 @@ public class WebCheckerGame
         return message;
     }
 
+    /**
+     * checks if the movement for the red's piece is valid or not.
+     * @param startRow row position of the start.
+     * @param startCell cell position of the start.
+     * @param endRow row position of the end.
+     * @param endCell cell position of the end.
+     * @return appropriate message.
+     */
     private Message isValidTurnRed(int startRow, int startCell, int endRow, int endCell) {
         Message message = new Message();
         if(endRow == startRow + 1){
@@ -169,6 +225,14 @@ public class WebCheckerGame
         return message;
     }
 
+    /**
+     * checks if the movement for the white's piece is valid or not.
+     * @param startRow row position of the start.
+     * @param startCell cell position of the start.
+     * @param endRow row position of the end.
+     * @param endCell cell position of the end.
+     * @return appropriate message.
+     */
     private Message isValidTurnWhite(int startRow, int startCell, int endRow, int endCell){
         Message message = new Message();
         if(endRow == startRow - 1){
@@ -215,6 +279,10 @@ public class WebCheckerGame
         return message;
     }
 
+    /**
+     * Check if the undo is possible
+     * @return if successful, returns true else false.
+     */
     public boolean popMove(){
         boolean undoSuccessful = false;
         if(moveState != moveStatCode.CAPTURE_MODE){
@@ -229,6 +297,9 @@ public class WebCheckerGame
         return  undoSuccessful;
     }
 
+    /**
+     * This function moves the piece and commits and switch of the current players' turn.
+     */
     public void makeMove() {
         if (moveState == moveStatCode.CAPTURE_MODE){
             if(isPlayer1Turn){
@@ -266,10 +337,22 @@ public class WebCheckerGame
         moveState = moveStatCode.NO_MOVEMENT;
     }
 
+    /**
+     * Helper method to get the piece from the position.
+     * @param x row
+     * @param y cell
+     * @return {@link Piece}
+     */
     private Piece getPiece(int x, int y){
         return this.getBoard().getRow(x).getSpace(y).getPiece();
     }
 
+    /**
+     * Helper method to set the piece of the position.
+     * @param x row
+     * @param y cell
+     * @param piece the piece to be set.
+     */
     private void setPiece(int x, int y, Piece piece){
         this.getBoard().getRow(x).getSpace(y).setPiece(piece);
     }
