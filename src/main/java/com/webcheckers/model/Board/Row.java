@@ -23,6 +23,7 @@ public class Row implements Iterable<Space> {
 
   /**
    * Constructor
+   * Adds spaces and adds pieces in the corresponding position
    * @param index position of the row
    */
   public Row(int index) {
@@ -63,15 +64,27 @@ public class Row implements Iterable<Space> {
   /**
    * Public methods for freemarker.
    */
-
+  /**Returns space corresponding to cellIdX
+   *
+   * @param cellIdX
+   * @return Space
+   */
   public Space getSpace(int cellIdX){
     return spaces.get(cellIdX);
   }
 
+  /**
+   * Returns index
+   * @return index
+   */
   public int getIndex() {
     return index;
   }
 
+  /**
+   * Sets index
+   * @param index
+   */
   public void setIndex(int index) {
     this.index = index;
   }
