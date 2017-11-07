@@ -12,13 +12,24 @@ public class Board implements Iterable<Row> {
    * Lists
    */
   private ArrayList<Row> rows;
-
+//constructor
+  /**
+   * Adds rows to the arraylist
+   * @param
+   * @return
+   */
   public Board(){
     rows = new ArrayList<>();
     for (int i = 0; i < 8; i++) {
       rows.add(new Row(i));
     }
   }
+
+  /**
+   * Returns row corresponding to the particular index
+   * @param index
+   * @return Row
+   */
 
   public Row getRow(int index){
     return rows.get(index);
