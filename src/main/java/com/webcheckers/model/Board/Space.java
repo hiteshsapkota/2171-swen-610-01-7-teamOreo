@@ -28,6 +28,10 @@ public class Space {
     this.spaceColor = spaceColor;
   }
 
+  /**
+   * Returns color of corresponding space
+   * @return SPACECOLOR
+   */
   public SPACECOLOR getSpaceColor() {
     return spaceColor;
   }
@@ -36,23 +40,42 @@ public class Space {
    * Public methods
    */
 
-
+  /**
+   * Returns cellIdx
+   * @return cellIdx
+   */
   public int getCellIdx() {
     return cellIdx;
   }
 
+  /**
+   * Sets cellIdx
+   * @param cellIdx
+   */
   public void setCellIdx(int cellIdx) {
     this.cellIdx = cellIdx;
   }
 
+  /**
+   * Checks whether particular space is vaild for move or not
+   * @return true if spacecolor is black and piece is not else false
+   */
   public boolean isValid() {
     return this.spaceColor == SPACECOLOR.BLACK && this.piece == null;
   }
 
+  /**
+   * Returns piece
+   * @return piece
+   */
   public Piece getPiece() {
     return piece;
   }
 
+  /**
+   *  Sets piece
+   * @param piece
+   */
   public void setPiece(Piece piece) {
     this.piece = piece;
   }
