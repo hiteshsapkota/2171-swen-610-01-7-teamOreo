@@ -10,13 +10,28 @@ import spark.Route;
 
 import static com.webcheckers.model.Strings.*;
 
+/**
+ * Checks move is legal or illegal
+ */
 public class PostValidateMoveController implements Route {
   private final GameCenter gameCenter;
 
+  /**
+   * Initializes the gameCenter attribute.
+   * @param gameCenter
+   */
   public PostValidateMoveController(final GameCenter gameCenter){
     this.gameCenter = gameCenter;
   }
 
+  /**
+   * This handle method captures the start position and end position and based on that
+   * determines if the move is legal or illegal
+   * @param request
+   * @param response
+   * @return
+   * @throws Exception
+   */
   @Override
   public Object handle(Request request, Response response) throws Exception {
     // Get the start and end positions

@@ -27,6 +27,10 @@ public class StartPlayController implements TemplateViewRoute {
 
   private final GameCenter gameCenter;
 
+  /**
+   * Initializes the gameCenter attribute.
+   * @param gameCenter
+   */
   public StartPlayController(final GameCenter gameCenter){
     this.gameCenter = gameCenter;
   }
