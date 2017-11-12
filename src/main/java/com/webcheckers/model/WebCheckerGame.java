@@ -22,12 +22,13 @@ public class WebCheckerGame
     private Board board;
     private String player1;
     private colorEnum player1Color;
-    private boolean     isPlayer1Turn;
+    private boolean isPlayer1Turn;
     private String player2;
     private colorEnum player2Color;
     private boolean isPlayer2Turn;
     private moveStatCode moveState;
     private HashMap<String, ArrayList<Position>> possibleMovements = new HashMap<>();
+
     private enum moveStatCode{
         NO_MOVEMENT,
         MOVEMENT_MADE,
@@ -77,7 +78,6 @@ public class WebCheckerGame
         }
     }
 
-    // FIXME: let it not throw an exception for out of bounds.
     public void checkAllPieceForMovements(){
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -85,106 +85,113 @@ public class WebCheckerGame
                     System.out.println("No piece");
                     continue;
                 }
-                try{
-                    String positionKey = String.valueOf(i) + String.valueOf(j);
-                    possibleMovements.put(positionKey, new ArrayList<>());
-                    if(getPiece(i, j).getType() == typeEnum.KING){
-                        if(i + 1 <= 7){
-                            if(j + 1 <= 7){
-                                if(getPiece(i + 1, j + 1) == null){
-                                    possibleMovements.get(positionKey).add(new Position(i + 1, j + 1));
-                                }
-
-                                if(i + 2 <= 7 && j + 2 <= 7){
-                                    if(getPiece(i + 1, j + 1) != null && getPiece(i + 1, j + 1).getColor() != getPiece(i, j).getColor() && getPiece(i + 2, j + 2) == null){
-                                        possibleMovements.get(positionKey).add(new Position(i + 2, j + 2));
-                                    }
-                                }
+                String positionKey = String.valueOf(i) + String.valueOf(j);
+                possibleMovements.put(positionKey, new ArrayList<>());
+                if(getPiece(i, j).getType() == typeEnum.KING){
+                    if(i + 1 <= 7){
+                        if(j + 1 <= 7){
+                            if(getPiece(i + 1, j + 1) == null){
+                                possibleMovements.get(positionKey).add(new Position(i + 1, j + 1));
                             }
 
-                            if(j - 1 >= 0){
-                                if(getPiece(i + 1, j - 1) == null){
-                                    possibleMovements.get(positionKey).add(new Position(i + 1, j - 1));
-                                }
-
-                                if(i + 2 <= 7 && j - 2 >= 0){
-                                    if(getPiece(i + 1, j - 1) != null && getPiece(i + 1, j - 1).getColor() != getPiece(i, j).getColor() && getPiece(i + 2, j - 2) == null){
-                                        possibleMovements.get(positionKey).add(new Position(i + 2, j - 2));
-                                    }
+                            if(i + 2 <= 7 && j + 2 <= 7){
+                                if(getPiece(i + 1, j + 1) != null && getPiece(i + 1, j + 1).getColor() != getPiece(i, j).getColor() && getPiece(i + 2, j + 2) == null){
+                                    possibleMovements.get(positionKey).add(new Position(i + 2, j + 2));
                                 }
                             }
                         }
-
-                        if(i - 1 >= 0){
-                            if(j + 1 <= 7){
-                                if(getPiece(i - 1, j + 1) == null){
-                                    possibleMovements.get(positionKey).add(new Position(i - 1, j + 1));
-                                }
-                                if(i - 2 >= 0 && j + 2 <= 7){
-                                    if(getPiece(i - 1, j + 1) != null && getPiece(i - 1, j + 1).getColor() != getPiece(i, j).getColor() && getPiece(i - 2, j + 2) == null){
-                                        possibleMovements.get(positionKey).add(new Position(i - 2, j + 2));
-                                    }
-                                }
+                        if(j - 1 >= 0){
+                            if(getPiece(i + 1, j - 1) == null){
+                                possibleMovements.get(positionKey).add(new Position(i + 1, j - 1));
                             }
 
-                            if(j - 1 >= 0){
-                                if(getPiece(i - 1, j - 1) == null){
-                                    possibleMovements.get(positionKey).add(new Position(i - 1, j - 1));
-                                }
-
-                                if(i - 2 >= 0 && j - 2 >= 0){
-                                    if(getPiece(i - 1, j - 1) != null && getPiece(i - 1, j - 1).getColor() != getPiece(i, j).getColor() && getPiece(i - 2, j - 2) == null){
-                                        possibleMovements.get(positionKey).add(new Position(i - 2, j - 2));
-                                    }
-                                }
-                            }
-
-                        }
-
-                    }
-                    else if(getPiece(i, j).getColor() == colorEnum.RED){
-                        if(i + 1 <= 7){
-                            if(j + 1 <= 7){
-                                if(getPiece(i + 1, j + 1) == null){
-                                    possibleMovements.get(positionKey).add(new Position(i + 1, j + 1));
-                                }
-                                if(i + 2 <= 7 && j + 2 <= 7){
-                                    if(getPiece(i + 1, j + 1) != null && getPiece(i + 1, j + 1).getColor() != colorEnum.RED && getPiece(i + 2, j + 2) == null){
-                                        possibleMovements.get(positionKey).add(new Position(i + 2, j + 2));
-                                    }
-                                }
-                            }
-
-                            if(j - 1 >= 0){
-                                if(getPiece(i + 1, j - 1) == null){
-                                    possibleMovements.get(positionKey).add(new Position(i + 1, j - 1));
-                                }
-
-                                if(i + 2 <= 7 && j - 2 >=0){
-                                    if(getPiece(i + 1, j - 1) != null && getPiece(i + 1, j - 1).getColor() != colorEnum.RED && getPiece(i + 2, j - 2) == null){
-                                        possibleMovements.get(positionKey).add(new Position(i + 2, j - 2));
-                                    }
+                            if(i + 2 <= 7 && j - 2 >= 0){
+                                if(getPiece(i + 1, j - 1) != null && getPiece(i + 1, j - 1).getColor() != getPiece(i, j).getColor() && getPiece(i + 2, j - 2) == null){
+                                    possibleMovements.get(positionKey).add(new Position(i + 2, j - 2));
                                 }
                             }
                         }
                     }
-                    else if(getPiece(i, j).getColor() == colorEnum.WHITE){
-                        if(getPiece(i - 1, j + 1) == null){
-                            possibleMovements.get(positionKey).add(new Position(i - 1, j + 1));
+
+                    if(i - 1 >= 0){
+                        if(j + 1 <= 7){
+                            if(getPiece(i - 1, j + 1) == null){
+                                possibleMovements.get(positionKey).add(new Position(i - 1, j + 1));
+                            }
+                            if(i - 2 >= 0 && j + 2 <= 7){
+                                if(getPiece(i - 1, j + 1) != null && getPiece(i - 1, j + 1).getColor() != getPiece(i, j).getColor() && getPiece(i - 2, j + 2) == null){
+                                    possibleMovements.get(positionKey).add(new Position(i - 2, j + 2));
+                                }
+                            }
                         }
-                        if(getPiece(i - 1, j - 1) == null){
-                            possibleMovements.get(positionKey).add(new Position(i - 1, j - 1));
+
+                        if(j - 1 >= 0){
+                            if(getPiece(i - 1, j - 1) == null){
+                                possibleMovements.get(positionKey).add(new Position(i - 1, j - 1));
+                            }
+
+                            if(i - 2 >= 0 && j - 2 >= 0){
+                                if(getPiece(i - 1, j - 1) != null && getPiece(i - 1, j - 1).getColor() != getPiece(i, j).getColor() && getPiece(i - 2, j - 2) == null){
+                                    possibleMovements.get(positionKey).add(new Position(i - 2, j - 2));
+                                }
+                            }
                         }
-                        if(getPiece(i - 1, j + 1) != null && getPiece(i - 1, j + 1).getColor() != colorEnum.RED && getPiece(i - 2, j + 2) == null){
-                            possibleMovements.get(positionKey).add(new Position(i - 2, j + 2));
+
+                    }
+
+                }
+                else if(getPiece(i, j).getColor() == colorEnum.RED){
+                    if(i + 1 <= 7){
+                        if(j + 1 <= 7){
+                            if(getPiece(i + 1, j + 1) == null){
+                                possibleMovements.get(positionKey).add(new Position(i + 1, j + 1));
+                            }
+                            if(i + 2 <= 7 && j + 2 <= 7){
+                                if(getPiece(i + 1, j + 1) != null && getPiece(i + 1, j + 1).getColor() != colorEnum.RED && getPiece(i + 2, j + 2) == null){
+                                    possibleMovements.get(positionKey).add(new Position(i + 2, j + 2));
+                                }
+                            }
                         }
-                        if(getPiece(i - 1, j - 1) != null && getPiece(i - 1, j - 1).getColor() != colorEnum.RED && getPiece(i - 2, j - 2) == null){
-                            possibleMovements.get(positionKey).add(new Position(i - 2, j - 2));
+
+                        if(j - 1 >= 0){
+                            if(getPiece(i + 1, j - 1) == null){
+                                possibleMovements.get(positionKey).add(new Position(i + 1, j - 1));
+                            }
+
+                            if(i + 2 <= 7 && j - 2 >=0){
+                                if(getPiece(i + 1, j - 1) != null && getPiece(i + 1, j - 1).getColor() != colorEnum.RED && getPiece(i + 2, j - 2) == null){
+                                    possibleMovements.get(positionKey).add(new Position(i + 2, j - 2));
+                                }
+                            }
                         }
                     }
                 }
-                catch (Exception e){
-                    System.out.println("out of bounds");
+                else if(getPiece(i, j).getColor() == colorEnum.WHITE){
+                    if(i - 1 >= 0){
+                        if(j + 1 <= 7){
+                            if(getPiece(i - 1, j + 1) == null){
+                                possibleMovements.get(positionKey).add(new Position(i - 1, j + 1));
+                            }
+
+                            if(i - 2 >= 0 && j + 2 <= 7){
+                                if(getPiece(i - 1, j + 1) != null && getPiece(i - 1, j + 1).getColor() != colorEnum.WHITE && getPiece(i - 2, j + 2) == null){
+                                    possibleMovements.get(positionKey).add(new Position(i - 2, j + 2));
+                                }
+                            }
+                        }
+
+                        if(j - 1 >= 0){
+                            if(getPiece(i - 1, j - 1) == null){
+                                possibleMovements.get(positionKey).add(new Position(i - 1, j - 1));
+                            }
+
+                            if(i - 2 >= 0 && j - 2 >= 0){
+                                if(getPiece(i - 1, j - 1) != null && getPiece(i - 1, j - 1).getColor() != colorEnum.WHITE && getPiece(i - 2, j - 2) == null){
+                                    possibleMovements.get(positionKey).add(new Position(i - 2, j - 2));
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -285,21 +292,21 @@ public class WebCheckerGame
         Position endPosition = new Position(endRow, endCell);
         if(possibleMoves.contains(endPosition)){
             // VALID
-            if(Math.abs(endRow - startRow) == 2){
+            if(endRow - startRow == 2 || endRow - startRow == -2){
                 moveState = moveStatCode.CAPTURE_MODE;
-                message.text = "Valid move";
-                message.type = "info";
+                message.text = VALID_MOVE;
+                message.type = MESSAGE_INFO;
             }
             else{
                 moveState = moveStatCode.MOVEMENT_MADE;
-                message.text = "Valid move";
-                message.type = "info";
+                message.text = VALID_MOVE;
+                message.type = MESSAGE_INFO;
             }
         }
         else{
             moveState = moveStatCode.NO_MOVEMENT;
-            message.text = "Invalid move";
-            message.type = "error";
+            message.text = INVALID_MOVE;
+            message.type = MESSAGE_ERROR;
             //INVALID
         }
         if(moveState == moveStatCode.MOVEMENT_MADE || moveState == moveStatCode.CAPTURE_MODE){
