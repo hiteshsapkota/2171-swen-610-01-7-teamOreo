@@ -45,7 +45,6 @@ public class PostValidateMoveController implements Route {
 
     // Get the current username
     String user = ((OnlinePlayers) request.session().attribute(USER_SESSION_ATTRIBUTE)).getName();
-
     return gameCenter.getGame(user).isValidTurn(startRow, startCell, endRow, endCell, user);
   }
 }
