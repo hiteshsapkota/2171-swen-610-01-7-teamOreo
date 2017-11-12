@@ -59,7 +59,7 @@ public class WebServer {
    * @param templateEngine The default {@link TemplateEngine} to render views.
    */
   public WebServer(final GameCenter gameCenter,
-      final TemplateEngine templateEngine) {
+                   final TemplateEngine templateEngine) {
     this.templateEngine = templateEngine;
     this.gameCenter = gameCenter;
   }
