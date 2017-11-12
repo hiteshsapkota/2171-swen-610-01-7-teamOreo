@@ -78,4 +78,8 @@ public class Row implements Iterable<Space> {
   public Iterator<Space> iterator() {
     return spaces.iterator();
   }
+
+  public int getIndex() {
+    return index;
+  }
 }

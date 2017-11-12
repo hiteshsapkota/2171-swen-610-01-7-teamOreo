@@ -59,29 +59,29 @@ public class WebCheckerGameTest {
 
   @Test
   public void isValidTurn() throws Exception {
-    Message message = game.isValidTurn(1,1,1,1, p1);
+    Message message = game.isValidTurn(1,1,1,1);
     assertEquals(MESSAGE_ERROR, message.type);
     assertEquals(INVALID_MOVE, message.text);
-    message = game.isValidTurn(1,1,2,2, p1);
+    message = game.isValidTurn(1,1,2,2);
     assertEquals(MESSAGE_INFO, message.type);
     assertEquals(VALID_MOVE, message.text);
     assertTrue(game.popMove());
     game.getBoard().getRow(3).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    message = game.isValidTurn(2, 1, 4, 3, p1);
+    message = game.isValidTurn(2, 1, 4, 3);
     assertEquals(MESSAGE_INFO, message.type);
     assertEquals(VALID_GET_PIECE, message.text);
     assertFalse(game.popMove());
     game.makeMove();
 
-    message = game.isValidTurn(5, 0, 5, 5, p2);
+    message = game.isValidTurn(5, 0, 5, 5);
     assertEquals(MESSAGE_ERROR, message.type);
     assertEquals(INVALID_MOVE, message.text);
-    message = game.isValidTurn(5, 0, 4, 1, p2);
+    message = game.isValidTurn(5, 0, 4, 1);
     assertEquals(MESSAGE_INFO, message.type);
     assertEquals(VALID_MOVE, message.text);
     assertTrue(game.popMove());
     game.getBoard().getRow(4).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    message = game.isValidTurn(5, 0, 3, 2, p2);
+    message = game.isValidTurn(5, 0, 3, 2);
     System.out.println(message.type + message.text);
     assertEquals(MESSAGE_INFO, message.type);
     assertEquals(VALID_GET_PIECE, message.text);

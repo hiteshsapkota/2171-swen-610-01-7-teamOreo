@@ -10,6 +10,11 @@ public class Space {
    */
   private int cellIdx;
   private Piece piece;
+
+  public int getCellIdx() {
+    return cellIdx;
+  }
+
   public enum SPACECOLOR{
     BLACK,
     WHITE
@@ -49,5 +54,9 @@ public class Space {
    */
   public void setPiece(Piece piece) {
     this.piece = piece;
+  }
+
+  public boolean isValid(){
+    return spaceColor == SPACECOLOR.BLACK && getPiece() == null;
   }
 }
