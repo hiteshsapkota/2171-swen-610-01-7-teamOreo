@@ -104,4 +104,12 @@ public class GameCenter {
         }
         return null;
     }
+
+    public void removeGame(String user) {
+        WebCheckerGame game = this.getGame(user);
+        String opponent = game.getOpponent(user);
+        allGames.remove(allGames.indexOf(game));
+        this.getPlayer(user).setFree(true);
+        this.getPlayer(opponent).setFree(true);
+    }
 }
