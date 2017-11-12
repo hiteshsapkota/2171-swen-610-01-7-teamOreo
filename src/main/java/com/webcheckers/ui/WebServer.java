@@ -57,7 +57,7 @@ public class WebServer {
    * @param templateEngine The default {@link TemplateEngine} to render views.
    */
   public WebServer(final GameCenter gameCenter,
-                   final TemplateEngine templateEngine) {
+      final TemplateEngine templateEngine) {
     this.templateEngine = templateEngine;
     this.gameCenter = gameCenter;
   }
@@ -123,13 +123,13 @@ public class WebServer {
 
     get(GAME_URL, new GetGameController(gameCenter), templateEngine);
 
-    post(CHECK_TURN, new PostCheckTurnController(gameCenter), JsonUtils.json());
-
+//    post(CHECK_TURN, new PostCheckTurnController(gameCenter), JsonUtils.json());
+//
     post(VALIDATE_MOVE, new PostValidateMoveController(gameCenter), JsonUtils.json());
-
-    post(BACKUP_MOVE, new PostBackUpMoveController(gameCenter), JsonUtils.json());
-
-    post(SUBMIT_TURN, new PostSubmitTurnController(gameCenter), JsonUtils.json());
+//
+//    post(BACKUP_MOVE, new PostBackUpMoveController(gameCenter), JsonUtils.json());
+//
+//    post(SUBMIT_TURN, new PostSubmitTurnController(gameCenter), JsonUtils.json());
   }
 
 }
