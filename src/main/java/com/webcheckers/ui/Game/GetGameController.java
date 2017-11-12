@@ -8,6 +8,7 @@ import com.webcheckers.model.OnlinePlayers;
 import com.webcheckers.model.WebCheckerGame;
 import java.util.HashMap;
 import java.util.Map;
+import spark.HaltException;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -41,8 +42,7 @@ public class GetGameController implements TemplateViewRoute {
 
     try{
       String user = ((OnlinePlayers) session.attribute("user")).getName();
-      WebCheckerGame game = gameCenter.getGame(user);
-      if(game == null){
+      if(gameCenter.getGame(user) == null){
         response.redirect(HOME_URL);
         halt();
         return null;
@@ -50,22 +50,36 @@ public class GetGameController implements TemplateViewRoute {
       else{
         Map<String, Object> vm = new HashMap<>();
         vm.put(TITLE_ATTR, GAME_TITLE);
-        vm.put(PLAYER_NAME_ATTR, game.getPlayer(user));
-        vm.put(OPPONENT_NAME_ATTR, game.getOpponent(user));
-        vm.put(PLAYER_COLOR_ATTR, game.getPlayerColor(user));
-        vm.put(OPPONENT_COLOR_ATTR, game.getOpponentColor(user));
-        vm.put(IS_MY_TURN_ATTR, game.isMyTurn(user));
+        vm.put(PLAYER_NAME_ATTR, gameCenter.getGame(user).getPlayer(user));
+        vm.put(OPPONENT_NAME_ATTR, gameCenter.getGame(user).getOpponent(user));
+        vm.put(PLAYER_COLOR_ATTR, gameCenter.getGame(user).getPlayerColor(user));
+        vm.put(OPPONENT_COLOR_ATTR, gameCenter.getGame(user).getOpponentColor(user));
+        vm.put(IS_MY_TURN_ATTR, gameCenter.getGame(user).isMyTurn(user));
         vm.put(CURRENT_PLAYER_ATTR, true);
-        vm.put(BOARD_ATTR, game.getBoard());
-
+        vm.put(BOARD_ATTR, gameCenter.getGame(user).getBoard());
+        gameCenter.getGame(user).checkAllPieceForMovements();
+        if(gameCenter.getGame(user).isGameEnded()){
+          if(gameCenter.getGame(user).didIWin(user)){
+            response.redirect("/gameOver?youWon=true");
+            halt();
+            return null;
+          }
+          else{
+            response.redirect("/gameOver?youWon=false");
+            halt();
+            return null;
+          }
+        }
         return new ModelAndView(vm, GAME_VIEW);
       }
     }
     catch (Exception e){
+      if (e.getClass() != HaltException.class){
+        e.printStackTrace();
+      }
       response.redirect(HOME_URL);
       halt();
       return null;
     }
-
   }
 }
