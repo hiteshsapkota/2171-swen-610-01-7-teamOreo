@@ -49,7 +49,6 @@
       
       <div>
         <div id="game-controls">
-        
           <fieldset id="game-info">
             <legend>Info</legend>
             
@@ -92,10 +91,11 @@
                  title="Commit your current turn to the server.">
                 Submit turn
               </a>
-              <a href="#" id="resignLink" disabled=disabled
-                 title="End the game by resigning.">
-                Resign from game
-              </a>
+              <#--<a href="#" id="resignLink" disabled=disabled-->
+                 <#--title="End the game by resigning.">-->
+                <#--Resign from game-->
+              <#--</a>-->
+              <a href="/resignGame" onclick="return confirm('Are you sure?')">Resign from Game</a>
             </div>
           </fieldset>
           

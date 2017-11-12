@@ -11,6 +11,7 @@ import com.webcheckers.ui.Game.GetGameOverController;
 import com.webcheckers.ui.Game.PostBackUpMoveController;
 import com.webcheckers.ui.Game.PostCheckTurnController;
 import com.webcheckers.ui.Game.PostEndGameController;
+import com.webcheckers.ui.Game.PostResignGameController;
 import com.webcheckers.ui.Game.PostSubmitTurnController;
 import com.webcheckers.ui.Game.PostValidateMoveController;
 import com.webcheckers.ui.Game.StartPlayController;
@@ -136,5 +137,7 @@ public class WebServer {
     get("/gameOver", new GetGameOverController(gameCenter), templateEngine);
 
     post("/endGame", new PostEndGameController(gameCenter), templateEngine);
+
+    get("/resignGame", new PostResignGameController(gameCenter), templateEngine);
   }
 }
