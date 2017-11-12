@@ -33,17 +33,29 @@ public class WebCheckerGame
     private int numOfPiecesPlayer1;
     private int numOfPiecesPlayer2;
 
+  /**
+   * Checks if the user entered won or lost.
+   * @param user the user who wants to check
+   * @return true if the user won, else false.
+   */
   public boolean didIWin(String user) {
     return Objects.equals(user, player1) ? numOfPiecesPlayer1 != 0 && numOfPossMovePlayer1 != 0
         : numOfPiecesPlayer2 != 0 && numOfPossMovePlayer2 != 0;
   }
 
+  /**
+   * All possible states for movement.
+   */
   private enum moveStatCode{
         NO_MOVEMENT,
         MOVEMENT_MADE,
         CAPTURE_MODE
     }
-    private enum conversionState{
+
+  /**
+   * All possible states for conversion.
+   */
+  private enum conversionState{
         IN_CONVERSION,
         NO_CONVERSION
     }
@@ -69,8 +81,6 @@ public class WebCheckerGame
         this.numOfPiecesPlayer2 = 12;
         this.numOfPiecesPlayer1 = 12;
         this.checkAllPieceForMovements();
-//        this.numOfPossMovePlayer1 =  0;
-//        this.numOfPossMovePlayer2 = 0;
     }
 
     /**
@@ -87,7 +97,10 @@ public class WebCheckerGame
         }
     }
 
-    public void checkAllPieceForMovements(){
+  /**
+   * This function checks for all possible movements and stores it in a Hash Map.
+   */
+  public void checkAllPieceForMovements(){
         this.numOfPossMovePlayer1 = 0;
         this.numOfPossMovePlayer2 = 0;
         for (int i = 0; i < 8; i++)
@@ -249,7 +262,11 @@ public class WebCheckerGame
           }
     }
 
-    public boolean isGameEnded(){
+  /**
+   * Checks if the game is ended or not.
+   * @return true if the game has ended, else false.
+   */
+  public boolean isGameEnded(){
       boolean gameEnded = false;
       if (checkIfNoMovesLeft() || checkIfPiecesLeftIsNone()) {
         gameEnded = true;
@@ -257,11 +274,19 @@ public class WebCheckerGame
       return gameEnded;
     }
 
-    private boolean checkIfPiecesLeftIsNone() {
+  /**
+   * Check if the there are pieces left for a player or opponent.
+   * @return true if there are no pieces left for a player, else false.
+   */
+  private boolean checkIfPiecesLeftIsNone() {
         return numOfPiecesPlayer2 == 0 || numOfPiecesPlayer1 == 0;
     }
 
-    private boolean checkIfNoMovesLeft() {
+  /**
+   * Checks if the number of possible moves is 0
+   * @return true if it is 0, else false.
+   */
+  private boolean checkIfNoMovesLeft() {
         return numOfPossMovePlayer1 == 0 || numOfPossMovePlayer2 == 0;
     }
 

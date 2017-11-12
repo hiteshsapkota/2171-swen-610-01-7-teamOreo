@@ -10,7 +10,12 @@ public class Piece {
    */
   private typeEnum type;
   private colorEnum color;
-//constructor
+
+  /**
+   * Constructor to create a piece
+   * @param type type of the piece.
+   * @param color color of the piece.
+   */
   public Piece(typeEnum type, colorEnum color) {
     this.type = type;
     this.color = color;
@@ -38,14 +43,6 @@ public class Piece {
    */
   public colorEnum getColor() {
     return color;
-  }
-
-  /**
-   * Sets color of the piece
-   * @param color enum of RED or WHITE
-   */
-  public void setColor(colorEnum color) {
-    this.color = color;
   }
 
   /**

@@ -18,21 +18,11 @@ public class MovementTest {
     assertEquals(1, movement.getStartRow());
   }
 
-  @Test
-  public void setStartRow() throws Exception {
-    movement.setStartRow(2);
-    assertEquals(2, movement.getStartRow());
-  }
+
 
   @Test
   public void getStartCell() throws Exception {
     assertEquals(2, movement.getStartCell());
-  }
-
-  @Test
-  public void setStartCell() throws Exception {
-    movement.setStartCell(3);
-    assertEquals(3, movement.getStartCell());
   }
 
   @Test
@@ -41,20 +31,8 @@ public class MovementTest {
   }
 
   @Test
-  public void setEndRow() throws Exception {
-    movement.setEndRow(4);
-    assertEquals(4, movement.getEndRow());
-  }
-
-  @Test
   public void getEndCell() throws Exception {
     assertEquals(4, movement.getEndCell());
-  }
-
-  @Test
-  public void setEndCell() throws Exception {
-    movement.setEndCell(5);
-    assertEquals(5, movement.getEndCell());
   }
 
 }

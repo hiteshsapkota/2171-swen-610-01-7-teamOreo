@@ -35,27 +35,11 @@ class Movement {
     }
 
     /**
-     * Sets the start row
-     * @param startRow integer of the position of row
-     */
-    void setStartRow(int startRow) {
-        this.startRow = startRow;
-    }
-
-    /**
      * getStartCell gets the start cell.
      * @return getStartCell integer
      */
     int getStartCell() {
         return startCell;
-    }
-
-    /**
-     * sets the start cell.
-     * @param startCell integer of the start cell
-     */
-    void setStartCell(int startCell) {
-        this.startCell = startCell;
     }
 
     /**
@@ -67,14 +51,6 @@ class Movement {
     }
 
     /**
-     * sets the end row
-     * @param endRow end row integer
-     */
-    void setEndRow(int endRow) {
-        this.endRow = endRow;
-    }
-
-    /**
      * gets the end cell
      * @return end of the cell
      */
@@ -82,12 +58,5 @@ class Movement {
         return endCell;
     }
 
-    /**
-     * sets the end cell
-     * @param endCell new position of the end cell.
-     */
-    void setEndCell(int endCell) {
-        this.endCell = endCell;
-    }
 }
 

@@ -59,7 +59,7 @@ public class GameCenter {
      * @param username current session.
      * @return {@link OnlinePlayers} object of the player.
      */
-    public OnlinePlayers getPlayer(String username){
+    OnlinePlayers getPlayer(String username){
         return this.allPlayers.get(username);
     }
 
@@ -105,6 +105,10 @@ public class GameCenter {
         return null;
     }
 
+    /**
+     * Remove game functions removes the game and sets the players free to play another game.
+     * @param user the user who wants to remove the game.
+     */
     public void removeGame(String user) {
         WebCheckerGame game = this.getGame(user);
         String opponent = game.getOpponent(user);

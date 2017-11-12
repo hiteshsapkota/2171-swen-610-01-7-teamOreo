@@ -30,11 +30,4 @@ public class PieceTest {
   public void getColor() throws Exception {
     assertEquals(colorEnum.WHITE, piece.getColor());
   }
-
-  @Test
-  public void setColor() throws Exception {
-    piece.setColor(colorEnum.RED);
-    assertEquals(colorEnum.RED, piece.getColor());
-  }
-
 }

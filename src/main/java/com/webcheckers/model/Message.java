@@ -3,7 +3,7 @@ package com.webcheckers.model;
 /**
  * Message class sets type and text of the particular message
  */
-    public class Message {
+public class Message {
     /**
      * Attributes
      */
@@ -23,8 +23,6 @@ package com.webcheckers.model;
     /**
      * Default constructor
      */
-        public Message() {
-
-        }
-    }
+    Message() {}
+}
 

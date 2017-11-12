@@ -21,24 +21,6 @@ public class SpaceTest {
   }
 
   @Test
-  public void getCellIdx() throws Exception {
-    assertEquals(1, space.getCellIdx());
-  }
-
-  @Test
-  public void setCellIdx() throws Exception {
-    space.setCellIdx(2);
-    assertEquals(2, space.getCellIdx());
-  }
-
-  @Test
-  public void isValid() throws Exception {
-    assertTrue(space.isValid());
-    space.setPiece(mock(Piece.class));
-    assertFalse(space.isValid());
-  }
-
-  @Test
   public void getPiece() throws Exception {
     Piece piece = mock(Piece.class);
     assertNull(space.getPiece());

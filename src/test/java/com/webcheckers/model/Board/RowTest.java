@@ -20,16 +20,4 @@ public class RowTest {
     assertEquals(SPACECOLOR.BLACK, row.getSpace(2).getSpaceColor());
 
   }
-
-  @Test
-  public void getIndex() throws Exception {
-    assertEquals(1, row.getIndex());
-  }
-
-  @Test
-  public void setIndex() throws Exception {
-    row.setIndex(2);
-    assertEquals(2, row.getIndex());
-  }
-
 }

@@ -26,7 +26,7 @@ public class Row implements Iterable<Space> {
    * Adds spaces and adds pieces in the corresponding position
    * @param index position of the row
    */
-  public Row(int index) {
+  Row(int index) {
     this.index = index;
     spaces = new ArrayList<>();
     for (int i = 0; i < 8; i++) {
@@ -70,21 +70,6 @@ public class Row implements Iterable<Space> {
     return spaces.get(cellIdX);
   }
 
-  /**
-   * Returns index
-   * @return index
-   */
-  public int getIndex() {
-    return index;
-  }
-
-  /**
-   * Sets index
-   * @param index position of cell.
-   */
-  public void setIndex(int index) {
-    this.index = index;
-  }
 
   /**
    * Iterator

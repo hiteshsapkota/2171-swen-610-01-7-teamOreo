@@ -21,7 +21,7 @@ public class Space {
    * @param cellIdx positon of the space
    * @param piece can be null
    */
-  public Space(int cellIdx, SPACECOLOR spaceColor, Piece piece) {
+  Space(int cellIdx, SPACECOLOR spaceColor, Piece piece) {
     this.cellIdx = cellIdx;
     this.piece = piece;
     this.spaceColor = spaceColor;
@@ -31,32 +31,8 @@ public class Space {
    * Returns color of corresponding space
    * @return SPACECOLOR
    */
-  public SPACECOLOR getSpaceColor() {
+  SPACECOLOR getSpaceColor() {
     return spaceColor;
-  }
-
-  /**
-   * Returns cellIdx
-   * @return cellIdx
-   */
-  public int getCellIdx() {
-    return cellIdx;
-  }
-
-  /**
-   * Sets cellIdx
-   * @param cellIdx position of cell.
-   */
-  public void setCellIdx(int cellIdx) {
-    this.cellIdx = cellIdx;
-  }
-
-  /**
-   * Checks whether particular space is vaild for move or not
-   * @return true if spacecolor is black and piece is not else false
-   */
-  public boolean isValid() {
-    return this.spaceColor == SPACECOLOR.BLACK && this.piece == null;
   }
 
   /**
