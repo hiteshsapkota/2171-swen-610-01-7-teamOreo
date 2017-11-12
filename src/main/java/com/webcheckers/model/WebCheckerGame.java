@@ -6,7 +6,6 @@ import com.webcheckers.model.Board.Piece.colorEnum;
 import com.webcheckers.model.Board.Piece.typeEnum;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
 
 import static com.webcheckers.model.Strings.*;
@@ -325,10 +324,9 @@ public class WebCheckerGame
      * @param startCell cell position of the start.
      * @param endRow row position of the end.
      * @param endCell cell position of the end.
-     * @param user current username.
      * @return the appropriate message.
      */
-    public Message isValidTurn(int startRow, int startCell, int endRow, int endCell, String user) {
+    public Message isValidTurn(int startRow, int startCell, int endRow, int endCell) {
         Message message = new Message();
         String pieceKey = String.valueOf(startRow) + String.valueOf(startCell);
         if(moveState == moveStatCode.MOVEMENT_MADE || moveState != moveStatCode.CAPTURE_MODE && !possibleMovements.containsKey(pieceKey)){

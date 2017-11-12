@@ -9,7 +9,6 @@ public class Space {
    * Attributes
    */
   private int cellIdx;
-  private boolean isValid;
   private Piece piece;
   public enum SPACECOLOR{
     BLACK,
@@ -37,10 +36,6 @@ public class Space {
   }
 
   /**
-   * Public methods
-   */
-
-  /**
    * Returns cellIdx
    * @return cellIdx
    */
@@ -50,7 +45,7 @@ public class Space {
 
   /**
    * Sets cellIdx
-   * @param cellIdx
+   * @param cellIdx position of cell.
    */
   public void setCellIdx(int cellIdx) {
     this.cellIdx = cellIdx;
@@ -74,7 +69,7 @@ public class Space {
 
   /**
    *  Sets piece
-   * @param piece
+   * @param piece the piece to be set.
    */
   public void setPiece(Piece piece) {
     this.piece = piece;

@@ -8,17 +8,14 @@ public class Piece {
   /**
    * attributes
    */
-  public typeEnum type;
-  public colorEnum color;
+  private typeEnum type;
+  private colorEnum color;
 //constructor
   public Piece(typeEnum type, colorEnum color) {
     this.type = type;
     this.color = color;
   }
 
-  /**
-   * Public methods
-   */
   /** Returns type of the piece(King or Single)
    *
    * @return typeEnum
@@ -29,7 +26,7 @@ public class Piece {
 
   /**
    * Sets piece typr(King or Single)
-   * @param type
+   * @param type type (King or Single)
    */
   public void setType(typeEnum type) {
     this.type = type;
@@ -45,7 +42,7 @@ public class Piece {
 
   /**
    * Sets color of the piece
-   * @param color
+   * @param color enum of RED or WHITE
    */
   public void setColor(colorEnum color) {
     this.color = color;

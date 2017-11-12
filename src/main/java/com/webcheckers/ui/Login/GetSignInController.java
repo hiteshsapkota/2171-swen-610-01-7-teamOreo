@@ -6,7 +6,6 @@ import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.OnlinePlayers;
-import com.webcheckers.ui.JsonUtils;
 import java.util.HashMap;
 import java.util.Map;
 import spark.ModelAndView;
@@ -18,20 +17,19 @@ import spark.TemplateViewRoute;
  * Get controller for the sign in page.
  */
 public class GetSignInController implements TemplateViewRoute {
-  private final GameCenter gameCenter;
 
   /**
    * This is a constructor initializes the gameCenter attribute.
-   * @param gameCenter
+   * @param gameCenter the one and only gameCenter.
    */
   public GetSignInController(final GameCenter gameCenter){
-    this.gameCenter = gameCenter;
+    GameCenter gameCenter1 = gameCenter;
   }
 
   /**
    * This handle method is overridden  to create a new sign in and show login info.
-   * @param request
-   * @param response
+   * @param request generic request
+   * @param response generic response
    * @return home_view
    */
   @Override

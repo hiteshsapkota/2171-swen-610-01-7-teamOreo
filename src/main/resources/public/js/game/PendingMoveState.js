@@ -34,7 +34,7 @@ define(function(require){
    */
   PendingMoveState.prototype.getName = function getName() {
     return GameConstants.PENDING_MOVE;
-  }
+  };
   
   /**
    * Hook when entering this state.
@@ -59,7 +59,7 @@ define(function(require){
       }
     }
     jQuery.post('/validateMove', JSON.stringify(move), handleMoveResponse, 'json');
-  }
+  };
 
   // export class constructor
   return PendingMoveState;

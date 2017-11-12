@@ -35,7 +35,7 @@ define(function(require){
    */
   StableTurnState.prototype.getName = function getName() {
     return GameConstants.STABLE_TURN;
-  }
+  };
   
   /**
    * Hook when entering this state.
@@ -45,7 +45,7 @@ define(function(require){
     this.getView().enableAllControls();
     // re-enable active Piece
     this.getView().enableActivePiece();
-  }
+  };
 
   /**
    * The player may request an additional move for a given turn.
@@ -72,7 +72,7 @@ define(function(require){
       }
     },
     'json');
-  }
+  };
 
   /**
    * Backup a single move.
@@ -84,7 +84,7 @@ define(function(require){
       handleUnmoveResponse(view, message);
     },
     'json');
-  }
+  };
 
   /**
    * Submit the Turn to the server.
@@ -94,7 +94,7 @@ define(function(require){
    */
   StableTurnState.prototype.submitTurn = function submitTurn() {
     jQuery('#gameForm').submit();
-  }
+  };
 
   //
   // Private (external) functions

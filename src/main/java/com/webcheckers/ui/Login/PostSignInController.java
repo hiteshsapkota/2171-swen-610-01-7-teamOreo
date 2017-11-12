@@ -21,7 +21,7 @@ private final GameCenter gameCenter;
 
   /**
    * Initializes the gameCenter attribute.
-   * @param gameCenter
+   * @param gameCenter the one and only gameCenter
    */
 
 public PostSignInController(final GameCenter gameCenter)
@@ -31,8 +31,8 @@ public PostSignInController(final GameCenter gameCenter)
 
   /**
    * Verify that the name entered is not empty and if it is empty or existing name it redirects to sign in page otherwise to home page.
-   * @param request
-   * @param response
+   * @param request generic request
+   * @param response generic response
    * @return home_view
    */
   @Override

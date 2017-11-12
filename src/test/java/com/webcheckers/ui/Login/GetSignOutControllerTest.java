@@ -1,12 +1,10 @@
 package com.webcheckers.ui.Login;
 
-import static com.webcheckers.model.Strings.SIGNIN_VIEW;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.OnlinePlayers;
 import org.junit.Test;
 import spark.Request;
 import spark.Response;

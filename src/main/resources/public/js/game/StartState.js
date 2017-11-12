@@ -24,8 +24,7 @@ define(function(require){
     this.getView = function() {
       return view;
     };
-  };
-
+  }
   //
   // Public (external) methods
   //

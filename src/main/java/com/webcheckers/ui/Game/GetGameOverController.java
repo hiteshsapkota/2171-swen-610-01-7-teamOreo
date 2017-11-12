@@ -1,7 +1,6 @@
 package com.webcheckers.ui.Game;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.OnlinePlayers;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -11,10 +10,9 @@ import spark.Response;
 import spark.TemplateViewRoute;
 
 public class GetGameOverController implements TemplateViewRoute {
-  private final GameCenter gameCenter;
 
   public GetGameOverController(final GameCenter gameCenter){
-    this.gameCenter = gameCenter;
+    GameCenter gameCenter1 = gameCenter;
   }
 
 

@@ -1,6 +1,5 @@
 package com.webcheckers.ui.Game;
 
-import static com.webcheckers.model.Strings.OPPONENT_ATTR;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -38,7 +37,7 @@ public class PostValidateMoveControllerTest {
     when(session.attribute("user")).thenReturn(player);
     when(player.getName()).thenReturn(user);
     when(gameCenter.getGame(user)).thenReturn(game);
-    when(game.isValidTurn(1, 1, 2, 2, user)).thenReturn(mock);
+    when(game.isValidTurn(1, 1, 2, 2)).thenReturn(mock);
     when(request.body()).thenReturn("{'start':{'row':1,'cell':1},'end':{'row':2,'cell':2}}");
     Message object = (Message) postValidateMoveController.handle(request, response);
     assertNotNull(object);

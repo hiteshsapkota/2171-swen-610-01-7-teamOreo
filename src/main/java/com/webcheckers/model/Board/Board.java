@@ -13,11 +13,7 @@ public class Board implements Iterable<Row> {
    */
   private ArrayList<Row> rows;
 //constructor
-  /**
-   * Adds rows to the arraylist
-   * @param
-   * @return
-   */
+
   public Board(){
     rows = new ArrayList<>();
     for (int i = 0; i < 8; i++) {
@@ -27,7 +23,7 @@ public class Board implements Iterable<Row> {
 
   /**
    * Returns row corresponding to the particular index
-   * @param index
+   * @param index the position of row.
    * @return Row
    */
 

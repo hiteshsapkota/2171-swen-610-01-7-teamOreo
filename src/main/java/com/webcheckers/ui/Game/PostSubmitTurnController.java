@@ -6,11 +6,9 @@ import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.OnlinePlayers;
-import com.webcheckers.model.WebCheckerGame;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import spark.TemplateViewRoute;
 
 /**
  * It captures the move made by the player when clicked on 'Submit Turn'
@@ -20,7 +18,7 @@ public class PostSubmitTurnController implements Route {
 
     /**
      * Initializes the gameCenter attribute.
-     * @param gameCenter
+     * @param gameCenter the one and only gamecenter.
      */
     public PostSubmitTurnController(final GameCenter gameCenter) {
         this.gameCenter = gameCenter;
@@ -28,10 +26,10 @@ public class PostSubmitTurnController implements Route {
 
     /**
      * This method handles the control to the other player in case of a valid move
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
+     * @param request generic request.
+     * @param response generic response.
+     * @return null always.
+     * @throws Exception if any.
      */
     @Override
     public Object handle(Request request, Response response) throws Exception {

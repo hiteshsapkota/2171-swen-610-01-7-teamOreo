@@ -18,7 +18,7 @@ public class GetSignOutController implements TemplateViewRoute {
   /**
    * This constructor initializes the gameCenter attribute.
    *
-   * @param gameCenter
+   * @param gameCenter the one and only gameCenter
    */
   public GetSignOutController(final GameCenter gameCenter) {
     this.gameCenter = gameCenter;
@@ -27,8 +27,8 @@ public class GetSignOutController implements TemplateViewRoute {
 
   /**
    * This handle method remove the session and username of the player.
-   * @param request
-   * @param response
+   * @param request generic request
+   * @param response generic response
    * @return home_view
    */
   @Override

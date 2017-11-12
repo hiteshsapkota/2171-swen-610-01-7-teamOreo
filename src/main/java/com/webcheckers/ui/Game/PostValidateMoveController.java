@@ -18,7 +18,7 @@ public class PostValidateMoveController implements Route {
 
   /**
    * Initializes the gameCenter attribute.
-   * @param gameCenter
+   * @param gameCenter the one and only gamecenter.
    */
   public PostValidateMoveController(final GameCenter gameCenter){
     this.gameCenter = gameCenter;
@@ -27,10 +27,10 @@ public class PostValidateMoveController implements Route {
   /**
    * This handle method captures the start position and end position and based on that
    * determines if the move is legal or illegal
-   * @param request
-   * @param response
-   * @return
-   * @throws Exception
+   * @param request generic request.
+   * @param response generic response.
+   * @return returns the message containing info and content.
+   * @throws Exception if any.
    */
   @Override
   public Object handle(Request request, Response response) throws Exception {
@@ -46,6 +46,6 @@ public class PostValidateMoveController implements Route {
 
     // Get the current username
     String user = ((OnlinePlayers) request.session().attribute(USER_SESSION_ATTRIBUTE)).getName();
-    return gameCenter.getGame(user).isValidTurn(startRow, startCell, endRow, endCell, user);
+    return gameCenter.getGame(user).isValidTurn(startRow, startCell, endRow, endCell);
   }
 }

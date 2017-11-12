@@ -72,7 +72,6 @@ public class Strings {
   static final String VALID_MOVE = "Valid move!";
   static final String INVALID_MOVE = "Invalid move!";
   static final String INVALID_ALREADY_MADE = "Invalid move, you have already made a move!";
-  static final String INVALID_ONLY_DIAGONALS = "Invalid move, only diagonals forwards are allowed";
   static final String VALID_GET_PIECE = "Valid move! Get that piece!";
   public static final String MESSAGE_ERROR = "error";
   public static final String MESSAGE_INFO = "info";

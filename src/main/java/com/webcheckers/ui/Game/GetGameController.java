@@ -5,7 +5,6 @@ import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.OnlinePlayers;
-import com.webcheckers.model.WebCheckerGame;
 import java.util.HashMap;
 import java.util.Map;
 import spark.HaltException;
@@ -24,7 +23,7 @@ public class GetGameController implements TemplateViewRoute {
 
   /**
    * Initializes the gameCenter attribute.
-   * @param gameCenter
+   * @param gameCenter the one and only gamecenter.
    */
   public GetGameController(final GameCenter gameCenter){
     this.gameCenter = gameCenter;
@@ -32,8 +31,8 @@ public class GetGameController implements TemplateViewRoute {
 
   /**
    * This handle method determines if the name can be created to return the game page otherwise redirects to home_page
-   * @param request
-   * @param response
+   * @param request generic request.
+   * @param response generic response.
    * @return game_view
    */
   @Override

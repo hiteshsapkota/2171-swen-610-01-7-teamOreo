@@ -71,7 +71,7 @@ define(function(require){
     
     this.getOpponentColor = function getOpponentColor() {
       return OPPOSITION_MAP[this.getPlayerColor()];
-    }
+    };
 
     this.getOpponentName = function getOpponentName() {
       return options.opponent.name;
@@ -218,28 +218,28 @@ define(function(require){
      */
     this.requestMove = function requestMove(pendingMove) {
       delegateStateMessage('requestMove', arguments);
-    }
+    };
 
     /**
      * Reset the whole turn.  This message has state-specific behavior.
      */
     this.resetTurn = function resetTurn() {
       delegateStateMessage('resetTurn', arguments);
-    }
+    };
 
     /**
      * Backup a single move.  This message has state-specific behavior.
      */
     this.backupMove = function backupMove() {
       delegateStateMessage('backupMove', arguments);
-    }
+    };
 
     /**
      * This user action submits a turn to the server.
      */
     this.submitTurn = function submitTurn() {
       delegateStateMessage('submitTurn', arguments);
-    }
+    };
 
     /**
      * Resign from the game.
@@ -250,7 +250,7 @@ define(function(require){
     this.resignGame = function resignGame() {
       // TODO
       alert('NYI: Resign action');
-    }
+    };
 
     // Private (internal) functions
 
@@ -342,7 +342,7 @@ define(function(require){
   GameView.prototype.beep = function beep() {
     var sound = document.getElementById("audio");
     sound.play();
-  }
+  };
   
   //
   // Private (external) functions

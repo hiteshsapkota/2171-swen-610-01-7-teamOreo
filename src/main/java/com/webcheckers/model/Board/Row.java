@@ -61,12 +61,9 @@ public class Row implements Iterable<Space> {
     }
   }
 
-  /**
-   * Public methods for freemarker.
-   */
   /**Returns space corresponding to cellIdX
    *
-   * @param cellIdX
+   * @param cellIdX position of cell
    * @return Space
    */
   public Space getSpace(int cellIdX){
@@ -83,7 +80,7 @@ public class Row implements Iterable<Space> {
 
   /**
    * Sets index
-   * @param index
+   * @param index position of cell.
    */
   public void setIndex(int index) {
     this.index = index;

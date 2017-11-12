@@ -17,7 +17,7 @@ import spark.TemplateViewRoute;
  *
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
-public class HomeController implements TemplateViewRoute {
+class HomeController implements TemplateViewRoute {
 
   private final GameCenter gameCenter;
 
@@ -33,8 +33,8 @@ public class HomeController implements TemplateViewRoute {
   /**
    *
    *This handle method is overridden to create a new session and get the home page.
-   * @param request
-   * @param response
+   * @param request generic request
+   * @param response generic response
    * @return home_view
    */
   @Override

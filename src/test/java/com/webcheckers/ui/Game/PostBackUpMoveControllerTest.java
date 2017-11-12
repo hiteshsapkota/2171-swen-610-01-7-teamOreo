@@ -11,7 +11,6 @@ import com.webcheckers.model.OnlinePlayers;
 import com.webcheckers.model.WebCheckerGame;
 import org.junit.Before;
 import org.junit.Test;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Session;

@@ -23,8 +23,7 @@ define(function(require){
     this.getView = function() {
       return view;
     };
-  };
-
+  }
   //
   // Public (external) methods
   //
@@ -34,7 +33,7 @@ define(function(require){
    */
   CheckMyTurnState.prototype.getName = function getName() {
     return GameConstants.CHECK_MY_TURN;
-  }
+  };
   
   /**
    * Method when entering this state.
@@ -47,7 +46,7 @@ define(function(require){
       handleResponse(view, isMyTurn);
     },
     'json');
-  }
+  };
 
   //
   // Private (external) functions

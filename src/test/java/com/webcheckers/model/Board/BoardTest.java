@@ -21,8 +21,4 @@ public class BoardTest {
 
   }
 
-  @Test
-  public void iterator() throws Exception {
-  }
-
 }

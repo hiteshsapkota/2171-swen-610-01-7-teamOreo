@@ -1,6 +1,5 @@
 package com.webcheckers.model;
 
-import java.util.ArrayList;
 
 /**
  * The OnlinePlayers class has the information about the player which

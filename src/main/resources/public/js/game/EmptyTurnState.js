@@ -35,7 +35,7 @@ define(function(require){
    */
   EmptyTurnState.prototype.getName = function getName() {
     return GameConstants.EMPTY_TURN;
-  }
+  };
   
   /**
    * Method when entering this state.
@@ -50,7 +50,7 @@ define(function(require){
     this.getView().disableAllControls();
     // re-enable all of my Pieces
     this.getView().enableAllMyPieces();
-  }
+  };
 
   /**
    * The player starts her turn by request an initial move.

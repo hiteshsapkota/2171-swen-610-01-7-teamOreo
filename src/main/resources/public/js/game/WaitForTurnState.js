@@ -23,8 +23,7 @@ define(function(require){
     this.getView = function() {
       return view;
     };
-  };
-
+  }
   //
   // Public (external) methods
   //
@@ -34,7 +33,7 @@ define(function(require){
    */
   WaitForTurnState.prototype.getName = function getName() {
     return GameConstants.WAIT_FOR_MY_TURN;
-  }
+  };
   
   /**
    * Method when entering this state.
@@ -43,7 +42,7 @@ define(function(require){
     var view = this.getView();
     // wait five seconds then check my turn
     setTimeout(function() { view.setState(GameConstants.CHECK_MY_TURN); }, 5000);
-  }
+  };
 
   // export class constructor
   return WaitForTurnState;

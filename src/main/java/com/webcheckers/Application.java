@@ -14,7 +14,7 @@ import com.webcheckers.ui.WebServer;
  *
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
-public final class Application {
+final class Application {
   private static final Logger LOG = Logger.getLogger(Application.class.getName());
 
   //

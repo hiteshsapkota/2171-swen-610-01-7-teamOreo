@@ -4,17 +4,7 @@ import static com.webcheckers.model.Strings.*;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.Board.Board;
 import com.webcheckers.model.OnlinePlayers;
-import com.webcheckers.model.Board.Piece;
-import com.webcheckers.model.Board.Piece.colorEnum;
-import com.webcheckers.model.Board.Piece.typeEnum;
-import com.webcheckers.model.Board.Row;
-import com.webcheckers.model.Board.Space;
-import com.webcheckers.model.WebCheckerGame;
-import com.webcheckers.ui.JsonUtils;
-import java.util.HashMap;
-import java.util.Map;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -29,7 +19,7 @@ public class StartPlayController implements TemplateViewRoute {
 
   /**
    * Initializes the gameCenter attribute.
-   * @param gameCenter
+   * @param gameCenter the one and only gamecenter.
    */
   public StartPlayController(final GameCenter gameCenter){
     this.gameCenter = gameCenter;
@@ -40,7 +30,6 @@ public class StartPlayController implements TemplateViewRoute {
     // get the name of the opponent and the player.
     String opponent = request.queryParams(OPPONENT_ATTR);
     String player = ((OnlinePlayers)request.session().attribute(USER_SESSION_ATTRIBUTE)).getName();
-    Map<String, Object> vm = new HashMap<>();
 
     // get indexes of player and opponent from the list.
 

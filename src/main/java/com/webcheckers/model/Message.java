@@ -12,8 +12,8 @@ package com.webcheckers.model;
 
     /**
      * Constructor with input parameters
-     * @param text
-     * @param type
+     * @param text content of the message.
+     * @param type type is info or error.
      */
         public Message(String text, String type) {
             this.text = text;

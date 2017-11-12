@@ -1,12 +1,10 @@
 package com.webcheckers.ui.Game;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.booleanThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.Message;
 import com.webcheckers.model.OnlinePlayers;
 import com.webcheckers.model.WebCheckerGame;
 import org.junit.Before;

@@ -1,7 +1,6 @@
 package com.webcheckers.ui.Game;
 
 import static com.webcheckers.model.Strings.*;
-import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.Message;
@@ -18,7 +17,7 @@ public class PostBackUpMoveController implements Route {
 
     /**
      * Initializes the gameCenter attribute.
-     * @param gameCenter
+     * @param gameCenter the one and only gamecenter.
      */
     public PostBackUpMoveController(final GameCenter gameCenter) {
         this.gameCenter = gameCenter;
@@ -27,10 +26,10 @@ public class PostBackUpMoveController implements Route {
     /**
      * This handle method checks if the backup move requested by a player can be implemented and
      * displays message accordingly
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
+     * @param request generic request.
+     * @param response generic response.
+     * @return Message object which contains the content and type.
+     * @throws Exception if any.
      */
     @Override
     public Object handle(Request request, Response response) throws Exception {
