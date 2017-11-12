@@ -7,8 +7,10 @@ import static spark.Spark.staticFileLocation;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.ui.Game.GetGameController;
+import com.webcheckers.ui.Game.GetGameOverController;
 import com.webcheckers.ui.Game.PostBackUpMoveController;
 import com.webcheckers.ui.Game.PostCheckTurnController;
+import com.webcheckers.ui.Game.PostEndGameController;
 import com.webcheckers.ui.Game.PostSubmitTurnController;
 import com.webcheckers.ui.Game.PostValidateMoveController;
 import com.webcheckers.ui.Game.StartPlayController;
@@ -57,7 +59,7 @@ public class WebServer {
    * @param templateEngine The default {@link TemplateEngine} to render views.
    */
   public WebServer(final GameCenter gameCenter,
-      final TemplateEngine templateEngine) {
+                   final TemplateEngine templateEngine) {
     this.templateEngine = templateEngine;
     this.gameCenter = gameCenter;
   }
@@ -123,13 +125,16 @@ public class WebServer {
 
     get(GAME_URL, new GetGameController(gameCenter), templateEngine);
 
-//    post(CHECK_TURN, new PostCheckTurnController(gameCenter), JsonUtils.json());
-//
-    post(VALIDATE_MOVE, new PostValidateMoveController(gameCenter), JsonUtils.json());
-//
-//    post(BACKUP_MOVE, new PostBackUpMoveController(gameCenter), JsonUtils.json());
-//
-//    post(SUBMIT_TURN, new PostSubmitTurnController(gameCenter), JsonUtils.json());
-  }
+    post(CHECK_TURN, new PostCheckTurnController(gameCenter), JsonUtils.json());
 
+    post(VALIDATE_MOVE, new PostValidateMoveController(gameCenter), JsonUtils.json());
+
+    post(BACKUP_MOVE, new PostBackUpMoveController(gameCenter), JsonUtils.json());
+
+    post(SUBMIT_TURN, new PostSubmitTurnController(gameCenter), JsonUtils.json());
+
+    get("/gameOver", new GetGameOverController(gameCenter), templateEngine);
+
+    post("/endGame", new PostEndGameController(gameCenter), templateEngine);
+  }
 }

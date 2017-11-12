@@ -8,6 +8,7 @@ import com.webcheckers.model.OnlinePlayers;
 import com.webcheckers.model.WebCheckerGame;
 import java.util.HashMap;
 import java.util.Map;
+import spark.HaltException;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -57,14 +58,28 @@ public class GetGameController implements TemplateViewRoute {
         vm.put(CURRENT_PLAYER_ATTR, true);
         vm.put(BOARD_ATTR, gameCenter.getGame(user).getBoard());
         gameCenter.getGame(user).checkAllPieceForMovements();
+        if(gameCenter.getGame(user).isGameEnded()){
+          if(gameCenter.getGame(user).didIWin(user)){
+            response.redirect("/gameOver?youWon=true");
+            halt();
+            return null;
+          }
+          else{
+            response.redirect("/gameOver?youWon=false");
+            halt();
+            return null;
+          }
+        }
         return new ModelAndView(vm, GAME_VIEW);
       }
     }
     catch (Exception e){
+      if (e.getClass() != HaltException.class){
+        e.printStackTrace();
+      }
       response.redirect(HOME_URL);
       halt();
       return null;
     }
-
   }
 }

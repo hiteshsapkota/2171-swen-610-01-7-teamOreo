@@ -35,6 +35,7 @@ public class PostValidateMoveController implements Route {
   @Override
   public Object handle(Request request, Response response) throws Exception {
     // Get the start and end positions
+    System.out.println(request.body());
     JsonObject jsonObject = JsonUtils.fromJson(request.body(), JsonObject.class);
     JsonObject start = jsonObject.getAsJsonObject(START);
     JsonObject end = jsonObject.getAsJsonObject(END);
