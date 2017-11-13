@@ -28,7 +28,7 @@ public class StringsTest {
         assertEquals("Welcome!",strings.WELCOME_TITLE);
         assertEquals("Game",strings.GAME_TITLE);
         assertEquals("Sign In!",strings.SIGN_IN_TITLE);
-        assertEquals("error",strings.MESSAGE_TYPE_ATTR);
+        assertEquals("error",strings.MESSAGE_TYPE_ERROR);
         assertEquals("The name you entered is empty!",strings.MESSAGE_EMPTY_NAME);
         assertEquals("The name already exists!",strings.MESSAGE_USER_EXISTS);
         assertEquals("home.ftl",strings.HOME_VIEW);
