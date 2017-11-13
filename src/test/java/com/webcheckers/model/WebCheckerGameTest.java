@@ -61,4 +61,69 @@ public class WebCheckerGameTest {
   public void isValidTurn() throws Exception {
 
   }
+
+  @Test
+  public void checkAllPieceForMovements(){
+
+    resetBoard();
+    game.getBoard().getRow(1).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
+    game.checkAllPieceForMovements();
+    game.getBoard().getRow(2).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
+    game.checkAllPieceForMovements();
+//    resetBoard();
+
+
+
+  }
+
+  private void resetBoard(){
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        game.getBoard().getRow(i).getSpace(j).setPiece(null);
+      }
+    }
+  }
+
+  @Test
+  public void makeMove(){
+    assertTrue(game.isMyTurn(p1));
+
+    // 2,1 to 3, 2
+    game.checkAllPieceForMovements();
+    assertEquals(MESSAGE_INFO, (game.isValidTurn(2, 1, 3, 2)).type);
+
+    game.makeMove();
+    assertTrue(game.isMyTurn(p2));
+
+    // 5,0 to 4,1
+    game.checkAllPieceForMovements();
+    assertEquals(MESSAGE_INFO, (game.isValidTurn(5, 0, 4, 1).type));
+
+    game.makeMove();
+
+    assertTrue(game.isMyTurn(p1));
+
+    game.checkAllPieceForMovements();
+    // capture mode, 3,2 to 5,0
+    assertEquals(MESSAGE_INFO, (game.isValidTurn(3, 2, 5, 0).type));
+
+    assertFalse(game.popMove());
+
+    game.makeMove();
+
+    assertTrue(game.isMyTurn(p2));
+
+    //Create a scenario for double capture.
+    Piece piece = game.getBoard().getRow(5).getSpace(0).getPiece();
+    game.getBoard().getRow(5).getSpace(0).setPiece(null);
+    game.getBoard().getRow(4).getSpace(1).setPiece(piece);
+
+    piece = game.getBoard().getRow(1).getSpace(2).getPiece();
+    game.getBoard().getRow(1).getSpace(2).setPiece(null);
+
+
+
+  }
+
+
 }
