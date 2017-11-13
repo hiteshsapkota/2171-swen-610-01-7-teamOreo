@@ -120,8 +120,35 @@ public class WebCheckerGameTest {
 
     piece = game.getBoard().getRow(1).getSpace(2).getPiece();
     game.getBoard().getRow(1).getSpace(2).setPiece(null);
+    game.getBoard().getRow(2).getSpace(1).setPiece(piece);
 
+    game.checkAllPieceForMovements();
 
+    assertEquals(MESSAGE_INFO, (game.isValidTurn(5, 2, 3, 0)).type);
+    assertEquals(MESSAGE_INFO, (game.isValidTurn(3, 0, 1, 2)).type);
+
+    game.makeMove();
+
+    assertTrue(game.isMyTurn(p1));
+
+    resetBoard();
+
+    game.getBoard().getRow(5).getSpace(0).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
+    game.getBoard().getRow(4).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
+
+    game.getBoard().getRow(2).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
+
+    game.checkAllPieceForMovements();
+
+    assertEquals(MESSAGE_INFO, (game.isValidTurn(2, 1, 3, 0)).type);
+    game.makeMove();
+
+    game.checkAllPieceForMovements();
+    assertEquals(MESSAGE_INFO, (game.isValidTurn(5, 0, 3, 2)).type);
+
+    game.makeMove();
+
+    assertTrue(game.isMyTurn(p1));
 
   }
 
