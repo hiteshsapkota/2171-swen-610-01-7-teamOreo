@@ -72,97 +72,93 @@ These are the features that we have implemented and tested in our Sprint 3
 
 * As a Player I want to start a game so I can challenge other online players.
 
+    * The player can pick an opponent from a list of all players signed-in that are not currently playing a game.
+
+    * This selection launches the Game view that includes a complete 8x8 grid with the initial piece layout.
+
+    * Sends the player back to the Home page if the requested opponent is already engaged in a game.
+
 * As a Player I want to sign-in to play online checkers.
+
+    * A player can navigate to the Signin page from the Home page.
+
+    * A player can enter their name and create a gaming session.
+
+    * The system must reject any sign-in using an existing name.
+
+    * A player can sign-out, which ends that player's session and frees up the name.
+
+    * The system will not persist player information. Furthermore, a given player name is first-come-first-serve. When the player signs-out the name is released for another player to use.
 
 * As a player, If it's not my turn, I shouldn’t be able to move my disk. 
 
+    * **Given** that is not my turn **When** I attempt to play **Then** I am expected to see a message saying _it's opponent_name turn_ and not allowed to move my piece.
+
+    * **Given** that is my turn **When** I attempt to play **Then** I am expected to see a message saying that _it's my turn_ and allowed to move my piece.
+
 * As a Player, If i am assigned red color, then i am supposed to make the first move.
+
+    * GIVEN that I want to play with a particular opponent WHEN i press the play button first THEN the system assigns me the red colour discs
+
+    * GIVEN that I am assigned the red color discs, WHEN the game starts THEN I should be able to make the first move.
+
+    * GIVEN that I am assigned the white colour discs, WHEN the game starts, THEN I should not be able to make the first move.
 
 * As a Player, I should be able to move my disc in the forward direction diagonally, so as to be able to play the game. 
 
+    * GIVEN its my turn, WHEN I make a legal movement on a single piece, THEN the system allows me to submit the turn and gives a message saying "Legal Move!"
+
+    * GIVEN that is my turn WHEN I make any illegal move on a single piece THEN the system will display a message saying "Illegal Movement".
+
 * As a Player, I should be forced to capture the opponent’s disk , if there is a possibility. 
+
+    * **Given** that I am in capture_mode **when** is my turn to play **then** I am expected to be forced to capture the opponent's piece.
 
 * As a Player, I must leap over the opponent’s pieces in a straight diagonal line on the other side, so as to capture the opponent’s piece and remove it from the board. 
 
+    * **Given** that I am able to make one capture **When** is my turn **Then** I am expected to jump against one opponent's piece and capture it. 
+
+    * **Given** that I am able to make more than one capture **When** is my turn **Then** I must be free to choose which piece to capture.
+
+    * **Given** that I am making a capturing move **When** I am playing **Then** the opponent's piece is expected to be removed from the board.
+
 * As a player, when my disk reaches the opposite furthest end of the board, my disk becomes a king disk. 
+
+    * GIVEN that I move a single piece WHEN I reach the last space on the opposite side of the board, THEN the piece is expected to become a king.
 
 * As a Player, I should be able to move my King disc in both forward and backward direction diagonally, so as to be able to play the game.
 
+    * Given its my turn, when I make a legal movement on a king piece, the system allows me to submit the turn and gives a message saying "Legal Move!"
+
+    * GIVEN that is my turn WHEN I make any illegal move on a king piece THEN the system will display a message saying "Illegal Movement". 
+
 * As a Player, I should be able to capture all the opponent’s disc, so that I win the game
+
+    * when I capture all the opponent's disk, i should be the winner
+
+    * when I am the winner, the game should end
+
+    * when the game ends, the system should take me to the homepage.
+
+    * when all my disks are capture, my game should be lost
+
+    * when i lose, the game should end
 
 * As a Player, If I am not able to move any of my discs, The game should end and I should be the loser.
 
+    * When I am not able to move any piece, the game should be over and I should be the loser
+
+    * when I have lost the game, i should be redirected to home
+
+    * if my opponent is not able to move any piece, the game should be over and i should be the winner
+
+    * when I have won the game, I should be redirected to home.
+
 * As a Player, I should be able to resign the game at any point, so as to end the game.
 
-### Feature 1(Sign-In) :
+    * GIVEN that I am on an active game WHEN I click on the resign option THEN I am expected to see a warning message.
 
-* A player navigates to the Signin page from the Home page.
-
-* The system rejects any sign-in using an existing name.
-
-* A player can sign-out, which ends that player's session and frees up the name.
-
-* The system does not persist player information. Furthermore, a given player name is first-come-first-serve. 
-
-### Feature 2 (Game Start) :
-
-* The player picks an opponent from a list of all players signed-in that are not currently playing a game.
-
-* This selection launches the Game view that includes a complete board with rows, spaces and pieces with initial layout.
-
-* Sends the player back to the Home page if the requested opponent is already engaged in a game.
-
-Feature 3 (Disk Assignment) :
-
-* In the Game view, the player making the request for opponent, is assigned the red colored disks, while his opponent is assigned the white colored disks.
-
-* The player assigned the red colored disks makes the first move.
-
-* The player assigned the white colored disks will make the second move.
-
-* The players play the game in alternate turns.
-
-Feature 4 (Game Movement) :
-
-* The players can only move in forward diagonal directions.
-
-* A player can make a move. If the move is valid, the movement is saved and a message is displayed stating "It’s a valid move". The player needs to click on Submit Turn.
-
-* If the move is invalid, the piece goes back to its original position, and an error message is displayed stating "Invalid Move".
-
-* A player can undo his/her move by clicking on the Backup one Move button which will take the piece back to the previous position. 
-
-Feature 5 (Game Waiting) :
-
-* A player can only play when it is his/her turn. He/she needs to await his/her turn.
-
-Feature 6 (Disk Capture) :
-
-* A player needs to jump over opponent’s piece to be able to capture it.
-
-* If a player gets the chance to capture an opponent’s piece, he/she has to make the capture.
-
-* The backup move will not work and will give an error when you are capturing a move. 
-
-Feature 7 (Disk Conversion) :
-
-* A single piece gets converted to a King piece when it moves to the last space on the opposite side of the board
-
-Feature 8 (King Movement) :
-
-* A King piece can move in both forward or backward diagonal directions. 
-
-* If a King piece makes a valid move, the movement is saved and a message is displayed stating "It’s a valid move". The player needs to click on Submit Turn.
-
-* If a King piece makes an invalid move, the piece goes back to its original position, and an error message is displayed stating "Invalid Move".
-
-* A player can undo his/her move by clicking on the Backup one Move button which will take the piece back to the previous position.
-
-Feature 9 (Resignation) :
-
-* If a player is in active game, and he clicks 
-
-Feature 10 (Win) :
+    * GIVEN that I confirm to resign the game WHEN I am shown the warning message THEN I am expected to have my status changed to free and redirected to the home page.
 
 # Application Domain
 
@@ -225,8 +221,6 @@ Diagram below shows the architectural diagram of the Guessing Game
 ## Overview of User Interface
 
 When the user goes to our application, the home screen is presented which will allow the user to sign in. When the user presses the sign-in button, the system presents the login page where the user can enter a unique name for himself. If the details entered by the user is empty or if the name is already taken, appropriate error messages will be shown. When the user enters a unique name, the system will show the home page, this time showing all the players that are available to play. The user can then select a player and press the play button which starts the game for both the player and the opponent he/she wants to play. The player will start the game first and the opponent will be in the waiting state. The player can select any piece which he/she owns and move it in the board. The board validates the move once the player has made a move. If there is an illegal movement, the piece will come back to its original position giving errors, else it will show the valid message and the piece can be moved. The player can either backup the move or reset the move, or submit the move. When the player submit the move, the move is committed and the player is in the waiting state, and the control moves to the opponent. This goes on and on until the game ends, wherein the system shows the user who has won and who has lost. Any player can select the go home button to delete the game from the system and the system will take him/her to the home screen so that they can play another game. The user can also log-out of the system which frees the name for another user to use. 
-
-User Interface prevent the direct interaction of user with the application and the model tier. It is responsible User Interface consist of two components: UI controller and UI view. UI controller is responsible for handling the routes whereas UI view is responsible for displaying the webpage for the user. UI controller is done by the HTTP route handler whereas UI view is done by view templates . UI view consists of a three ftl files:home.ftl, game.ftl and sign in.ftl. Different controller classes are implemented in order to handle routes. Get LogInController, Post LogIncontroller, Get SignOut Controller are some examples of the UI controller.
 
 ## UI
 
@@ -334,15 +328,17 @@ The WebServer has instances of all Controllers and the Application has only one 
 
 ## Component Diagram 
 
+![image alt text](image_8.jpg)
+
 ## Package Diagram 
 
-![image alt text](image_8.png)
+![image alt text](image_9.png)
 
 # Dynamic Models
 
 ## Statechart Diagram
 
-![image alt text](image_9.png)
+![image alt text](image_10.png)
 
 ## Sequence Diagrams
 
@@ -350,25 +346,25 @@ These are the various Sequences for various call functions made from the user to
 
 HomeController.handle()
 
-![image alt text](image_10.png)
+![image alt text](image_11.png)
 
 PostSign Controller.handle()
 
-![image alt text](image_11.png)
+![image alt text](image_12.png)
 
 StartPlay Controller.handle()
 
-![image alt text](image_12.png)
+![image alt text](image_13.png)
 
 Post BackUp Move Controller.handle()
 
-![image alt text](image_13.png)
+![image alt text](image_14.png)
 
 Post Submit Turn Controller.handle()
 
-![image alt text](image_14.png)
+![image alt text](image_15.png)
 
 GetGameController.handle():
 
-![image alt text](image_15.png)
+![image alt text](image_16.png)
 
