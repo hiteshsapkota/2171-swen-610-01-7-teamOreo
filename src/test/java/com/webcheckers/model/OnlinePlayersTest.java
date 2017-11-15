@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class OnlinePlayersTest {
   private OnlinePlayers onlinePlayers;
-  private String test = "test";
+  private final String test = "test";
 
   @Before
   public void start(){
@@ -34,8 +34,8 @@ public class OnlinePlayersTest {
   public void equals() throws Exception {
     OnlinePlayers p2 = new OnlinePlayers(test);
     assertTrue(onlinePlayers.equals(p2));
-    assertFalse(onlinePlayers.equals(null));
-    assertFalse(onlinePlayers.equals(test));
+    assertFalse(onlinePlayers.getName().equals(null));
+    assertFalse(onlinePlayers.getName().equals(test));
 
   }
 

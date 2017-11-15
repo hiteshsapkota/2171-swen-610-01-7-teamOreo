@@ -11,8 +11,8 @@ import static com.webcheckers.model.Strings.USER_SESSION_ATTRIBUTE;
 
 public class GameCenter {
 
-    private Map<String, OnlinePlayers> allPlayers = new HashMap<>();
-    private ArrayList<WebCheckerGame> allGames = new ArrayList();
+    private final Map<String, OnlinePlayers> allPlayers = new HashMap<>();
+    private final ArrayList<WebCheckerGame> allGames = new ArrayList<>();
 
 
     /**
@@ -22,7 +22,7 @@ public class GameCenter {
      */
     public void login(Session session, String username){
         OnlinePlayers player = new OnlinePlayers(username);
-        session.attribute("user", player);
+        session.attribute(USER_SESSION_ATTRIBUTE, player);
         this.allPlayers.put(username, player);
     }
 

@@ -16,7 +16,7 @@ import spark.Session;
 
 public class StartPlayControllerTest {
   private StartPlayController startPlayController;
-  private GameCenter gameCenter = mock(GameCenter.class);
+  private final GameCenter gameCenter = mock(GameCenter.class);
   @Before
   public void start(){
 

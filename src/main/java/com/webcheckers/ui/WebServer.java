@@ -116,7 +116,7 @@ public class WebServer {
     // Shows the Checkers game Home page.
     get(HOME_URL, new HomeController(gameCenter), templateEngine);
     // Shows the Sign In Page.
-    get(SIGN_IN_URL, new GetSignInController(gameCenter), templateEngine);
+    get(SIGN_IN_URL, new GetSignInController(), templateEngine);
     // POST controller for signing in
     post(SIGN_IN_URL, new PostSignInController(gameCenter), templateEngine);
     // Get controller for Signing out
@@ -134,10 +134,10 @@ public class WebServer {
 
     post(SUBMIT_TURN, new PostSubmitTurnController(gameCenter), JsonUtils.json());
 
-    get("/gameOver", new GetGameOverController(gameCenter), templateEngine);
+    get(GAME_OVER, new GetGameOverController(), templateEngine);
 
-    post("/endGame", new PostEndGameController(gameCenter), templateEngine);
+    post(END_GAME, new PostEndGameController(gameCenter), templateEngine);
 
-    get("/resignGame", new PostResignGameController(gameCenter), templateEngine);
+    get(RESIGN_GAME, new PostResignGameController(gameCenter), templateEngine);
   }
 }

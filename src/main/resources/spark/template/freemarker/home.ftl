@@ -37,6 +37,7 @@
         </#list>
       </ul>
       <button type="submit">Lets Play!</button>
+
     </form>
 
   <#else>

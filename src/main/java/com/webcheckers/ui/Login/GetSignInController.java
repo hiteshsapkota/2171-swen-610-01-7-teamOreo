@@ -19,14 +19,6 @@ import spark.TemplateViewRoute;
 public class GetSignInController implements TemplateViewRoute {
 
   /**
-   * This is a constructor initializes the gameCenter attribute.
-   * @param gameCenter the one and only gameCenter.
-   */
-  public GetSignInController(final GameCenter gameCenter){
-    GameCenter gameCenter1 = gameCenter;
-  }
-
-  /**
    * This handle method is overridden  to create a new sign in and show login info.
    * @param request generic request
    * @param response generic response

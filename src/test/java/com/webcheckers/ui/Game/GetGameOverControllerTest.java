@@ -1,7 +1,6 @@
 package com.webcheckers.ui.Game;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.ui.Login.PostSignInController;
 import org.junit.Test;
 import spark.ModelAndView;
 import spark.Request;
@@ -10,7 +9,6 @@ import spark.Response;
 import java.util.HashMap;
 
 import static com.webcheckers.model.Strings.*;
-import static com.webcheckers.model.Strings.MESSAGE_ATTR;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -20,7 +18,7 @@ public class GetGameOverControllerTest {
     public void handle1() throws Exception {
         String gamestatus="Congratulations! You won.";
         GameCenter gameCenter = mock(GameCenter.class);
-        GetGameOverController getGameOverController = new GetGameOverController(gameCenter);
+        GetGameOverController getGameOverController = new GetGameOverController();
         Request request = mock(Request.class);
         Response response = mock(Response.class);
 
@@ -30,7 +28,7 @@ public class GetGameOverControllerTest {
 
         assertEquals("game_over.ftl", modelAndView.getViewName());
 
-        HashMap<String, Object> vm = (HashMap) modelAndView.getModel();
+        HashMap vm = (HashMap) modelAndView.getModel();
 
         assertEquals(gamestatus, vm.get("message"));
     }
@@ -38,7 +36,7 @@ public class GetGameOverControllerTest {
     @Test
     public void handle2() throws Exception{
         GameCenter gameCenter = mock(GameCenter.class);
-        GetGameOverController getGameOverController = new GetGameOverController(gameCenter);
+        GetGameOverController getGameOverController = new GetGameOverController();
         Request request = mock(Request.class);
         Response response = mock(Response.class);
         String gamestatus = "You lost, Better luck next time.";
@@ -50,7 +48,7 @@ public class GetGameOverControllerTest {
 
         assertEquals("game_over.ftl", modelAndView.getViewName());
 
-        HashMap<String, Object> vm = (HashMap) modelAndView.getModel();
+        HashMap vm = (HashMap) modelAndView.getModel();
 
         assertEquals(gamestatus, vm.get(MESSAGE_ATTR));
     }

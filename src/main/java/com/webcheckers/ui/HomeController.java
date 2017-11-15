@@ -50,7 +50,7 @@ class HomeController implements TemplateViewRoute {
     } else { // If a user is logged in
       if(!gameCenter.userIsFree(currentPlayer.getName())){
         //TODO send the user back to the game page.
-        response.redirect("/game");
+        response.redirect(GAME_URL);
         halt();
         return null;
       }

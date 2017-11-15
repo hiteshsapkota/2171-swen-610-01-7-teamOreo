@@ -17,7 +17,7 @@ import spark.Session;
 
 public class PostBackUpMoveControllerTest {
   private PostBackUpMoveController postBackUpMoveController;
-  private GameCenter gameCenter = mock(GameCenter.class);
+  private final GameCenter gameCenter = mock(GameCenter.class);
   @Before
   public void start(){
 

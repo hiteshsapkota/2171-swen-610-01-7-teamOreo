@@ -19,7 +19,7 @@ import spark.Session;
 
 public class GetGameControllerTest {
   private GetGameController getGameController;
-  private GameCenter gameCenter = mock(GameCenter.class);
+  private final GameCenter gameCenter = mock(GameCenter.class);
   @Before
   public void start(){
 

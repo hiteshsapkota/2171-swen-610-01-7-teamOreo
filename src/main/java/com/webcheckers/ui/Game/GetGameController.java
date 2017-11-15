@@ -59,12 +59,12 @@ public class GetGameController implements TemplateViewRoute {
         gameCenter.getGame(user).checkAllPieceForMovements();
         if(gameCenter.getGame(user).isGameEnded()){
           if(gameCenter.getGame(user).didIWin(user)){
-            response.redirect("/gameOver?youWon=true");
+            response.redirect(GAME_WON);
             halt();
             return null;
           }
           else{
-            response.redirect("/gameOver?youWon=false");
+            response.redirect(GAME_LOST);
             halt();
             return null;
           }

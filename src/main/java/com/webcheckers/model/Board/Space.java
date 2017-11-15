@@ -8,7 +8,7 @@ public class Space {
   /**
    * Attributes
    */
-  private int cellIdx;
+  private final int cellIdx;
   private Piece piece;
 
   public int getCellIdx() {
@@ -19,16 +19,15 @@ public class Space {
     BLACK,
     WHITE
   }
-  private SPACECOLOR spaceColor;
+  private final SPACECOLOR spaceColor;
 
   /**
    * Constructor
    * @param cellIdx positon of the space
-   * @param piece can be null
    */
-  Space(int cellIdx, SPACECOLOR spaceColor, Piece piece) {
+  Space(int cellIdx, SPACECOLOR spaceColor) {
     this.cellIdx = cellIdx;
-    this.piece = piece;
+    this.piece = null;
     this.spaceColor = spaceColor;
   }
 

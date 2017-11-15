@@ -45,13 +45,13 @@ public PostSignInController(final GameCenter gameCenter)
       // show error and redirect to sign in page.
       vm.put(TITLE_ATTR, WELCOME_TITLE);
       vm.put(MESSAGE_ATTR, MESSAGE_EMPTY_NAME);
-      vm.put(MESSAGE_TYPE_ATTR, MESSAGE_TYPE_ERROR);
+      vm.put(MESSAGE_TYPE_ATTR, MESSAGE_ERROR);
       return new ModelAndView(vm, SIGNIN_VIEW);
     } else if (gameCenter.userAlreadyExists(username)) { // name already exists
       // show error and redirect to sign in page.
       vm.put(TITLE_ATTR, WELCOME_TITLE);
       vm.put(MESSAGE_ATTR, MESSAGE_USER_EXISTS);
-      vm.put(MESSAGE_TYPE_ATTR, MESSAGE_TYPE_ERROR);
+      vm.put(MESSAGE_TYPE_ATTR, MESSAGE_ERROR);
       return new ModelAndView(vm, SIGNIN_VIEW);
     } else {
       // add the name to the session

@@ -2,7 +2,6 @@ package com.webcheckers.ui.Game;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.OnlinePlayers;
-import com.webcheckers.ui.Login.GetSignOutController;
 import org.junit.Test;
 import spark.HaltException;
 import spark.Request;

@@ -1,5 +1,6 @@
 package com.webcheckers.ui.Game;
 
+import static com.webcheckers.model.Strings.HOME_URL;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
@@ -23,7 +24,7 @@ public class PostEndGameController implements TemplateViewRoute {
     if(gameCenter.getGame(user) != null){
       gameCenter.removeGame(user);
     }
-    response.redirect("/");
+    response.redirect(HOME_URL);
     halt();
     return null;
   }

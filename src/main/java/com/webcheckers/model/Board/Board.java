@@ -11,7 +11,7 @@ public class Board implements Iterable<Row> {
   /**
    * Lists
    */
-  private ArrayList<Row> rows;
+  final private ArrayList<Row> rows;
 
   /**
    *  Constructor for board.

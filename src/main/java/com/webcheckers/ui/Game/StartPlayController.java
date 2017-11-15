@@ -31,6 +31,11 @@ public class StartPlayController implements TemplateViewRoute {
     String opponent = request.queryParams(OPPONENT_ATTR);
     String player = ((OnlinePlayers)request.session().attribute(USER_SESSION_ATTRIBUTE)).getName();
 
+    if(opponent == null){
+      response.redirect("/");
+      halt();
+      return null;
+    }
     // get indexes of player and opponent from the list.
 
     // if the opponent is free

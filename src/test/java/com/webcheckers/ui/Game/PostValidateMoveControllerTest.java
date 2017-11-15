@@ -17,7 +17,7 @@ import spark.Session;
 public class PostValidateMoveControllerTest {
 
   private PostValidateMoveController postValidateMoveController;
-  private GameCenter gameCenter = mock(GameCenter.class);
+  private final GameCenter gameCenter = mock(GameCenter.class);
   @Before
   public void start(){
 

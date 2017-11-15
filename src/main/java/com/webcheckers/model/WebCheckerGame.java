@@ -18,15 +18,15 @@ public class WebCheckerGame
     //
     // Attributes
     //
-    private Board board;
-    private String player1;
-    private colorEnum player1Color;
+    private final Board board;
+    private final String player1;
+    private final colorEnum player1Color;
     private boolean isPlayer1Turn;
-    private String player2;
-    private colorEnum player2Color;
+    private final String player2;
+    private final colorEnum player2Color;
     private boolean isPlayer2Turn;
     private moveStatCode moveState;
-    private HashMap<String, ArrayList<Position>> possibleMovements = new HashMap<>();
+    private final HashMap<String, ArrayList<Position>> possibleMovements = new HashMap<>();
     private int numOfPossMovePlayer1;
     private int numOfPossMovePlayer2;
 
@@ -60,7 +60,7 @@ public class WebCheckerGame
         NO_CONVERSION
     }
     private conversionState conversion;
-    private ArrayList<Movement> movements = new ArrayList<>();
+    private final ArrayList<Movement> movements = new ArrayList<>();
 
     /**
      * Constructor to create a new game.
@@ -418,9 +418,7 @@ public class WebCheckerGame
      */
     public void makeMove() {
         for (int i = movements.size() - 1; i >= 0 ; i--) {
-
-          System.out.println("Movement" + i);
-            if (moveState == moveStatCode.CAPTURE_MODE) {
+           if (moveState == moveStatCode.CAPTURE_MODE) {
               if(isPlayer1Turn){
                 numOfPiecesPlayer2 --;
               }

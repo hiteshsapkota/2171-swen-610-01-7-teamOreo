@@ -7,10 +7,10 @@ class Movement {
     //
     // Attributes
     //
-    private int startRow;
-    private int startCell;
-    private int endRow;
-    private int endCell;
+    private final int startRow;
+    private final int startCell;
+    private final int endRow;
+    private final int endCell;
 
     /**
      * Constructor, takes the values and sets it up accordingly

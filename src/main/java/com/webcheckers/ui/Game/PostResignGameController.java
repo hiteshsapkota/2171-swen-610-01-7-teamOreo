@@ -1,5 +1,7 @@
 package com.webcheckers.ui.Game;
 
+import static com.webcheckers.model.Strings.HOME_URL;
+import static com.webcheckers.model.Strings.USER_SESSION_ATTRIBUTE;
 import static spark.Spark.halt;
 
 import com.webcheckers.appl.GameCenter;
@@ -7,7 +9,6 @@ import com.webcheckers.model.OnlinePlayers;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import spark.Route;
 import spark.TemplateViewRoute;
 
 public class PostResignGameController implements TemplateViewRoute {
@@ -21,9 +22,9 @@ public class PostResignGameController implements TemplateViewRoute {
 
   @Override
   public ModelAndView handle(Request request, Response response) {
-    String user = ((OnlinePlayers) request.session().attribute("user")).getName();
+    String user = ((OnlinePlayers) request.session().attribute(USER_SESSION_ATTRIBUTE)).getName();
     gameCenter.removeGame(user);
-    response.redirect("/");
+    response.redirect(HOME_URL);
     halt();
     return null;
   }

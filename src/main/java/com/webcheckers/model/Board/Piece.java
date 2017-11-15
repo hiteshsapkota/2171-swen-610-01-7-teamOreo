@@ -9,7 +9,7 @@ public class Piece {
    * attributes
    */
   private typeEnum type;
-  private colorEnum color;
+  private final colorEnum color;
 
   /**
    * Constructor to create a piece

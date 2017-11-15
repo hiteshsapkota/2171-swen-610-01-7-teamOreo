@@ -5,56 +5,56 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class StringsTest {
-    Strings strings=new Strings();
+
     @Test
     public void stringNameTest() throws Exception{
 
 
 
-        assertEquals("title", strings.TITLE_ATTR);
-        assertEquals("currentPlayer",strings.CURRENT_PLAYER_ATTR);
-        assertEquals("playerName",strings.PLAYER_NAME_ATTR);
-        assertEquals("onlinePlayers",strings.ONLINE_PLAYERS_ATTR);
-        assertEquals("username",strings.USERNAME_ATTR);
-        assertEquals("message",strings.MESSAGE_ATTR);
-        assertEquals("messageType",strings.MESSAGE_TYPE_ATTR);
-        assertEquals("opponent",strings.OPPONENT_ATTR);
-        assertEquals("playerColor",strings.PLAYER_COLOR_ATTR);
-        assertEquals("isMyTurn",strings.IS_MY_TURN_ATTR);
-        assertEquals("opponentName",strings.OPPONENT_NAME_ATTR);
-        assertEquals("opponentColor",strings.OPPONENT_COLOR_ATTR);
-        assertEquals("board",strings.BOARD_ATTR);
-        assertEquals("user",strings.USER_SESSION_ATTRIBUTE);
-        assertEquals("Welcome!",strings.WELCOME_TITLE);
-        assertEquals("Game",strings.GAME_TITLE);
-        assertEquals("Sign In!",strings.SIGN_IN_TITLE);
-        assertEquals("error",strings.MESSAGE_TYPE_ERROR);
-        assertEquals("The name you entered is empty!",strings.MESSAGE_EMPTY_NAME);
-        assertEquals("The name already exists!",strings.MESSAGE_USER_EXISTS);
-        assertEquals("home.ftl",strings.HOME_VIEW);
-        assertEquals("signin.ftl",strings.SIGNIN_VIEW);
-        assertEquals("game.ftl",strings.GAME_VIEW);
-        assertEquals("/",strings.HOME_URL);
-        assertEquals("/signin",strings.SIGN_IN_URL);
-        assertEquals("/signout",strings.SIGN_OUT_URL);
-        assertEquals("/play",strings.PLAY_URL);
-        assertEquals("/game",strings.GAME_URL);
-        assertEquals("/checkTurn",strings.CHECK_TURN);
-        assertEquals("/validateMove",strings.VALIDATE_MOVE);
-        assertEquals("/backupMove",strings.BACKUP_MOVE);
-        assertEquals("/submitTurn",strings.SUBMIT_TURN);
-        assertEquals("start",strings.START);
-        assertEquals("end",strings.END);
-        assertEquals("row",strings.ROW);
-        assertEquals("cell",strings.CELL);
-        assertEquals("Valid move!",strings.VALID_MOVE);
-        assertEquals("Invalid move!",strings.INVALID_MOVE);
-        assertEquals("Invalid move, you have already made a move!",strings.INVALID_ALREADY_MADE);
-        assertEquals("Valid move! Get that piece!",strings.VALID_GET_PIECE);
-        assertEquals("error",strings.MESSAGE_ERROR);
-        assertEquals("info",strings.MESSAGE_INFO);
-        assertEquals("Backed up the move",strings.BACKUP_SUCCESSFUL);
-        assertEquals("This is a forced move because of the disk capture",strings.BACKUP_UNSUCCESSFUL);
+        assertEquals("title", Strings.TITLE_ATTR);
+        assertEquals("currentPlayer", Strings.CURRENT_PLAYER_ATTR);
+        assertEquals("playerName", Strings.PLAYER_NAME_ATTR);
+        assertEquals("onlinePlayers", Strings.ONLINE_PLAYERS_ATTR);
+        assertEquals("username", Strings.USERNAME_ATTR);
+        assertEquals("message", Strings.MESSAGE_ATTR);
+        assertEquals("messageType", Strings.MESSAGE_TYPE_ATTR);
+        assertEquals("opponent", Strings.OPPONENT_ATTR);
+        assertEquals("playerColor", Strings.PLAYER_COLOR_ATTR);
+        assertEquals("isMyTurn", Strings.IS_MY_TURN_ATTR);
+        assertEquals("opponentName", Strings.OPPONENT_NAME_ATTR);
+        assertEquals("opponentColor", Strings.OPPONENT_COLOR_ATTR);
+        assertEquals("board", Strings.BOARD_ATTR);
+        assertEquals("user", Strings.USER_SESSION_ATTRIBUTE);
+        assertEquals("Welcome!", Strings.WELCOME_TITLE);
+        assertEquals("Game", Strings.GAME_TITLE);
+        assertEquals("Sign In!", Strings.SIGN_IN_TITLE);
+        assertEquals("The name you entered is empty!", Strings.MESSAGE_EMPTY_NAME);
+        assertEquals("The name already exists!", Strings.MESSAGE_USER_EXISTS);
+        assertEquals("home.ftl", Strings.HOME_VIEW);
+        assertEquals("signin.ftl", Strings.SIGNIN_VIEW);
+        assertEquals("game.ftl", Strings.GAME_VIEW);
+        assertEquals("/", Strings.HOME_URL);
+        assertEquals("/signin", Strings.SIGN_IN_URL);
+        assertEquals("/signout", Strings.SIGN_OUT_URL);
+        assertEquals("/play", Strings.PLAY_URL);
+        assertEquals("/game", Strings.GAME_URL);
+        assertEquals("/checkTurn", Strings.CHECK_TURN);
+        assertEquals("/validateMove", Strings.VALIDATE_MOVE);
+        assertEquals("/backupMove", Strings.BACKUP_MOVE);
+        assertEquals("/submitTurn", Strings.SUBMIT_TURN);
+        assertEquals("start", Strings.START);
+        assertEquals("end", Strings.END);
+        assertEquals("row", Strings.ROW);
+        assertEquals("cell", Strings.CELL);
+        assertEquals("Valid move!", Strings.VALID_MOVE);
+        assertEquals("Invalid move!", Strings.INVALID_MOVE);
+        assertEquals("Invalid move, you have already made a move!", Strings.INVALID_ALREADY_MADE);
+        assertEquals("Valid move! Get that piece!", Strings.VALID_GET_PIECE);
+        assertEquals("error", Strings.MESSAGE_ERROR);
+        assertEquals("info", Strings.MESSAGE_INFO);
+        assertEquals("Backed up the move", Strings.BACKUP_SUCCESSFUL);
+        assertEquals("This is a forced move because of the disk capture",
+            Strings.BACKUP_UNSUCCESSFUL);
 
 
 

@@ -10,7 +10,7 @@ public class OnlinePlayers {
   //
   // Attributes
   //
-  private String name;
+  final private String name;
   private boolean isFree;
 
   //

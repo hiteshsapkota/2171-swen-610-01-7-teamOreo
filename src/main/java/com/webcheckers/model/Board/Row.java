@@ -14,12 +14,12 @@ public class Row implements Iterable<Space> {
   /**
    * list
    */
-  private ArrayList<Space> spaces;
+  private final ArrayList<Space> spaces;
 
   /**
    * attributes
    */
-  private int index;
+  private final int index;
 
   /**
    * Constructor
@@ -33,15 +33,15 @@ public class Row implements Iterable<Space> {
       // Adding spaces
       if (index % 2 == 0) {
         if (i % 2 == 0) {
-          spaces.add(new Space(i, SPACECOLOR.WHITE, null));
+          spaces.add(new Space(i, SPACECOLOR.WHITE));
         } else {
-          spaces.add(new Space(i, SPACECOLOR.BLACK, null));
+          spaces.add(new Space(i, SPACECOLOR.BLACK));
         }
       } else {
         if (i % 2 == 0) {
-          spaces.add(new Space(i, SPACECOLOR.BLACK, null));
+          spaces.add(new Space(i, SPACECOLOR.BLACK));
         } else {
-          spaces.add(new Space(i, SPACECOLOR.WHITE, null));
+          spaces.add(new Space(i, SPACECOLOR.WHITE));
         }
       }
 

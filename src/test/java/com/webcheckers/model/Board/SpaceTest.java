@@ -12,7 +12,7 @@ public class SpaceTest {
 
   @Before
   public void start(){
-    space = new Space(1, SPACECOLOR.BLACK, null);
+    space = new Space(1, SPACECOLOR.BLACK);
   }
 
   @Test

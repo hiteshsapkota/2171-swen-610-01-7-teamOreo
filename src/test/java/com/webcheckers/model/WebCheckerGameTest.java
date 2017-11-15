@@ -10,8 +10,8 @@ import com.webcheckers.model.Board.Piece.typeEnum;
 import org.junit.Test;
 
 public class WebCheckerGameTest {
-  private String p1 = "test";
-  private String p2 = "test2";
+  private final String p1 = "test";
+  private final String p2 = "test2";
   private WebCheckerGame game = new WebCheckerGame(p1, p2);
 
   @Test
@@ -57,10 +57,6 @@ public class WebCheckerGameTest {
     assertFalse(game.hasPlayer("notingame"));
   }
 
-  @Test
-  public void isValidTurn() throws Exception {
-
-  }
 
 
 
@@ -92,17 +88,25 @@ public class WebCheckerGameTest {
     game.makeMove();
 
     assertTrue(game.isMyTurn(p2));
+  }
 
-    //Create a scenario for double capture.
-    Piece piece = game.getBoard().getRow(5).getSpace(0).getPiece();
-    game.getBoard().getRow(5).getSpace(0).setPiece(null);
-    game.getBoard().getRow(4).getSpace(1).setPiece(piece);
+  @Test
+  public void isGameEnded(){
+    game = new WebCheckerGame(p1, p2);
+    assertFalse(game.isGameEnded());
 
-    piece = game.getBoard().getRow(1).getSpace(2).getPiece();
-    game.getBoard().getRow(1).getSpace(2).setPiece(null);
+    resetBoard(colorEnum.WHITE);
+    game.checkAllPieceForMovements();
+    assertTrue(game.isGameEnded());
+    assertTrue(game.didIWin(p1));
+    assertFalse(game.didIWin(p2));
 
+    game = new WebCheckerGame(p1, p2);
 
-
+    resetBoard(colorEnum.RED);
+    game.checkAllPieceForMovements();
+    assertTrue(game.isGameEnded());
+    assertFalse(game.didIWin(p1));
   }
 
   @Test
@@ -231,7 +235,7 @@ public class WebCheckerGameTest {
     game.getBoard().getRow(3).getSpace(6).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
     game.checkAllPieceForMovements();
 
-resetBoard();
+    resetBoard();
     game.getBoard().getRow(7).getSpace(2).setPiece(new Piece(typeEnum.KING, colorEnum.WHITE));
     game.checkAllPieceForMovements();
 
@@ -257,6 +261,16 @@ resetBoard();
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
         game.getBoard().getRow(i).getSpace(j).setPiece(null);
+      }
+    }
+  }
+
+  private void resetBoard(colorEnum color){
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        if(game.getBoard().getRow(i).getSpace(j).getPiece() != null && game.getBoard().getRow(i).getSpace(j).getPiece().getColor() == color){
+          game.getBoard().getRow(i).getSpace(j).setPiece(null);
+        }
       }
     }
   }

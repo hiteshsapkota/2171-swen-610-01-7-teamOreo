@@ -30,7 +30,7 @@ public class GetSignInControllerTest {
       GameCenter gameCenter = mock(GameCenter.class);
       when(request.session()).thenReturn(session);
       when(session.attribute("user")).thenReturn(players);
-      GetSignInController getSignInController = new GetSignInController(gameCenter);
+      GetSignInController getSignInController = new GetSignInController();
       assertNull(getSignInController.handle(request, response));
     }
     catch (HaltException e){
@@ -48,7 +48,7 @@ public class GetSignInControllerTest {
     when(request.session()).thenReturn(session);
     when(session.attribute("user")).thenReturn(null);
 
-    GetSignInController getSignInController = new GetSignInController(gameCenter);
+    GetSignInController getSignInController = new GetSignInController();
 
     assertEquals(SIGNIN_VIEW, getSignInController.handle(request, response).getViewName());
   }
