@@ -11,8 +11,8 @@ import static com.webcheckers.model.Strings.USER_SESSION_ATTRIBUTE;
 
 public class GameCenter {
 
-    private final Map<String, OnlinePlayers> allPlayers = new HashMap<>();
-    private final ArrayList<WebCheckerGame> allGames = new ArrayList<>();
+    private AllPlayers allPlayers = new AllPlayers();
+	private final ArrayList<WebCheckerGame> allGames = new ArrayList<>();
 
 
     /**
@@ -21,9 +21,7 @@ public class GameCenter {
      * @param username : The name of the user.
      */
     public void login(Session session, String username){
-        OnlinePlayers player = new OnlinePlayers(username);
-        session.attribute(USER_SESSION_ATTRIBUTE, player);
-        this.allPlayers.put(username, player);
+        allPlayers.login(session, username);
     }
 
     /**
@@ -31,9 +29,7 @@ public class GameCenter {
      * @param session to remove the attribute
      */
     public void logout(Session session){
-        String username = ((OnlinePlayers) session.attribute(USER_SESSION_ATTRIBUTE)).getName();
-        session.removeAttribute(USER_SESSION_ATTRIBUTE);
-        this.allPlayers.remove(username);
+        allPlayers.logout(session);
     }
 
     /**
@@ -42,7 +38,7 @@ public class GameCenter {
      * @return returns true if the username exist.
      */
     public boolean userAlreadyExists(String username){
-        return this.allPlayers.keySet().contains(username);
+        return allPlayers.userAlreadyExists(username);
     }
 
     /**
@@ -51,7 +47,7 @@ public class GameCenter {
      * @return returns true if its free.
      */
     public boolean userIsFree(String username){
-        return allPlayers.get(username).isFree();
+        return allPlayers.userIsFree(username);
     }
 
     /**
@@ -60,7 +56,7 @@ public class GameCenter {
      * @return {@link OnlinePlayers} object of the player.
      */
     OnlinePlayers getPlayer(String username){
-        return this.allPlayers.get(username);
+        return allPlayers.getPlayer(username);
     }
 
     /**
@@ -68,13 +64,7 @@ public class GameCenter {
      * @return an {@link ArrayList} of all the players.
      */
     public ArrayList<String> getAllAvailablePlayers(){
-        ArrayList<String> players = new ArrayList<>();
-        for(OnlinePlayers player: allPlayers.values()){
-            if(player.isFree()){
-                players.add(player.getName());
-            }
-        }
-        return players;
+        return allPlayers.getAllAvailablePlayers();
     }
 
     /**
@@ -85,8 +75,8 @@ public class GameCenter {
      */
     public WebCheckerGame addGame(String player1, String player2){
         WebCheckerGame game = new WebCheckerGame(player1, player2);
-        getPlayer(player1).setFree(false);
-        getPlayer(player2).setFree(false);
+        allPlayers.getPlayer(player1).setFree(false);
+        allPlayers.getPlayer(player2).setFree(false);
         allGames.add(game);
         return game;
     }
@@ -113,7 +103,7 @@ public class GameCenter {
         WebCheckerGame game = this.getGame(user);
         String opponent = game.getOpponent(user);
         allGames.remove(allGames.indexOf(game));
-        this.getPlayer(user).setFree(true);
-        this.getPlayer(opponent).setFree(true);
+        allPlayers.getPlayer(user).setFree(true);
+        allPlayers.getPlayer(opponent).setFree(true);
     }
 }
