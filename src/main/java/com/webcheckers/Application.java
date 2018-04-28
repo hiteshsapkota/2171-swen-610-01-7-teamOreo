@@ -34,21 +34,20 @@ final class Application {
    */
   public static void main(String[] args) {
 
-    // The application uses FreeMarker templates to generate the HTML
-    // responses sent back to the client. This will be the engine processing
-    // the templates and associated data.
-    final TemplateEngine templateEngine = new FreeMarkerEngine();
-
-    final GameCenter gameCenter = new GameCenter();
-    // inject the game center and freemarker engine into web server
-    final WebServer webServer = new WebServer(gameCenter, templateEngine);
-
-    // inject web server into application
+    WebServer webServer = webServer();
+	// inject web server into application
     final Application app = new Application(webServer);
 
     // start the application up
     app.initialize();
   }
+
+private static WebServer webServer() {
+	final TemplateEngine templateEngine = new FreeMarkerEngine();
+	final GameCenter gameCenter = new GameCenter();
+	final WebServer webServer = new WebServer(gameCenter, templateEngine);
+	return webServer;
+}
 
   //
   // Attributes
