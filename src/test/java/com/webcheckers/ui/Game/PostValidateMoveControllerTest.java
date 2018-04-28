@@ -31,13 +31,11 @@ public class PostValidateMoveControllerTest {
     Response response = mock(Response.class);
     OnlinePlayers player = mock(OnlinePlayers.class);
     String user = "test";
-    WebCheckerGame game = mock(WebCheckerGame.class);
-    Message mock = new Message("message1", "info");
-    when(request.session()).thenReturn(session);
+    WebCheckerGame game = game();
+	when(request.session()).thenReturn(session);
     when(session.attribute("user")).thenReturn(player);
     when(player.getName()).thenReturn(user);
     when(gameCenter.getGame(user)).thenReturn(game);
-    when(game.isValidTurn(1, 1, 2, 2)).thenReturn(mock);
     when(request.body()).thenReturn("{'start':{'row':1,'cell':1},'end':{'row':2,'cell':2}}");
     Message object = (Message) postValidateMoveController.handle(request, response);
     assertNotNull(object);
@@ -47,5 +45,12 @@ public class PostValidateMoveControllerTest {
 
 
   }
+
+private WebCheckerGame game() {
+	WebCheckerGame game = mock(WebCheckerGame.class);
+	Message mock = new Message("message1", "info");
+	when(game.isValidTurn(1, 1, 2, 2)).thenReturn(mock);
+	return game;
+}
 
 }

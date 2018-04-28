@@ -1,6 +1,5 @@
 package com.webcheckers.ui.Game;
 
-import com.webcheckers.appl.GameCenter;
 import org.junit.Test;
 import spark.ModelAndView;
 import spark.Request;
@@ -17,7 +16,6 @@ public class GetGameOverControllerTest {
     @Test
     public void handle1() throws Exception {
         String gamestatus="Congratulations! You won.";
-        GameCenter gameCenter = mock(GameCenter.class);
         GetGameOverController getGameOverController = new GetGameOverController();
         Request request = mock(Request.class);
         Response response = mock(Response.class);
@@ -28,14 +26,13 @@ public class GetGameOverControllerTest {
 
         assertEquals("game_over.ftl", modelAndView.getViewName());
 
-        HashMap vm = (HashMap) modelAndView.getModel();
+        HashMap<?, ?> vm = (HashMap<?, ?>) modelAndView.getModel();
 
         assertEquals(gamestatus, vm.get("message"));
     }
 
     @Test
     public void handle2() throws Exception{
-        GameCenter gameCenter = mock(GameCenter.class);
         GetGameOverController getGameOverController = new GetGameOverController();
         Request request = mock(Request.class);
         Response response = mock(Response.class);
@@ -48,7 +45,7 @@ public class GetGameOverControllerTest {
 
         assertEquals("game_over.ftl", modelAndView.getViewName());
 
-        HashMap vm = (HashMap) modelAndView.getModel();
+        HashMap<?, ?> vm = (HashMap<?, ?>) modelAndView.getModel();
 
         assertEquals(gamestatus, vm.get(MESSAGE_ATTR));
     }

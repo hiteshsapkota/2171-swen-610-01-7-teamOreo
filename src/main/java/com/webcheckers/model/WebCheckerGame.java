@@ -3,19 +3,13 @@ package com.webcheckers.model;
 import com.webcheckers.model.Board.Board;
 import com.webcheckers.model.Board.Piece;
 import com.webcheckers.model.Board.Piece.colorEnum;
-import com.webcheckers.model.Board.Piece.typeEnum;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-
-import static com.webcheckers.model.Strings.*;
 
 /**
  * This is the class of the game and its functions. It holds the boards, the players and some of the validations.
  */
 public class WebCheckerGame
 {
-    private GameMovementVerification gameMovementVerification = new GameMovementVerification();
+    private WebCheckerGameProduct2 webCheckerGameProduct2 = new WebCheckerGameProduct2();
 	//
     // Attributes
     //
@@ -26,7 +20,7 @@ public class WebCheckerGame
    * @return true if the user won, else false.
    */
   public boolean didIWin(String user) {
-    return gameMovementVerification.didIWin(user);
+    return webCheckerGameProduct2.getGameMovementVerification().didIWin(user);
   }
 
   /**
@@ -52,15 +46,15 @@ public class WebCheckerGame
      */
     public WebCheckerGame(String player1,String player2)
     {
-        gameMovementVerification.setWebCheckerGameProduct(new WebCheckerGameProduct(player1, player2));
+        webCheckerGameProduct2.getGameMovementVerification().setWebCheckerGameProduct(new WebCheckerGameProduct(player1, player2));
 		this.board = new Board();
-        gameMovementVerification.getWebCheckerGameProduct().setIsPlayer1Turn(true);
-        gameMovementVerification.getWebCheckerGameProduct().setIsPlayer2Turn(false);
-        gameMovementVerification.setMoveState(moveStatCode.NO_MOVEMENT);
-        gameMovementVerification.setConversion(conversionState.NO_CONVERSION);
-        gameMovementVerification.setNumOfPiecesPlayer2(12);
-        gameMovementVerification.setNumOfPiecesPlayer1(12);
-        gameMovementVerification.checkAllPieceForMovements(this);
+        webCheckerGameProduct2.getGameMovementVerification().getWebCheckerGameProduct().setIsPlayer1Turn(true);
+        webCheckerGameProduct2.getGameMovementVerification().getWebCheckerGameProduct().setIsPlayer2Turn(false);
+        webCheckerGameProduct2.getGameMovementVerification().setMoveState(moveStatCode.NO_MOVEMENT);
+        webCheckerGameProduct2.getGameMovementVerification().setConversion(conversionState.NO_CONVERSION);
+        webCheckerGameProduct2.getGameMovementVerification().setNumOfPiecesPlayer2(12);
+        webCheckerGameProduct2.getGameMovementVerification().setNumOfPiecesPlayer1(12);
+        webCheckerGameProduct2.getGameMovementVerification().checkAllPieceForMovements(this);
     }
 
     /**
@@ -69,14 +63,14 @@ public class WebCheckerGame
      * @return returns true if its his/her turn else returns false.
      */
     public boolean isMyTurn(String username){
-        return gameMovementVerification.getWebCheckerGameProduct().isMyTurn(username);
+        return webCheckerGameProduct2.isMyTurn(username);
     }
 
   /**
    * This function checks for all possible movements and stores it in a Hash Map.
    */
   public void checkAllPieceForMovements(){
-        gameMovementVerification.checkAllPieceForMovements(this);
+        webCheckerGameProduct2.getGameMovementVerification().checkAllPieceForMovements(this);
     }
 
   /**
@@ -84,7 +78,7 @@ public class WebCheckerGame
    * @return true if the game has ended, else false.
    */
   public boolean isGameEnded(){
-      return gameMovementVerification.isGameEnded();
+      return webCheckerGameProduct2.getGameMovementVerification().isGameEnded();
     }
 
   /**
@@ -101,7 +95,7 @@ public class WebCheckerGame
      * @return name of the user.
      */
     public String getPlayer(String username) {
-      return gameMovementVerification.getWebCheckerGameProduct().getPlayer(username);
+      return webCheckerGameProduct2.getPlayer(username);
     }
 
     /**
@@ -110,7 +104,7 @@ public class WebCheckerGame
      * @return opponent name
      */
     public String getOpponent(String username){
-      return gameMovementVerification.getWebCheckerGameProduct().getOpponent(username);
+      return webCheckerGameProduct2.getOpponent(username);
     }
 
     /**
@@ -119,7 +113,7 @@ public class WebCheckerGame
      * @return @colorEnum of the player's piece
      */
     public colorEnum getPlayerColor(String username){
-      return gameMovementVerification.getWebCheckerGameProduct().getPlayerColor(username);
+      return webCheckerGameProduct2.getPlayerColor(username);
     }
 
     /**
@@ -128,7 +122,7 @@ public class WebCheckerGame
      * @return @colorEnum of the opponent.
      */
     public colorEnum getOpponentColor(String username) {
-      return gameMovementVerification.getWebCheckerGameProduct().getOpponentColor(username);
+      return webCheckerGameProduct2.getOpponentColor(username);
     }
 
     /**
@@ -137,7 +131,7 @@ public class WebCheckerGame
      * @return true if the player is in the game.
      */
     public boolean hasPlayer(String username) {
-        return gameMovementVerification.getWebCheckerGameProduct().hasPlayer(username);
+        return webCheckerGameProduct2.hasPlayer(username);
     }
 
     /**
@@ -149,7 +143,7 @@ public class WebCheckerGame
      * @return the appropriate message.
      */
     public Message isValidTurn(int startRow, int startCell, int endRow, int endCell) {
-        return gameMovementVerification.isValidTurn(startRow, startCell, endRow, endCell, this);
+        return webCheckerGameProduct2.getGameMovementVerification().isValidTurn(startRow, startCell, endRow, endCell, this);
     }
 
     /**
@@ -157,14 +151,14 @@ public class WebCheckerGame
      * @return if successful, returns true else false.
      */
     public boolean popMove(){
-        return gameMovementVerification.popMove(this);
+        return webCheckerGameProduct2.getGameMovementVerification().popMove(this);
     }
 
     /**
      * This function moves the piece and commits and switch of the current players' turn.
      */
     public void makeMove() {
-        gameMovementVerification.makeMove(this);
+        webCheckerGameProduct2.getGameMovementVerification().makeMove(this);
 
     }
 

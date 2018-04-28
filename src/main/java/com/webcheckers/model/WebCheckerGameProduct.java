@@ -2,22 +2,17 @@ package com.webcheckers.model;
 import com.webcheckers.model.Board.Piece.colorEnum;
 
 
-import com.webcheckers.model.Board.Piece;
 import java.util.Objects;
 
 public class WebCheckerGameProduct {
+	private WebCheckerGameTurnPlayer webCheckerGameTurnPlayer = new WebCheckerGameTurnPlayer();
+	private WebCheckerGameColor webCheckerGameColor;
 	private final String player1;
 	private final String player2;
-	private final colorEnum player1Color;
-	private final colorEnum player2Color;
-	private boolean isPlayer1Turn;
-	private boolean isPlayer2Turn;
-
 	public WebCheckerGameProduct(String player1, String player2) {
+		this.webCheckerGameColor = new WebCheckerGameColor();
 		this.player1 = player1;
-		this.player1Color = colorEnum.RED;
 		this.player2 = player2;
-		this.player2Color = colorEnum.WHITE;
 	}
 
 	public String getPlayer1() {
@@ -25,19 +20,19 @@ public class WebCheckerGameProduct {
 	}
 
 	public boolean getIsPlayer1Turn() {
-		return isPlayer1Turn;
+		return webCheckerGameTurnPlayer.getIsPlayer1Turn();
 	}
 
 	public void setIsPlayer1Turn(boolean isPlayer1Turn) {
-		this.isPlayer1Turn = isPlayer1Turn;
+		webCheckerGameTurnPlayer.setIsPlayer1Turn(isPlayer1Turn);
 	}
 
 	public boolean getIsPlayer2Turn() {
-		return isPlayer2Turn;
+		return webCheckerGameTurnPlayer.getIsPlayer2Turn();
 	}
 
 	public void setIsPlayer2Turn(boolean isPlayer2Turn) {
-		this.isPlayer2Turn = isPlayer2Turn;
+		webCheckerGameTurnPlayer.setIsPlayer2Turn(isPlayer2Turn);
 	}
 
 	/**
@@ -73,7 +68,7 @@ public class WebCheckerGameProduct {
 	* @return  @colorEnum of the player's piece
 	*/
 	public colorEnum getPlayerColor(String username) {
-		return Objects.equals(this.player1, username) ? player1Color : player2Color;
+		return webCheckerGameColor.getPlayerColor(username, this.player1);
 	}
 
 	/**
@@ -82,7 +77,7 @@ public class WebCheckerGameProduct {
 	* @return  @colorEnum of the opponent.
 	*/
 	public colorEnum getOpponentColor(String username) {
-		return Objects.equals(this.player1, username) ? player2Color : player1Color;
+		return webCheckerGameColor.getOpponentColor(username, this.player1);
 	}
 
 	/**
@@ -91,10 +86,10 @@ public class WebCheckerGameProduct {
 	* @return  returns true if its his/her turn else returns false.
 	*/
 	public boolean isMyTurn(String username) {
-		if (Objects.equals(player1, username)) {
-			return isPlayer1Turn;
-		} else {
-			return isPlayer2Turn;
-		}
+		return webCheckerGameTurnPlayer.isMyTurn(username, this.player1);
+	}
+
+	public void switchPlayerMove() {
+		webCheckerGameTurnPlayer.switchPlayerMove(this);
 	}
 }

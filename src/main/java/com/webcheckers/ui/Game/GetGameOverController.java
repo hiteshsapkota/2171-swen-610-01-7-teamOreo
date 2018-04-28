@@ -6,7 +6,6 @@ import static com.webcheckers.model.Strings.GAME_WON_MESSAGE;
 import static com.webcheckers.model.Strings.MESSAGE_ATTR;
 import static com.webcheckers.model.Strings.YOU_WON_ATTR;
 
-import com.webcheckers.appl.GameCenter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

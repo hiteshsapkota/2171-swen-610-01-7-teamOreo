@@ -5,21 +5,16 @@ import com.webcheckers.model.WebCheckerGame.moveStatCode;
 import java.util.ArrayList;
 import com.webcheckers.model.WebCheckerGame.conversionState;
 import java.util.HashMap;
-import java.util.Objects;
 import com.webcheckers.model.Board.Piece;
 import com.webcheckers.model.Board.Piece.typeEnum;
 import com.webcheckers.model.Board.Piece.colorEnum;
-import static com.webcheckers.model.Strings.*;
 
 
 
 
 public class GameMovementVerification {
+	private GameMovementVerificationnum_player gameMovementVerificationnum_player = new GameMovementVerificationnum_player();
 	private WebCheckerGameProduct webCheckerGameProduct;
-	private int numOfPiecesPlayer1;
-	private int numOfPiecesPlayer2;
-	private int numOfPossMovePlayer1;
-	private int numOfPossMovePlayer2;
 	private moveStatCode moveState;
 	private final ArrayList<Movement> movements = new ArrayList<>();
 	private conversionState conversion;
@@ -34,11 +29,11 @@ public class GameMovementVerification {
 	}
 
 	public void setNumOfPiecesPlayer1(int numOfPiecesPlayer1) {
-		this.numOfPiecesPlayer1 = numOfPiecesPlayer1;
+		gameMovementVerificationnum_player.setNumOfPiecesPlayer1(numOfPiecesPlayer1);
 	}
 
 	public void setNumOfPiecesPlayer2(int numOfPiecesPlayer2) {
-		this.numOfPiecesPlayer2 = numOfPiecesPlayer2;
+		gameMovementVerificationnum_player.setNumOfPiecesPlayer2(numOfPiecesPlayer2);
 	}
 
 	public void setMoveState(moveStatCode moveState) {
@@ -54,7 +49,7 @@ public class GameMovementVerification {
 	* @return  true if there are no pieces left for a player, else false.
 	*/
 	public boolean checkIfPiecesLeftIsNone() {
-		return numOfPiecesPlayer2 == 0 || numOfPiecesPlayer1 == 0;
+		return gameMovementVerificationnum_player.checkIfPiecesLeftIsNone();
 	}
 
 	/**
@@ -63,9 +58,7 @@ public class GameMovementVerification {
 	* @return  true if the user won, else false.
 	*/
 	public boolean didIWin(String user) {
-		return Objects.equals(user, webCheckerGameProduct.getPlayer1())
-				? numOfPiecesPlayer1 != 0 && numOfPossMovePlayer1 != 0
-				: numOfPiecesPlayer2 != 0 && numOfPossMovePlayer2 != 0;
+		return gameMovementVerificationnum_player.didIWin(user, this.webCheckerGameProduct);
 	}
 
 	/**
@@ -73,15 +66,15 @@ public class GameMovementVerification {
 	* @return  true if it is 0, else false.
 	*/
 	public boolean checkIfNoMovesLeft() {
-		return numOfPossMovePlayer1 == 0 || numOfPossMovePlayer2 == 0;
+		return gameMovementVerificationnum_player.checkIfNoMovesLeft();
 	}
 
 	/**
 	* This function checks for all possible movements and stores it in a Hash Map.
 	*/
 	public void checkAllPieceForMovements(WebCheckerGame webCheckerGame) {
-		this.numOfPossMovePlayer1 = 0;
-		this.numOfPossMovePlayer2 = 0;
+		gameMovementVerificationnum_player.setNumOfPossMovePlayer1(0);
+		gameMovementVerificationnum_player.setNumOfPossMovePlayer2(0);
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++) {
 				if (webCheckerGame.getPiece(i, j) == null)
@@ -93,47 +86,55 @@ public class GameMovementVerification {
 						if (j + 1 <= 7) {
 							if (webCheckerGame.getPiece(i + 1, j + 1) == null) {
 								possibleMovements.get(positionKey).add(new Position(i + 1, j + 1));
-								numOfPossMovePlayer1 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
-										? numOfPossMovePlayer1 + 1
-										: numOfPossMovePlayer1;
-								numOfPossMovePlayer2 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
-										? numOfPossMovePlayer2 + 2
-										: numOfPossMovePlayer2;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer1());
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 2
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer2());
 							}
 							if (i + 2 <= 7 && j + 2 <= 7 && webCheckerGame.getPiece(i + 1, j + 1) != null
 									&& webCheckerGame.getPiece(i + 1, j + 1).getColor() != webCheckerGame.getPiece(i, j)
 											.getColor()
 									&& webCheckerGame.getPiece(i + 2, j + 2) == null) {
 								possibleMovements.get(positionKey).add(new Position(i + 2, j + 2));
-								numOfPossMovePlayer1 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
-										? numOfPossMovePlayer1 + 1
-										: numOfPossMovePlayer1;
-								numOfPossMovePlayer2 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
-										? numOfPossMovePlayer2 + 2
-										: numOfPossMovePlayer2;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer1());
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 2
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer2());
 							}
 						}
 						if (j - 1 >= 0) {
 							if (webCheckerGame.getPiece(i + 1, j - 1) == null) {
 								possibleMovements.get(positionKey).add(new Position(i + 1, j - 1));
-								numOfPossMovePlayer1 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
-										? numOfPossMovePlayer1 + 1
-										: numOfPossMovePlayer1;
-								numOfPossMovePlayer2 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
-										? numOfPossMovePlayer2 + 2
-										: numOfPossMovePlayer2;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer1());
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 2
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer2());
 							}
 							if (i + 2 <= 7 && j - 2 >= 0 && webCheckerGame.getPiece(i + 1, j - 1) != null
 									&& webCheckerGame.getPiece(i + 1, j - 1).getColor() != webCheckerGame.getPiece(i, j)
 											.getColor()
 									&& webCheckerGame.getPiece(i + 2, j - 2) == null) {
 								possibleMovements.get(positionKey).add(new Position(i + 2, j - 2));
-								numOfPossMovePlayer1 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
-										? numOfPossMovePlayer1 + 1
-										: numOfPossMovePlayer1;
-								numOfPossMovePlayer2 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
-										? numOfPossMovePlayer2 + 2
-										: numOfPossMovePlayer2;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer1());
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 2
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer2());
 							}
 						}
 					}
@@ -141,47 +142,55 @@ public class GameMovementVerification {
 						if (j + 1 <= 7) {
 							if (webCheckerGame.getPiece(i - 1, j + 1) == null) {
 								possibleMovements.get(positionKey).add(new Position(i - 1, j + 1));
-								numOfPossMovePlayer1 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
-										? numOfPossMovePlayer1 + 1
-										: numOfPossMovePlayer1;
-								numOfPossMovePlayer2 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
-										? numOfPossMovePlayer2 + 2
-										: numOfPossMovePlayer2;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer1());
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 2
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer2());
 							}
 							if (i - 2 >= 0 && j + 2 <= 7 && webCheckerGame.getPiece(i - 1, j + 1) != null
 									&& webCheckerGame.getPiece(i - 1, j + 1).getColor() != webCheckerGame.getPiece(i, j)
 											.getColor()
 									&& webCheckerGame.getPiece(i - 2, j + 2) == null) {
 								possibleMovements.get(positionKey).add(new Position(i - 2, j + 2));
-								numOfPossMovePlayer1 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
-										? numOfPossMovePlayer1 + 1
-										: numOfPossMovePlayer1;
-								numOfPossMovePlayer2 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
-										? numOfPossMovePlayer2 + 2
-										: numOfPossMovePlayer2;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer1());
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 2
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer2());
 							}
 						}
 						if (j - 1 >= 0) {
 							if (webCheckerGame.getPiece(i - 1, j - 1) == null) {
 								possibleMovements.get(positionKey).add(new Position(i - 1, j - 1));
-								numOfPossMovePlayer1 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
-										? numOfPossMovePlayer1 + 1
-										: numOfPossMovePlayer1;
-								numOfPossMovePlayer2 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
-										? numOfPossMovePlayer2 + 2
-										: numOfPossMovePlayer2;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer1());
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 2
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer2());
 							}
 							if (i - 2 >= 0 && j - 2 >= 0 && webCheckerGame.getPiece(i - 1, j - 1) != null
 									&& webCheckerGame.getPiece(i - 1, j - 1).getColor() != webCheckerGame.getPiece(i, j)
 											.getColor()
 									&& webCheckerGame.getPiece(i - 2, j - 2) == null) {
 								possibleMovements.get(positionKey).add(new Position(i - 2, j - 2));
-								numOfPossMovePlayer1 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
-										? numOfPossMovePlayer1 + 1
-										: numOfPossMovePlayer1;
-								numOfPossMovePlayer2 = (webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
-										? numOfPossMovePlayer2 + 2
-										: numOfPossMovePlayer2;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.RED)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer1());
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										(webCheckerGame.getPiece(i, j).getColor() == colorEnum.WHITE)
+												? gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 2
+												: gameMovementVerificationnum_player.getNumOfPossMovePlayer2());
 							}
 						}
 					}
@@ -190,25 +199,29 @@ public class GameMovementVerification {
 						if (j + 1 <= 7) {
 							if (webCheckerGame.getPiece(i + 1, j + 1) == null) {
 								possibleMovements.get(positionKey).add(new Position(i + 1, j + 1));
-								numOfPossMovePlayer1++;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1);
 							}
 							if (i + 2 <= 7 && j + 2 <= 7 && webCheckerGame.getPiece(i + 1, j + 1) != null
 									&& webCheckerGame.getPiece(i + 1, j + 1).getColor() != colorEnum.RED
 									&& webCheckerGame.getPiece(i + 2, j + 2) == null) {
 								possibleMovements.get(positionKey).add(new Position(i + 2, j + 2));
-								numOfPossMovePlayer1++;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1);
 							}
 						}
 						if (j - 1 >= 0) {
 							if (webCheckerGame.getPiece(i + 1, j - 1) == null) {
 								possibleMovements.get(positionKey).add(new Position(i + 1, j - 1));
-								numOfPossMovePlayer1++;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1);
 							}
 							if (i + 2 <= 7 && j - 2 >= 0 && webCheckerGame.getPiece(i + 1, j - 1) != null
 									&& webCheckerGame.getPiece(i + 1, j - 1).getColor() != colorEnum.RED
 									&& webCheckerGame.getPiece(i + 2, j - 2) == null) {
 								possibleMovements.get(positionKey).add(new Position(i + 2, j - 2));
-								numOfPossMovePlayer1++;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer1(
+										gameMovementVerificationnum_player.getNumOfPossMovePlayer1() + 1);
 							}
 						}
 					}
@@ -217,25 +230,29 @@ public class GameMovementVerification {
 						if (j + 1 <= 7) {
 							if (webCheckerGame.getPiece(i - 1, j + 1) == null) {
 								possibleMovements.get(positionKey).add(new Position(i - 1, j + 1));
-								numOfPossMovePlayer2++;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 1);
 							}
 							if (i - 2 >= 0 && j + 2 <= 7 && webCheckerGame.getPiece(i - 1, j + 1) != null
 									&& webCheckerGame.getPiece(i - 1, j + 1).getColor() != colorEnum.WHITE
 									&& webCheckerGame.getPiece(i - 2, j + 2) == null) {
 								possibleMovements.get(positionKey).add(new Position(i - 2, j + 2));
-								numOfPossMovePlayer2++;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 1);
 							}
 						}
 						if (j - 1 >= 0) {
 							if (webCheckerGame.getPiece(i - 1, j - 1) == null) {
 								possibleMovements.get(positionKey).add(new Position(i - 1, j - 1));
-								numOfPossMovePlayer2++;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 1);
 							}
 							if (i - 2 >= 0 && j - 2 >= 0 && webCheckerGame.getPiece(i - 1, j - 1) != null
 									&& webCheckerGame.getPiece(i - 1, j - 1).getColor() != colorEnum.WHITE
 									&& webCheckerGame.getPiece(i - 2, j - 2) == null) {
 								possibleMovements.get(positionKey).add(new Position(i - 2, j - 2));
-								numOfPossMovePlayer2++;
+								gameMovementVerificationnum_player.setNumOfPossMovePlayer2(
+										gameMovementVerificationnum_player.getNumOfPossMovePlayer2() + 1);
 							}
 						}
 					}
@@ -320,9 +337,11 @@ public class GameMovementVerification {
 		for (int i = movements.size() - 1; i >= 0; i--) {
 			if (moveState == moveStatCode.CAPTURE_MODE) {
 				if (webCheckerGameProduct.getIsPlayer1Turn()) {
-					numOfPiecesPlayer2--;
+					gameMovementVerificationnum_player
+							.setNumOfPiecesPlayer2(gameMovementVerificationnum_player.getNumOfPiecesPlayer2() - 1);
 				} else if (webCheckerGameProduct.getIsPlayer2Turn()) {
-					numOfPiecesPlayer1--;
+					gameMovementVerificationnum_player
+							.setNumOfPiecesPlayer1(gameMovementVerificationnum_player.getNumOfPiecesPlayer1() - 1);
 				}
 				if (webCheckerGameProduct.getIsPlayer1Turn()) {
 					if (typeEnum.KING == webCheckerGame.getPiece(movements.get(movements.size() - 1).getEndRow(),
@@ -384,13 +403,7 @@ public class GameMovementVerification {
 				conversion = conversionState.NO_CONVERSION;
 			}
 		}
-		if (webCheckerGameProduct.getIsPlayer1Turn()) {
-			webCheckerGameProduct.setIsPlayer1Turn(false);
-			webCheckerGameProduct.setIsPlayer2Turn(true);
-		} else {
-			webCheckerGameProduct.setIsPlayer2Turn(false);
-			webCheckerGameProduct.setIsPlayer1Turn(true);
-		}
+		webCheckerGameProduct.switchPlayerMove();
 		movements.clear();
 		moveState = moveStatCode.NO_MOVEMENT;
 		conversion = conversionState.NO_CONVERSION;
@@ -403,7 +416,7 @@ public class GameMovementVerification {
 	*/
 	public boolean isGameEnded() {
 		boolean gameEnded = false;
-		if (checkIfNoMovesLeft() || checkIfPiecesLeftIsNone()) {
+		if (gameMovementVerificationnum_player.checkIfNoMovesLeft() || gameMovementVerificationnum_player.checkIfPiecesLeftIsNone()) {
 			gameEnded = true;
 		}
 		return gameEnded;

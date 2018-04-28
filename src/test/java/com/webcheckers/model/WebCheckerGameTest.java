@@ -64,31 +64,26 @@ public class WebCheckerGameTest {
   public void makeMove(){
     assertTrue(game.isMyTurn(p1));
 
-    // 2,1 to 3, 2
-    game.checkAllPieceForMovements();
-    assertEquals(MESSAGE_INFO, (game.isValidTurn(2, 1, 3, 2)).type);
-
-    game.makeMove();
-    assertTrue(game.isMyTurn(p2));
-
-    // 5,0 to 4,1
-    game.checkAllPieceForMovements();
-    assertEquals(MESSAGE_INFO, (game.isValidTurn(5, 0, 4, 1).type));
-
-    game.makeMove();
+    game2();
+	assertTrue(game.isMyTurn(p2));
 
     assertTrue(game.isMyTurn(p1));
 
-    game.checkAllPieceForMovements();
-    // capture mode, 3,2 to 5,0
-    assertEquals(MESSAGE_INFO, (game.isValidTurn(3, 2, 5, 0).type));
-
-    assertFalse(game.popMove());
-
-    game.makeMove();
-
     assertTrue(game.isMyTurn(p2));
   }
+
+private void game2() {
+	game.checkAllPieceForMovements();
+	assertEquals(MESSAGE_INFO, (game.isValidTurn(2, 1, 3, 2)).type);
+	game.makeMove();
+	game.checkAllPieceForMovements();
+	assertEquals(MESSAGE_INFO, (game.isValidTurn(5, 0, 4, 1).type));
+	game.makeMove();
+	game.checkAllPieceForMovements();
+	assertEquals(MESSAGE_INFO, (game.isValidTurn(3, 2, 5, 0).type));
+	assertFalse(game.popMove());
+	game.makeMove();
+}
 
   @Test
   public void isGameEnded(){
@@ -114,148 +109,135 @@ public class WebCheckerGameTest {
     //Condition1
     resetBoard();
     game.getBoard().getRow(1).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
-    game.getBoard().getRow(2).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
+    game();
+	game.getBoard().getRow(2).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
     game.getBoard().getRow(2).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     resetBoard();
     game.getBoard().getRow(1).getSpace(2).setPiece(new Piece(typeEnum.SINGLE,colorEnum.RED));
     game.getBoard().getRow(2).getSpace(1).setPiece(new Piece(typeEnum.SINGLE,colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(0).setPiece(new Piece(typeEnum.SINGLE,colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(0).setPiece(new Piece(typeEnum.SINGLE,colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(2).getSpace(3).setPiece(new Piece(typeEnum.SINGLE,colorEnum.WHITE));
     game.getBoard().getRow(3).getSpace(4).setPiece(new Piece(typeEnum.SINGLE,colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(4).setPiece(new Piece(typeEnum.SINGLE,colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     resetBoard();
     game.getBoard().getRow(2).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
     game.getBoard().getRow(3).getSpace(0).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     //check for second condition
     resetBoard();
     game.getBoard().getRow(5).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(4).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(4).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
-
     game.getBoard().getRow(4).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(0).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(0).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
-
-
     game.getBoard().getRow(3).getSpace(4).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(4).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     resetBoard();
     game.getBoard().getRow(6).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
     game.getBoard().getRow(5).getSpace(0).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     resetBoard();
     //Check condition for king piece
     //First condition
 
     game.getBoard().getRow(1).getSpace(4).setPiece(new Piece(typeEnum.KING, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(0).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(0).getSpace(5).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(2).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(2).getSpace(5).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(0).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(0).getSpace(5).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(2).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(6).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(6).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     resetBoard();
 
     //Second Condition
     game.getBoard().getRow(5).getSpace(4).setPiece(new Piece(typeEnum.KING, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(6).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(6).getSpace(5).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(4).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(4).getSpace(5).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(6).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(7).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(7).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
-
-
-
     game.getBoard().getRow(6).getSpace(5).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(7).getSpace(6).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(7).getSpace(6).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
-
-
-
     game.getBoard().getRow(4).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(2).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
-
-
     game.getBoard().getRow(4).getSpace(5).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(6).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(3).getSpace(6).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
-
     resetBoard();
     game.getBoard().getRow(7).getSpace(2).setPiece(new Piece(typeEnum.KING, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
-
     game.getBoard().getRow(6).getSpace(1).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
-
     game.getBoard().getRow(5).getSpace(0).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(5).getSpace(0).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
-
-
     game.getBoard().getRow(6).getSpace(3).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
-
     game.getBoard().getRow(5).getSpace(4).setPiece(new Piece(typeEnum.SINGLE, colorEnum.WHITE));
-    game.checkAllPieceForMovements();
     game.getBoard().getRow(5).getSpace(4).setPiece(new Piece(typeEnum.SINGLE, colorEnum.RED));
-    game.checkAllPieceForMovements();
   }
+
+private void game() {
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+	game.checkAllPieceForMovements();
+}
 
   private void resetBoard(){
     for (int i = 0; i < 8; i++) {

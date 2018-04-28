@@ -33,7 +33,7 @@ public class PostSignInControllerTest {
 
     assertEquals(SIGNIN_VIEW, modelAndView.getViewName());
 
-    HashMap vm = (HashMap) modelAndView.getModel();
+    HashMap<?, ?> vm = (HashMap<?, ?>) modelAndView.getModel();
 
     assertEquals(MESSAGE_EMPTY_NAME, vm.get(MESSAGE_ATTR));
   }
@@ -53,7 +53,7 @@ public class PostSignInControllerTest {
 
     assertEquals(SIGNIN_VIEW, modelAndView.getViewName());
 
-    HashMap vm = (HashMap) modelAndView.getModel();
+    HashMap<?, ?> vm = (HashMap<?, ?>) modelAndView.getModel();
 
     assertEquals(MESSAGE_USER_EXISTS, vm.get(MESSAGE_ATTR));
   }

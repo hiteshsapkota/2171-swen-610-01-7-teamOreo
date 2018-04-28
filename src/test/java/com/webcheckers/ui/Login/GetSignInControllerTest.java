@@ -1,6 +1,5 @@
 package com.webcheckers.ui.Login;
 
-import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.OnlinePlayers;
 import org.junit.Test;
 
@@ -27,7 +26,6 @@ public class GetSignInControllerTest {
       Response response = mock(Response.class);
       Session session = mock(Session.class);
       OnlinePlayers players = mock(OnlinePlayers.class);
-      GameCenter gameCenter = mock(GameCenter.class);
       when(request.session()).thenReturn(session);
       when(session.attribute("user")).thenReturn(players);
       GetSignInController getSignInController = new GetSignInController();
@@ -43,8 +41,6 @@ public class GetSignInControllerTest {
     Request request = mock(Request.class);
     Response response = mock(Response.class);
     Session session = mock(Session.class);
-    GameCenter gameCenter = mock(GameCenter.class);
-
     when(request.session()).thenReturn(session);
     when(session.attribute("user")).thenReturn(null);
 

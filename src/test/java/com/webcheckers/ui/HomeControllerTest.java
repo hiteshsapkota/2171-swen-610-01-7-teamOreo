@@ -31,7 +31,7 @@ public class HomeControllerTest {
     when(session.attribute("user")).thenReturn(null);
 
     ModelAndView modelAndView = homeController.handle(request, response);
-    HashMap vm = (HashMap) modelAndView.getModel();
+    HashMap<?, ?> vm = (HashMap<?, ?>) modelAndView.getModel();
 
     assertFalse((boolean)vm.get(CURRENT_PLAYER_ATTR));
     assertEquals(HOME_VIEW, modelAndView.getViewName());
@@ -55,7 +55,7 @@ public class HomeControllerTest {
     when(gameCenter.userIsFree(players.getName())).thenReturn(true);
 
     ModelAndView modelAndView = homeController.handle(request, response);
-    HashMap vm = (HashMap) modelAndView.getModel();
+    HashMap<?, ?> vm = (HashMap<?, ?>) modelAndView.getModel();
 
     assertTrue((boolean)vm.get(CURRENT_PLAYER_ATTR));
     assertEquals(HOME_VIEW, modelAndView.getViewName());

@@ -3,11 +3,7 @@ package com.webcheckers.appl;
 import com.webcheckers.model.OnlinePlayers;
 import com.webcheckers.model.WebCheckerGame;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import spark.Session;
-
-import static com.webcheckers.model.Strings.USER_SESSION_ATTRIBUTE;
 
 public class GameCenter {
 

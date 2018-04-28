@@ -4,7 +4,6 @@ package com.webcheckers.ui.Login;
 import static com.webcheckers.model.Strings.*;
 import static spark.Spark.halt;
 
-import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.OnlinePlayers;
 import java.util.HashMap;
 import java.util.Map;
